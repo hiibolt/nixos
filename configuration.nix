@@ -9,7 +9,6 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
   boot.loader.systemd-boot.enable = true;
@@ -33,24 +32,23 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
-  # Define Kanata Start Package
-  systemd.services.launch-kanata = {
-    description = "Launches Kanata";
-    wantedBy = [ "johnww.target" ];
-    serviceConfig = {
-      ExecStart = "/home/johnww/Documents/launchkanata.sh";
+  # Define Kanata Service
+  hardware.uinput.enable = true;
+  services.udev.extraRules = "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\", OPTIONS+=\"static_node=uinput\"";
+  systemd.user.services = {
+    kanata = {
+      path = [ pkgs.kanata ];
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ConditionPathExists=''${./semimak.kbd}'';
+        ExecStart = ''${pkgs.kanata}/bin/kanata -c ${./semimak.kbd}'';
+      };
+      enable = true;
     };
   };
-  systemd.services.launch-kanata.enable = true;
-
-  #Enable AMD GPU Drivers
-  #services.xserver.videoDrivers = [ "amdgpu-pro" ];
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Start the ExpressVPN network daemon
-  services.expressvpn.enable = true;
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
@@ -93,7 +91,7 @@
   users.users.johnww = {
     isNormalUser = true;
     description = "John Wallace White";
-    extraGroups = [ "networkmanager" "wheel" "dialout"];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "uinput" "input" ];
     packages = with pkgs; [
       google-chrome
       cider
@@ -129,7 +127,7 @@
     openai
     rustup
     gcc
-    postman
+    tlp
   #  wget
   ];
   environment.shells = with pkgs; [ fish ];
