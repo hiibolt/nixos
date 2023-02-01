@@ -123,6 +123,7 @@
   environment.systemPackages = with pkgs; [
     dotnet-sdk
     git
+    gh
     gcc-arm-embedded
     kanata
     openai
