@@ -23,8 +23,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
+  # Enable networking and Tailscale
   networking.networkmanager.enable = true;
+  services.tailscale.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -32,7 +33,12 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
-  # Define Kanata Service
+  # Auto updating Nix
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
+
+  # Define Kanata service
   hardware.uinput.enable = true;
   services.udev.extraRules = "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\", OPTIONS+=\"static_node=uinput\"";
   systemd.user.services = {
@@ -93,18 +99,17 @@
     description = "John Wallace White";
     extraGroups = [ "networkmanager" "wheel" "dialout" "uinput" "input" ];
     packages = with pkgs; [
-      google-chrome
       cider
       firefox
       osu-lazer
       opentabletdriver
       vscode
-      thunderbird
       discord
       stack
       logseq
-      onedrive
       steam
+      wireguard-go
+      opera
     ];
   };
 
@@ -122,12 +127,12 @@
     dotnet-sdk
     git
     gh
-    gcc-arm-embedded
     kanata
     openai
     rustup
     gcc
-    tlp
+    python310
+    tailscale
   #  wget
   ];
   environment.shells = with pkgs; [ fish ];
