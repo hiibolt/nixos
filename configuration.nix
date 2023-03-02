@@ -36,6 +36,10 @@
   # Auto updating Nix
   system.autoUpgrade.enable = true;
   system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade.flags = [
+    "-p"
+    "${import ./semver.nix}"
+  ];
   system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
 
   # Define Kanata service
@@ -100,16 +104,14 @@
     extraGroups = [ "networkmanager" "wheel" "dialout" "uinput" "input" ];
     packages = with pkgs; [
       cider
-      firefox
       osu-lazer
       opentabletdriver
       vscode
-      discord
       stack
       logseq
       steam
       wireguard-go
-      opera
+      librewolf
     ];
   };
 
