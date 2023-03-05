@@ -3,11 +3,21 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
- 
+let 
+
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+
+  hyprland = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  }).defaultNix;
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # Inclued Hyprland WM
+      hyprland.nixosModules.default
     ];
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
@@ -35,7 +45,7 @@
 
   # Auto updating Nix
   system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  # system.autoUpgrade.allowReboot = true;
   system.autoUpgrade.flags = [
     "-p"
     "${import ./semver.nix}"
@@ -55,6 +65,19 @@
       };
       enable = true;
     };
+  };
+  programs.hyprland = {
+    enable = true;
+
+    # default options, you don't need to set them
+    package = hyprland.packages.${pkgs.system}.default;
+
+    xwayland = {
+      enable = true;
+      hidpi = true;
+    };
+
+    nvidiaPatches = false;
   };
 
   # Enable the X11 windowing system.
