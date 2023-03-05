@@ -4,20 +4,12 @@
 
 { config, pkgs, ... }:
 let 
-
-  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
-
-  hyprland = (import flake-compat {
-    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
-  }).defaultNix;
 in
 {
   imports =
     [ 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # Inclued Hyprland WM
-      hyprland.nixosModules.default
     ];
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
@@ -65,19 +57,6 @@ in
       };
       enable = true;
     };
-  };
-  programs.hyprland = {
-    enable = true;
-
-    # default options, you don't need to set them
-    package = hyprland.packages.${pkgs.system}.default;
-
-    xwayland = {
-      enable = true;
-      hidpi = true;
-    };
-
-    nvidiaPatches = false;
   };
 
   # Enable the X11 windowing system.
