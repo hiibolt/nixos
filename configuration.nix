@@ -137,6 +137,7 @@ in
     gcc
     python310
     tailscale
+    gnome.mutter
   #  wget
   ];
   environment.shells = with pkgs; [ fish ];
