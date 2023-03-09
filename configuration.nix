@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }:
 let 
+  next_version = import ./semver.nix;
 in
 {
   imports =
@@ -28,6 +29,7 @@ in
   # Enable networking and Tailscale
   networking.networkmanager.enable = true;
   services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "both";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -40,7 +42,7 @@ in
   # system.autoUpgrade.allowReboot = true;
   system.autoUpgrade.flags = [
     "-p"
-    "${import ./semver.nix}"
+    next_version
   ];
   system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
 
@@ -114,11 +116,17 @@ in
       steam
       wireguard-go
       librewolf
+      discord
     ];
   };
 
   # Enables fish, a better shell, and adds launch arguments to allow for PROS development
   programs.fish.enable = true;
+  programs.fish.shellInit = ''
+    alias vex="/etc/nixos/.scripts/vex.sh"
+    alias wro="/etc/nixos/.scripts/wro.sh"
+    alias cfg="/etc/nixos/.scripts/cfg.sh"
+  '';
   users.defaultUserShell = pkgs.fish;
 
   # Allow unfree packages
@@ -137,7 +145,9 @@ in
     gcc
     python310
     tailscale
-    gnome.mutter
+    #gnome.mutter
+    nix-prefetch-git
+    ydotool           # Keypress simulator
   #  wget
   ];
   environment.shells = with pkgs; [ fish ];
