@@ -138,19 +138,10 @@ in
   environment.systemPackages = with pkgs; [
     dotnet-sdk
     git
-    gh
     kanata
-    openai
-    rustup
-    gcc
-    python310
     tailscale
-    #gnome.mutter
-    nix-prefetch-git
-    ydotool           # Keypress simulator
     direnv
     cachix
-  #  wget
   ];
   environment.shells = with pkgs; [ fish ];
 
