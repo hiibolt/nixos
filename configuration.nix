@@ -126,6 +126,7 @@ in
     alias vex="/etc/nixos/.scripts/vex.sh"
     alias wro="/etc/nixos/.scripts/wro.sh"
     alias cfg="/etc/nixos/.scripts/cfg.sh"
+    alias template="/etc/nixos/.scripts/get-template.sh"
   '';
   users.defaultUserShell = pkgs.fish;
 
