@@ -11,7 +11,9 @@ in
     [ 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./cachix.nix
+      ./semimak/semimak.nix
+      ./fish/fish.nix
+      ./maintenance/storage.nix
     ];
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
@@ -48,19 +50,6 @@ in
   system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
 
   # Define Kanata service
-  hardware.uinput.enable = true;
-  services.udev.extraRules = "KERNEL==\"uinput\", MODE=\"0660\", GROUP=\"uinput\", OPTIONS+=\"static_node=uinput\"";
-  systemd.user.services = {
-    kanata = {
-      path = [ pkgs.kanata ];
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        ConditionPathExists=''${./semimak.kbd}'';
-        ExecStart = ''${pkgs.kanata}/bin/kanata -c ${./semimak.kbd}'';
-      };
-      enable = true;
-    };
-  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -121,15 +110,6 @@ in
     ];
   };
 
-  # Enables fish, a better shell, and adds launch arguments to allow for PROS development
-  programs.fish.enable = true;
-  programs.fish.shellInit = ''
-    alias vex="/etc/nixos/.scripts/vex.sh"
-    alias wro="/etc/nixos/.scripts/wro.sh"
-    alias cfg="/etc/nixos/.scripts/cfg.sh"
-    alias template="/etc/nixos/.scripts/get-template.sh"
-  '';
-  users.defaultUserShell = pkgs.fish;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -140,13 +120,9 @@ in
   environment.systemPackages = with pkgs; [
     dotnet-sdk
     git
-    kanata
     tailscale
     direnv
-    cachix
-    fishPlugins.tide
   ];
-  environment.shells = with pkgs; [ fish ];
 
   # Give steam permissions to play games
   programs.steam = {
