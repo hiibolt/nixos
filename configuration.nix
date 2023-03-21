@@ -15,6 +15,7 @@ in
       ./fish/fish.nix
       ./maintenance/storage.nix
       ./maintenance/upgrade.nix
+      ./hardware/fingerprint.nix
     ];
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
