@@ -40,17 +40,6 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
-  # Auto updating Nix
-  system.autoUpgrade.enable = true;
-  # system.autoUpgrade.allowReboot = true;
-  system.autoUpgrade.flags = [
-    "-p"
-    next_version
-  ];
-  system.autoUpgrade.channel = https://nixos.org/channels/nixos-unstable;
-
-  # Define Kanata service
-
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
