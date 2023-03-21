@@ -23,8 +23,7 @@ in
          operation = "switch";
          flags = [
 		"-p"
-		"${lastVersion)"
+		"Bolt v${builtins.elemAt addtopatch 0}.${builtins.elemAt addtopatch 1}.${builtins.elemAt addtopatch 2}"	
 	 ];
     };
-    "Bolt v${builtins.elemAt addtopatch 0}.${builtins.elemAt addtopatch 1}.${builtins.elemAt addtopatch 2}"	
 }

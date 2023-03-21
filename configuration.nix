@@ -14,6 +14,7 @@ in
       ./semimak/semimak.nix
       ./fish/fish.nix
       ./maintenance/storage.nix
+      ./maintenance/upgrade.nix
     ];
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
