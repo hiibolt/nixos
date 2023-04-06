@@ -98,6 +98,7 @@ in
       wireguard-go
       librewolf
       discord
+      gimp
     ];
   };
 
@@ -113,6 +114,7 @@ in
     git
     tailscale
     direnv
+    syncthing
   ];
 
   # Give steam permissions to play games
