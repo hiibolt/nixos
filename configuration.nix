@@ -96,7 +96,28 @@ in
       cider
       osu-lazer
       opentabletdriver
-      vscode
+      (vscode-with-extensions.override {
+        # When the extension is already available in the default extensions set.
+        vscodeExtensions = with vscode-extensions; [
+          bbenoist.nix
+          ms-vscode.cpptools
+        ]
+        # Concise version from the vscode market place when not available in the default set.
+        ++ vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            name = "aws-toolkit-vscode";
+            publisher = "amazonwebservices";
+            version = "1.74.0";
+            sha256 = "sha256-ITcOGQAmJ+yb11BKfcpw/IaSog/DMj97qUuA8dgoDRo=";
+          }
+          {
+            name = "nix-env-selector";
+            publisher = "arrterian";
+            version = "1.0.9";
+            sha256 = "sha256-TkxqWZ8X+PAonzeXQ+sI9WI+XlqUHll7YyM7N9uErk0=";
+          }
+        ];
+      })
       stack
       logseq
       steam
