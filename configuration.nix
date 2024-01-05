@@ -26,7 +26,6 @@ in
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi";
     };
-    grub.configurationName = 15;
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -88,6 +87,12 @@ in
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   users.users.johnww = {
     isNormalUser = true;
     description = "John Wallace White";
@@ -96,28 +101,7 @@ in
       cider
       osu-lazer
       opentabletdriver
-      (vscode-with-extensions.override {
-        # When the extension is already available in the default extensions set.
-        vscodeExtensions = with vscode-extensions; [
-          bbenoist.nix
-          ms-vscode.cpptools
-        ]
-        # Concise version from the vscode market place when not available in the default set.
-        ++ vscode-utils.extensionsFromVscodeMarketplace [
-          {
-            name = "aws-toolkit-vscode";
-            publisher = "amazonwebservices";
-            version = "1.74.0";
-            sha256 = "sha256-ITcOGQAmJ+yb11BKfcpw/IaSog/DMj97qUuA8dgoDRo=";
-          }
-          {
-            name = "nix-env-selector";
-            publisher = "arrterian";
-            version = "1.0.9";
-            sha256 = "sha256-TkxqWZ8X+PAonzeXQ+sI9WI+XlqUHll7YyM7N9uErk0=";
-          }
-        ];
-      })
+      neovim
       stack
       logseq
       steam
@@ -125,6 +109,11 @@ in
       librewolf
       discord
       gimp
+      zoom-us
+      vscode
+      electron
+      libreoffice
+      android-studio
       (lutris.override {
         extraLibraries =  pkgs: [
           # List library dependencies here
@@ -147,7 +136,10 @@ in
     git
     tailscale
     direnv
-    syncthing
+
+    apfs-fuse # APFS for Apple-style drives
+    ventoy    # USB Boot Creator
+    ddrescue  # Drive Data Recovery
   ];
 
   # Give steam permissions to play games
