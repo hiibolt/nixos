@@ -9,14 +9,21 @@ in
 {
   imports =
     [ 
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      # Hardware Configuration and Kernel Packages
+      ./hardware/hardware-configuration.nix
+      ./hardware/opengl.nix
+      
+      # Driver for Alternate Keyboard Layout
       ./semimak/semimak.nix
+
+      # Shell Packages
       ./fish/fish.nix
+
+      # Maintenance Tooling / Automation
       ./maintenance/storage.nix
       ./maintenance/upgrade.nix
-      #./hardware/fingerprint.nix
     ];
+
   # Bootloader.
   boot.kernelPackages = pkgs.linuxPackages_6_1;
   boot.blacklistedKernelModules = [ "psmouse" ];
@@ -55,9 +62,11 @@ in
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
-    xkbOptions = "grp:alt_space_toggle";
+    xkb = {
+	      layout = "us";
+        variant = "";
+        options = "grp:alt_space_toggle";
+    };
   };
 
   # Enable CUPS to print documents.
@@ -88,32 +97,31 @@ in
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
+  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
+  virtualisation.docker.liveRestore = false;
+  users.extraGroups.vboxusers.members = [ "johnww" ];
+  users.extraGroups.docker.members = [ "johnww" ];
   users.users.johnww = {
     isNormalUser = true;
     description = "John Wallace White";
-    extraGroups = [ "networkmanager" "wheel" "dialout" "uinput" "input" ];
+    extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" "dialout" "uinput" "input" ];
     packages = with pkgs; [
       cider
-      osu-lazer
-      opentabletdriver
-      neovim
       stack
       logseq
-      steam
       wireguard-go
       librewolf
       discord
-      gimp
       zoom-us
+      awscli2 
       vscode
       electron
       libreoffice
-      android-studio
+      tetex
+      tilix
+      docker
+      docker-compose
       (lutris.override {
         extraLibraries =  pkgs: [
           # List library dependencies here
@@ -137,17 +145,11 @@ in
     tailscale
     direnv
 
-    apfs-fuse # APFS for Apple-style drives
     ventoy    # USB Boot Creator
-    ddrescue  # Drive Data Recovery
   ];
 
-  # Give steam permissions to play games
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  };
+  # Libvirtd / virt-manager
+  programs.virt-manager.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -174,7 +176,7 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
   
 }
 
