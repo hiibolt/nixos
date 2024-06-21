@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {	
   environment.systemPackages = with pkgs; [ kanata ];
   hardware.uinput.enable = true;

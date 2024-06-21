@@ -18,6 +18,12 @@ function t
     set_color normal
     eval "$TEST_COMMAND"
 end
+function d
+    set_color -o blue
+    echo "Debug phase '$DEBUG_COMMAND'"
+    set_color normal
+    eval "$DEBUG_COMMAND"
+end
 function cbt
     c
     b
@@ -51,5 +57,4 @@ function boilerplate -d "Grabs a boilerplate from https://github.com/boltr6/nix-
     end
 end
 set_color -i cyan
-set fish_greeting "ILY ~E"
-set_color normal
+set fish_greeting "Don't stop 'till Stanford"

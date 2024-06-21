@@ -142,6 +142,7 @@ in
   environment.systemPackages = with pkgs; [
     dotnet-sdk
     git
+    gh
     tailscale
     direnv
 

@@ -4,7 +4,7 @@ let
 
     grabVers = s: 
         let 
-            groups = builtins.match "Bolt v([[:digit:]]+).([[:digit:]]+).([[:digit:]]+)" s;
+            groups = builtins.match "Boltv([[:digit:]]+).([[:digit:]]+).([[:digit:]]+)" s;
             res = if groups != null then groups else ["0" "0" "0"];
         in 
             res;
@@ -23,7 +23,7 @@ in
          operation = "switch";
          flags = [
 		"-p"
-		"Bolt v${builtins.elemAt addtopatch 0}.${builtins.elemAt addtopatch 1}.${builtins.elemAt addtopatch 2}"	
+		"Boltv${builtins.elemAt addtopatch 0}.${builtins.elemAt addtopatch 1}.${builtins.elemAt addtopatch 2}"	
 	 ];
     };
 }
