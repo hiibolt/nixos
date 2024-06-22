@@ -12,6 +12,7 @@ in
       # Hardware Configuration and Kernel Packages
       ./hardware/hardware-configuration.nix
       ./hardware/opengl.nix
+      ./hardware/fingerprint.nix
       
       # Driver for Alternate Keyboard Layout
       ./semimak/semimak.nix
@@ -22,6 +23,9 @@ in
       # Maintenance Tooling / Automation
       ./maintenance/storage.nix
       ./maintenance/upgrade.nix
+
+      # Add users
+      ./users/hiibolt.nix
     ];
 
   # Bootloader.
@@ -95,42 +99,12 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-
+  # Enable Docker and Vbox
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
   virtualisation.docker.liveRestore = false;
-  users.extraGroups.vboxusers.members = [ "johnww" ];
-  users.extraGroups.docker.members = [ "johnww" ];
-  users.users.johnww = {
-    isNormalUser = true;
-    description = "John Wallace White";
-    extraGroups = [ "docker" "libvirtd" "networkmanager" "wheel" "dialout" "uinput" "input" ];
-    packages = with pkgs; [
-      cider
-      stack
-      logseq
-      wireguard-go
-      librewolf
-      discord
-      vesktop
-      zoom-us
-      awscli2 
-      vscode
-      electron
-      libreoffice
-      tetex
-      tilix
-      docker
-      docker-compose
-      (lutris.override {
-        extraLibraries =  pkgs: [
-          # List library dependencies here
-        ];
-      })
-    ];
-  };
-
+  users.extraGroups.vboxusers.members = [ "hiibolt" ];
+  users.extraGroups.docker.members = [ "hiibolt" ];
 
   # Allow unfree packages
   nixpkgs.config = {
