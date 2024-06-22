@@ -113,6 +113,7 @@ in
       wireguard-go
       librewolf
       discord
+      vesktop
       zoom-us
       awscli2 
       vscode
