@@ -7,7 +7,7 @@
 {
 	imports = [ 
 		# Hardware imports
-		/etc/nixos/hardware-configuration.nix
+		/etc/nixos/hardware/hardware-configuration.nix
 
 		# Add users and groups
 		/etc/nixos/users/hiibolt.nix
@@ -98,8 +98,9 @@
 	# Install firefox.
 	programs.firefox.enable = true;
 
-	# Allow unfree packages
+	# Allow unfree packages and enable Nix Flakes
 	nixpkgs.config.allowUnfree = true;
+  	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget

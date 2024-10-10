@@ -1,0 +1,49 @@
+(defcfg
+  ;; Your keyboard device may differ from this. I believe /dev/input/by-id/
+  ;; is preferable; I recall reading that it's less likely to change names on you,
+  ;; but I didn't find any keyboard device in there in my VM.
+  ;;linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd
+  linux-dev /dev/input/by-id/usb-SteelSeries_Apex_Pro_TKL_Wireless-if01-event-kbd
+)
+
+;; Only one defsrc is allowed.
+;;
+;; defsrc defines the keys that will be intercepted by kanata. The order of the
+;; keys matches with deflayer declarations and all deflayer declarations must
+;; have the same number of keys as defsrc. Any keys not listed in defsrc will
+;; be passed straight to the operating system.
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+;; The first layer defined is the layer that will be active by default when
+;; kanata starts up. 
+(deflayer semimak
+  grv  XX  XX    [    ]   XX   XX   XX   XX   XX    -    =    XX    bspc
+  tab  f    l    h    v    z    XX    q    w    u    o    y    @scd    ;
+  caps  s    r    n    t    k    XX    c    d    e    a    i    ret
+  x      '    b    m    j    XX   XX    p    g    ,    .    rsft
+  lctl lmet lalt           spc            rshift rmet rctl
+)
+
+;; defalias is used to declare a shortcut for a more complicated action to keep
+;; the deflayer declarations clean and aligned. The alignment in deflayers is not
+;; necessary, but is strongly recommended for ease of understanding visually.
+;;
+;; Aliases are referred to by `@<alias_name>`.
+(defalias
+  ;; Hold prtsc to toggle to symbol keys, otherwise just act as prtsc anyway
+  scd  (layer-toggle secondlayer)
+)
+
+(deflayer secondlayer
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    1    2    3    4    _    _    S-f5    f5   up   C-S-f9    _    _    _
+  _    5    6    7    8    esc    _    f9    left    down    rght    _    _
+  _    \    /    9    0    _    _    C-grv    _    _    _    _
+  _    _    _              _              _    _    _
+)
