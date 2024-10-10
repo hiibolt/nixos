@@ -64,6 +64,12 @@
 						version = "0.2.6";
 						sha256 = "LcAomgK91hnJWqAW4I0FAgTOwr8Kwv7ZhvGCgkokKuY=";
 					}
+					{
+						name = "vscord";
+						publisher = "LeonardSSH";
+						version = "5.2.13";
+						sha256 = "Jgm3ekXFLhylX7RM6tdfi+lRLrcl4UQGmRHbr27M59M=";
+					}
 				];
 			})
 		];
