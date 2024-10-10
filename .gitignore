@@ -2,3 +2,4 @@
 /hardware-configuration.nix
 *.AppImage
 /hardware
+/maintenance

@@ -3,156 +3,143 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-let 
-  next_version = import ./semver.nix;
-in
+
 {
-  imports =
-    [ 
-      # Hardware Configuration and Kernel Packages
-      ./hardware/hardware-configuration.nix
-      ./hardware/opengl.nix
-      ./hardware/fingerprint.nix
-      
-      # Driver for Alternate Keyboard Layout
-      ./semimak/semimak.nix
+	imports = [ 
+		# Hardware imports
+		/etc/nixos/hardware/hardware-configuration.nix
+    	/etc/nixos/hardware/fingerprint.nix
+    	/etc/nixos/hardware/opengl.nix
 
-      # Shell Packages
-      ./fish/fish.nix
+		# Add users and groups
+		/etc/nixos/users/hiibolt.nix
+		/etc/nixos/users/groups.nix
 
-      # Maintenance Tooling / Automation
-      ./maintenance/storage.nix
-      ./maintenance/upgrade.nix
+		# Add various packages
+		/etc/nixos/packages/fish/default.nix
+		/etc/nixos/packages/kanata/default.nix
+		/etc/nixos/packages/background-rotator/default.nix
+    /etc/nixos/packages/maintenance/storage.nix
+	];
 
-      # Add users
-      ./users/hiibolt.nix
-    ];
+	# Bootloader.
+	boot.loader.systemd-boot.enable = true;
+	boot.loader.efi.canTouchEfiVariables = true;
 
-  # Bootloader.
-  boot.kernelPackages = pkgs.linuxPackages_6_1;
-  boot.blacklistedKernelModules = [ "psmouse" ];
-  boot.loader = {
-    systemd-boot.enable = true;
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot/efi";
-    };
-  };
+	networking.hostName = "nuclearbombwarhead"; # Define your hostname.
+	# networking.wireless.enable = true;	
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+	# Enables Tailscale
+	services.tailscale.enable = true;
+	services.openssh.enable = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+	# Configure network proxy if necessary
+	# networking.proxy.default = "http://user:password@proxy:port/";
+	# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking and Tailscale
-  networking.networkmanager.enable = true;
-  services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "both";
+	# Enable networking
+	networking.networkmanager.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "America/Chicago";
+	# Set your time zone.
+	time.timeZone = "America/Chicago";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.utf8";
+	# Add system fonts
+	fonts.packages = [
+		pkgs.nerdfonts
+	];
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+	# Select internationalisation properties.
+	i18n.defaultLocale = "en_US.UTF-8";
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+	i18n.extraLocaleSettings = {
+		LC_ADDRESS = "en_US.UTF-8";
+		LC_IDENTIFICATION = "en_US.UTF-8";
+		LC_MEASUREMENT = "en_US.UTF-8";
+		LC_MONETARY = "en_US.UTF-8";
+		LC_NAME = "en_US.UTF-8";
+		LC_NUMERIC = "en_US.UTF-8";
+		LC_PAPER = "en_US.UTF-8";
+		LC_TELEPHONE = "en_US.UTF-8";
+		LC_TIME = "en_US.UTF-8";
+	};
 
-  # Configure keymap in X11
-  services.xserver = {
-    xkb = {
-	      layout = "us";
-        variant = "";
-        options = "grp:alt_space_toggle";
-    };
-  };
+	# Enable the X11 windowing system.
+	# You can disable this if you're only using the Wayland session.
+	services.xserver.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+	# Enable the KDE Plasma Desktop Environment.
+	services.displayManager.sddm.enable = true;
+	services.desktopManager.plasma6.enable = true;
 
-  # Enable and configure tablet drivers
-  hardware.opentabletdriver.enable = true;
+	# Configure keymap in X11
+	services.xserver.xkb = {
+		layout = "us";
+		variant = "";
+	};
 
-  # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+	# Enable CUPS to print documents.
+	services.printing.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
-  };
+	# Enable sound with pipewire.
+	hardware.pulseaudio.enable = false;
+	security.rtkit.enable = true;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		pulse.enable = true;
+		# If you want to use JACK applications, uncomment this
+		#jack.enable = true;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+		# use the example session manager (no others are packaged yet so this is enabled by default,
+		# no need to redefine it in your config for now)
+		#media-session.enable = true;
+	};
 
-  # Enable Docker and Vbox
-  virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
-  virtualisation.docker.liveRestore = false;
-  users.extraGroups.vboxusers.members = [ "hiibolt" ];
-  users.extraGroups.docker.members = [ "hiibolt" ];
+	# Enable touchpad support (enabled default in most desktopManager).
+	# services.xserver.libinput.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config = {
-    allowUnfree = true;
-  };
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+	# Install firefox.
+	programs.firefox.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    dotnet-sdk
-    git
-    gh
-    tailscale
-    direnv
+	# Allow unfree packages and enable Nix Flakes
+	nixpkgs.config.allowUnfree = true;
+  	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    ventoy    # USB Boot Creator
-  ];
+	# List packages installed in system profile. To search, run:
+	# $ nix search wget
+	environment.systemPackages = with pkgs; [
+		vim
+		wine
+		git
+		gh
+	];
 
-  # Libvirtd / virt-manager
-  programs.virt-manager.enable = true;
+	# Some programs need SUID wrappers, can be configured further or are
+	# started in user sessions.
+	# programs.mtr.enable = true;
+	# programs.gnupg.agent = {
+	#   enable = true;
+	#   enableSSHSupport = true;
+	# };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+	# List services that you want to enable:
 
-  # List services that you want to enable:
+	# Enable the OpenSSH daemon.
+	# services.openssh.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+	# Open ports in the firewall.
+	# networking.firewall.allowedTCPPorts = [ ... ];
+	# networking.firewall.allowedUDPPorts = [ ... ];
+	# Or disable the firewall altogether.
+	# networking.firewall.enable = false;
 
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+	# This value determines the NixOS release from which the default
+	# settings for stateful data, like file locations and database versions
+	# on your system were taken. It‘s perfectly fine and recommended to leave
+	# this value at the release version of the first install of this system.
+	# Before changing this value read the documentation for this option
+	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+	system.stateVersion = "24.05"; # Did you read the comment?
 
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
-  
 }
-
