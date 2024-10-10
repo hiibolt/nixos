@@ -16,6 +16,7 @@
 		# Add various packages
 		/etc/nixos/packages/fish/default.nix
 		/etc/nixos/packages/kanata/default.nix
+		/etc/nixos/packages/background-rotator/default.nix
 	];
 
 	# Bootloader.
