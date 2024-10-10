@@ -7,7 +7,7 @@
     users.users.hiibolt = {
 		isNormalUser = true;
 		description = "hiibolt";
-		extraGroups = [ "libvirtd" "networkmanager" "wheel" "dialout" "uinput" "input" ];
+		extraGroups = [ "networkmanager" "wheel" "dialout" ];
 		packages = with pkgs; [
 			kdePackages.kate
 			osu-lazer
