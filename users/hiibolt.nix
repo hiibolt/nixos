@@ -9,11 +9,24 @@
 		description = "hiibolt";
 		extraGroups = [ "networkmanager" "wheel" "dialout" ];
 		packages = with pkgs; [
+			# GUI Packages
 			kdePackages.kate
-			osu-lazer
+
+			# Browsers
 			brave
 			librewolf
+
+			# Shell Utilies
 			tilix
+			fastfetch
+			direnv
+
+			# Virtualization
+			docker
+			docker-compose
+
+			# Games and Applications
+			osu-lazer
 			(lutris.override {
 				extraLibraries = pkgs: [
 					libadwaita
@@ -25,10 +38,7 @@
 			})
 			vesktop
       		libreoffice
-			docker
-			docker-compose
 			logseq
-			direnv
 		    (pkgs.callPackage /etc/nixos/packages/cider/default.nix {})	
 			(vscode-with-extensions.override {
 				vscodeExtensions = with vscode-extensions; [
