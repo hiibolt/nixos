@@ -40,6 +40,7 @@
       		libreoffice
 			logseq
 		    (pkgs.callPackage /etc/nixos/packages/cider/default.nix {})	
+		    # (pkgs.callPackage /etc/nixos/packages/deno/default.nix {})	
 			(vscode-with-extensions.override {
 				vscodeExtensions = with vscode-extensions; [
 					github.copilot
