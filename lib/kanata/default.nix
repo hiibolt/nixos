@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, keyboard_path }:
 {	
   environment.systemPackages = with pkgs; [ kanata ];
   hardware.uinput.enable = true;
@@ -6,7 +6,7 @@
   systemd.services.kanata = {
     path = [ pkgs.kanata ];
     wantedBy = [ "multi-user.target" ];
-    script = ''kanata -c /etc/nixos/hardware/semimak.kbd'';
+    script = ''kanata -c ${keyboard_path}'';
     enable = true;
   };
 }
