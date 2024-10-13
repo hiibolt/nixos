@@ -3,6 +3,7 @@
 	pkgs,
 	inputs,
 	impermanence,
+	hostname,
 	wallpaper
 }:
 let
@@ -79,20 +80,12 @@ in
 			"kdeglobals"."WM"."inactiveBlend" = "144,156,204";
 			"kdeglobals"."WM"."inactiveForeground" = "211,229,241";
 			"kwalletrc"."Wallet"."First Use" = false;
-			"kwinrc"."Desktops"."Id_1" = "783299e3-3440-4116-b9d0-845941cc0e51";
-			"kwinrc"."Desktops"."Id_2" = "9d30429e-a316-48ba-838c-3385fa16c0f6";
-			"kwinrc"."Desktops"."Id_3" = "d24dfdcb-1ed5-4ce1-824f-06b115df8873";
-			"kwinrc"."Desktops"."Number" = 3;
-			"kwinrc"."Desktops"."Rows" = 2;
-			"kwinrc"."Tiling"."padding" = 12;
-			"kwinrc"."Tiling/cbc2ee2d-43b8-5fed-8410-299addbcca52"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.45833333333333337},{\"height\":0.5416666666666666}],\"width\":0.3911458333333333},{\"width\":0.6088541666666627}]}";
-			"kwinrc"."Tiling/d3b153ee-5d4a-5046-a2e9-ded4dc797d82"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.6083333333333305},{\"width\":0.3916666666666695}]}";
 			"kwinrc"."Xwayland"."Scale" = 1;
 			"plasma-localerc"."Formats"."LANG" = "en_US.UTF-8";
 			"spectaclerc"."GuiConfig"."captureMode" = 0;
 			"spectaclerc"."ImageSave"."translatedScreenshotsFolder" = "Screenshots";
 			"spectaclerc"."VideoSave"."translatedScreencastsFolder" = "Screencasts";
-		};
+		} // (import ./desktops/${hostname}.nix);
 		dataFile = {
 			# Nothing, yet
 		};
@@ -129,12 +122,18 @@ in
 				# Language Support
 				bbenoist.nix
 			]  ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-				{
-					name = "remote-ssh-edit";
-					publisher = "ms-vscode-remote";
-					version = "0.47.2";
-					sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-				}
+				#{
+				#	name = "remote-ssh-edit";
+				#	publisher = "ms-vscode-remote";
+				#	version = "0.47.2";
+				#	sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
+				#}
+				#{
+				#	name = "remote-ssh";
+				#	publisher = "ms-vscode-remote";
+				#	version = "0.116.2024100715";
+				#	sha256 = "Mo11BGA27Bi62JRPU6INOq3SXTsp5ASYzd8ihlV3ZZY=";
+				#}
 				{
 					name = "glassit";
 					publisher = "s-nlf-fh";
@@ -147,6 +146,18 @@ in
 					version = "5.2.13";
 					sha256 = "Jgm3ekXFLhylX7RM6tdfi+lRLrcl4UQGmRHbr27M59M=";
 				}
+				{
+					name = "remote-explorer";
+					publisher = "ms-vscode";
+					version = "0.5.2024081309";
+					sha256 = "YExf9Yyo7Zp0Nfoap8Vvtas11W9Czslt55X9lb/Ri3s=";
+				}
+				{
+					name = "vscode-remote-extensionpack";
+					publisher = "ms-vscode-remote";
+					version = "0.25.0";
+					sha256 = "CleLZvH40gidW6fqonZv/E/VO8IDI+QU4Zymo0n35Ns=";
+				}
 			];
 			userSettings = {
 				"editor.fontFamily" = "'DejaVu Sans Mono'";
@@ -156,6 +167,7 @@ in
 				"security.workspace.trust.enabled" = false;
 				"git.openRepositoryInParentFolders" = "always";
 				"extensions.ignoreRecommendations" = true;
+				"remote.SSH.useLocalServer" = false;
 
 				# Extensions
 				## Glassit

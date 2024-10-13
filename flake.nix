@@ -90,6 +90,41 @@
 						inherit pkgs;
 						inherit inputs;
 						inherit wallpaper;
+						hostname = "nuclearbombwarhead";
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+				}
+				stylix.nixosModules.stylix
+
+				impermanence.nixosModules.impermanence
+				
+			];
+		};
+		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
+			inherit system;
+
+			specialArgs = {inherit inputs;};
+			modules = [
+				disko.nixosModules.default
+
+				nix-index-database.nixosModules.nix-index
+
+				./devices/nuclearbombconsole/configuration.nix 
+				
+				home-manager.nixosModules.default {	
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.sharedModules = [ 
+						plasma-manager.homeManagerModules.plasma-manager
+					];
+					home-manager.backupFileExtension = "meow";
+					
+					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit inputs;
+						inherit wallpaper;
+						hostname = "nuclearbombconsole";
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}
