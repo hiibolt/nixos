@@ -37,6 +37,10 @@ Generate template files to conveniently build a lot of Nix's fs, then remove con
 * `rm -f /mnt/etc/nixos/*; sudo mv /tmp/nix/* /mnt/etc/nixos`
 * `mkdir -p /mnt/persist/nixos; cp -r /mnt/etc/nixos /mnt/persist; rm -f /etc/nixos/configuration.nix; cp -r /mnt/etc/nixos/* /etc/nixos`
 
+Before continuing, note the following caveats:
+- If you have 16GB or less of RAM, consider switching `TMPDIR` prior to building or you may run into issues. Alternatively, use the `release-minimal` branch.
+- This installation will likely conflict with any RAID drive formations. Consider disabling it in BIOS or reworking the `disko` setup.
+
 Install and reboot:
 * `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
 * `reboot`
