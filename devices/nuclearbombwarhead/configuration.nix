@@ -34,8 +34,7 @@ in
     ];
 
   # Set the root password
-  users.users.root.initialPassword = "1234";
-  users.users.root.hashedPasswordFile = "./passwords/root.pw";
+  users.users.root.hashedPasswordFile = "/etc/nixos/devices/nuclearbombwarhead/passwords/root.pw";
 
   # Enable OpenGL
   hardware.opengl = {

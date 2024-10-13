@@ -9,7 +9,7 @@ appimageTools.wrapType2 rec {
   version = "2.5.0";
 
   src = fetchurl {
-    url = "file://${./Cider-${version}.AppImage}";
+    url = "https://dl.dropboxusercontent.com/scl/fi/v7321ymjrzc0emsmr2r9c/Cider-linux-appimage-x64.AppImage?rlkey=8y8dfw2p4dp5ecvs9cegg5ih1&st=mhqowsxw";
     sha256 = "HwfByY8av1AvI+t7wnaNbhDLXBxgzRKYiLG1hPUto9o=";
   };
 
