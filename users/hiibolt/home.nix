@@ -5,10 +5,20 @@
 	impermanence,
 	wallpaper
 }:
+let
+	vscode-server = fetchTarball {
+		url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
+		sha256 = "1rq8mrlmbzpcbv9ys0x88alw30ks70jlmvnfr2j8v830yy5wvw7h";
+	};
+in
 { 
 	imports = [
+		"${vscode-server}/modules/vscode-server/home.nix"
 		inputs.impermanence.nixosModules.home-manager.impermanence
 	];
+
+	# VSC Server
+	services.vscode-server.enable = true;
 
 	# HM-only Stylix options
 	stylix = {
@@ -145,6 +155,7 @@
 				"git.autofetch" = true;
 				"security.workspace.trust.enabled" = false;
 				"git.openRepositoryInParentFolders" = "always";
+				"extensions.ignoreRecommendations" = true;
 
 				# Extensions
 				## Glassit

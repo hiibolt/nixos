@@ -103,8 +103,12 @@ in
     networkmanager.enable = true;
   };
   services.openssh.enable = true;
-  services.tailscale.enable = true;
-
+  services.tailscale = {
+    enable = true;
+    extraSetFlags = [
+      "--ssh"
+    ];
+  };
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

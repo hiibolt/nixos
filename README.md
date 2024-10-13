@@ -63,3 +63,5 @@ Download ZZZ through Lutris
 * `git clone -b release-1.0 https://github.com/hiibolt/nix.git`
 * `mv nix/.gitignore nix/.git .`
 * `rm -rf nix`
+### Enable VSCode Server
+* `systemctl --user enable auto-fix-vscode-server.service`
