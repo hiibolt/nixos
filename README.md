@@ -22,7 +22,7 @@ It's probably a bad idea to store passwords declaratively publically ^^'
 * `echo "..." > root`
 * `echo "..." > hiibolt`
 ### Unfree AppImages
-Cider uses a not-for-distribution AppImage, so it must be downloaded, moved, and renamed into `/etc/nixos/lib/cider/Cider-X.X.X.AppImage`
+Cider uses a not-for-distribution AppImage, so it must be downloaded, moved, and renamed into `x/etc/nixos/lib/cider/Cider-X.X.X.AppImage`
 ### Log into services
 Log into:
 * GitHub via Librewolf
@@ -30,3 +30,10 @@ Log into:
 * Tailscale
 * Vesktop
 * osu!lazer
+### Download Games
+Download ZZZ through Lutris
+### Reinject Gitfiles to `/etc/nixos`
+* `cd /etc/nixos`
+* `git clone https://github.com/hiibolt/nix.git`
+* `mv nix/.gitignore nix/.git .`
+* `rm -rf nix`
