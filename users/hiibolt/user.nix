@@ -6,7 +6,8 @@
   users.users.hiibolt = {
     isNormalUser = true;
     description = "hiibolt";
-    hashedPasswordFile = "/etc/nixos/users/hiibolt/passwords/hiibolt.pw";
+    initialPassword = "1234";
+    # hashedPasswordFile = "/etc/nixos/users/hiibolt/passwords/hiibolt.pw";
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
         # Development
