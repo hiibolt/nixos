@@ -6,7 +6,8 @@
   users.users.hiibolt = {
     isNormalUser = true;
     description = "hiibolt";
-    hashedPasswordFile = "/persist/passwords/hiibolt";
+    initialPassword = "1234";
+    hashedPasswordFile = "./passwords/hiibolt.pw";
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
         # Development
@@ -23,7 +24,7 @@
         fastfetch
 
         # Music
-        (pkgs.callPackage "${inputs.etc-nixos}/lib/cider/default.nix" {})
+        (pkgs.callPackage "./cider/default.nix" {})
 
         # Games
         osu-lazer-bin

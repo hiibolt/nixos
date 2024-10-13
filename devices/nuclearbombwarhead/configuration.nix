@@ -34,7 +34,8 @@ in
     ];
 
   # Set the root password
-  users.users.root.hashedPasswordFile = "/persist/passwords/root";
+  users.users.root.initialPassword = "1234";
+  users.users.root.hashedPasswordFile = "./passwords/root.pw";
 
   # Enable OpenGL
   hardware.opengl = {
