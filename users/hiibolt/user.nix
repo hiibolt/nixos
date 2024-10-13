@@ -24,7 +24,7 @@
         fastfetch
 
         # Music
-        (pkgs.callPackage "./cider/default.nix" {})
+        (pkgs.callPackage ./cider/default.nix {})
 
         # Games
         osu-lazer-bin
