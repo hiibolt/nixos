@@ -1,28 +1,54 @@
-# My NixOS 
-This is a proof-of-concept NixOS configuration that uses `impermanence` with `home-manager` and `plasma-manager` to achieve a highly stylized development system with an entirely defined state.
+# NixOS - Stateful HA Kubernetes Cluster - `nuclearbomb`
+This is a set of proof-of-concept NixOS configurations that uses `impermanence` with `home-manager` and `plasma-manager` to achieve a highly stylized development system with an entirely defined state.
 
-Being impermanent, everything besides choice directories are cleared.
+![image](https://github.com/user-attachments/assets/619f39ba-9237-43a0-8410-93e1924dd682)
+![image](https://github.com/user-attachments/assets/2c789cc4-3db1-42d6-9715-0e5656619275)
+![image](https://github.com/user-attachments/assets/9316ee93-1018-444c-b386-3bc4a4dbba72)
 
-Besides directories that store credentials, everything is wiped except for two specific choices:
+## Impermanence
+Being impermanent, everything besides choice directories are cleared at boot!
+
+Besides directories that store credentials or (temporary) configuration, everything is wiped except for two specific choices:
 
 * `~/Development`
+
 I develop locally, for now. I have yet to find a suitible cloud development solution. Replit comes (came) close, but unfortunately their pricing is not what it used to be. May the `Hacker` plan rest in peace.
 
 * `~/Games`
-I dislike the idea of waiting upwards of an hour for each reboot to redownload my games.
+
+I would be okay with placing it in the Nix Store somehow, similar to how `osu!laser` is packaged, but it seems like there isn't a Nix-y way to do so yet :(
+
+## Installation and Setup
+Enter sudo:
+* `sudo su`
+
+Ephemerally download Git (and an editor of your choice):
+* `nix-shell -p vim -p git`
+
+Pick the drive you want to install NixOS on (it will be formatted, choose wisely)
+* `lsblk`
+
+Import this configuration and run [disko](https://github.com/nix-community/disko) with the drive you selected:
+* `cd /tmp; git clone https://github.com/hiibolt/nix.git`
+* `sudo nix –experimental-features “nix-command flakes” run github:nix-community/disko – –mode disko /tmp/nix/devices/nuclearbombwarhead/hardware/disko.nix –arg device ‘“/dev/<your-drive-here>”’`
+
+Generate template files to conveniently build a lot of Nix's fs, then remove configuration files and copy our own in (backing up to `/persist`):
+* `sudo nixos-generate-config –no-filesystems –root /mnt`
+* `rm -f /mnt/etc/nixos/*; sudo mv /tmp/nix/* /mnt/etc/nixos`
+* `mkdir -p /mnt/persist/nixos; cp -r /mnt/etc/nixos /mnt/persist; rm -f /etc/nixos/configuration.nix; cp -r /mnt/etc/nixos/* /etc/nixos`
+
+Install and reboot:
+* `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
+* `reboot`
+
+Repopulate `/etc/nixos` with what we backed up, remove said backup, and rebuild/reboot:
+* `sudo cp -r /persist/nixos /etc && sudo rm -rf /persist/nixos`
+* `sudo nixos-rebuild switch --flake /etc/nixos#nuclearbombwarhead`
+* `reboot`
+
 
 ## Imperative Setup
-Unfortunately, there are some things which, for sake of security or legality, must be imperative.
-### Setting up passwords
-It's probably a bad idea to store passwords declaratively publically ^^'
-
-* `sudo mkdir -p /persist/passwords`
-* `cd /persist/passwords`
-* `mkpasswd`
-* `echo "..." > root`
-* `echo "..." > hiibolt`
-### Unfree AppImages
-Cider uses a not-for-distribution AppImage, so it must be downloaded, moved, and renamed into `x/etc/nixos/lib/cider/Cider-X.X.X.AppImage`
+There are some things which, for sake of security or legality, must be imperative.
 ### Log into services
 Log into:
 * GitHub via Librewolf
