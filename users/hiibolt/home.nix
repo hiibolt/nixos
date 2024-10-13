@@ -144,6 +144,7 @@
   				"workbench.colorTheme" = "Stylix";
 				"git.autofetch" = true;
 				"security.workspace.trust.enabled" = false;
+				"git.openRepositoryInParentFolders" = "always";
 
 				# Extensions
 				## Glassit
