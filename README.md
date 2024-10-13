@@ -29,7 +29,7 @@ Pick the drive you want to install NixOS on (it will be formatted, choose wisely
 * `lsblk`
 
 Import this configuration and run [disko](https://github.com/nix-community/disko) with the drive you selected:
-* `cd /tmp; git clone https://github.com/hiibolt/nix.git`
+* `cd /tmp; git clone -b release-1.0 https://github.com/hiibolt/nix.git`
 * `sudo nix –experimental-features “nix-command flakes” run github:nix-community/disko – –mode disko /tmp/nix/devices/nuclearbombwarhead/hardware/disko.nix –arg device ‘“/dev/<your-drive-here>”’`
 
 Generate template files to conveniently build a lot of Nix's fs, then remove configuration files and copy our own in (backing up to `/persist`):
@@ -60,6 +60,6 @@ Log into:
 Download ZZZ through Lutris
 ### Reinject Gitfiles to `/etc/nixos`
 * `cd /etc/nixos`
-* `git clone https://github.com/hiibolt/nix.git`
+* `git clone -b release-1.0 https://github.com/hiibolt/nix.git`
 * `mv nix/.gitignore nix/.git .`
 * `rm -rf nix`
