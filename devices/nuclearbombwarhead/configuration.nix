@@ -39,17 +39,37 @@ in
     # hashedPasswordFile = "/etc/nixos/devices/nuclearbombwarhead/passwords/root.pw";
   };
 
-  # Enable OpenGL
+  # Enable OpenGL, AMD, and Intel graphics drivers.
   hardware.opengl = {
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      # Intel Drivers
+      intel-media-driver
+      intel-compute-runtime
+      vaapiVdpau
+      libvdpau-va-gl
+      vaapiIntel
+      # intel-ocl
+
+      # AMD Drivers
+      rocmPackages.clr.icd
+      amdvlk
+    ];
   };
+  services.xserver.videoDrivers = [ "amdgpu" ]; 
+
+  # HIP workaround
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
+  ];
+
 
   # Stylix
 	stylix = {
     enable = true;
-    image = /etc/nixos/backgrounds/6.jpg;
+    image = /etc/nixos/backgrounds/5.jpg;
 	};
  
   # Use the systemd-boot EFI boot loader.
