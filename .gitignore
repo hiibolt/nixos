@@ -1,7 +1,2 @@
-/configuration.nix
-/hardware-configuration.nix
 #*.AppImage
-/hardware
-/maintenance
-/_old
 *.pw
