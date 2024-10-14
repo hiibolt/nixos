@@ -106,7 +106,7 @@ in
 		git = {
 			enable = true;
 			userName = "hiibolt";
-			userEmail = "my_git_username@gmail.com";
+			userEmail = "me@hiibolt.com";
 		};
 		gh = {
 			enable = true;
@@ -122,6 +122,14 @@ in
 				http_unix_socket = "";
 				browser = "";
 			};
+		};
+		neovim = {
+			enable = true;
+			vimAlias = true;
+			extraPackages = [ ];
+			extraLuaPackages = ps: [ ];
+			extraConfig = '''';
+			extraLuaConfig = '''';
 		};
 		vscode = {
 			enable = true;
