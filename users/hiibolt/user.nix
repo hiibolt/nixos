@@ -1,7 +1,11 @@
 
 { config, lib, pkgs, inputs, ... }:
 
-{
+{ 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+  ];
+
   # Create our primary user (`hiibolt`)
   users.users.hiibolt = {
     isNormalUser = true;
@@ -16,6 +20,9 @@
 
         # Web
 		    librewolf
+
+        # Note-taking
+        logseq
 
         # Vesktop
         vesktop

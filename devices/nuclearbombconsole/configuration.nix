@@ -44,7 +44,7 @@ in
   # Stylix
 	stylix = {
     enable = true;
-    image = /etc/nixos/backgrounds/5.jpg;
+    image = /etc/nixos/backgrounds/6.jpg;
 	};
  
   # Use the systemd-boot EFI boot loader.
