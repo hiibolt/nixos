@@ -14,6 +14,14 @@
 		inherit uses_plasma;
 	};
     
+    neovim = {
+        enable = true;
+        vimAlias = true;
+        extraPackages = [ ];
+        extraLuaPackages = ps: [ ];
+        extraConfig = '''';
+        extraLuaConfig = '''';
+    };
     git = {
         enable = true;
         userName = "hiibolt";
