@@ -12,7 +12,10 @@
   boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = [ "module_blacklist=i915" ]; # Disable Intel graphics driver
+  boot.kernelParams = [
+    "module_blacklist=i915" # Disable Intel graphics driver
+    "split_lock_detect=off" # Disable split lock detection (highly dangerous)
+  ]; 
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
