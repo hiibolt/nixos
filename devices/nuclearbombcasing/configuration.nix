@@ -30,48 +30,14 @@ in
 
       # Users
       "${users_dir}/hiibolt/user.nix"
-      "${users_dir}/larkben/user.nix"
       "${users_dir}/groups.nix"
     ];
 
   # Set the root password
   users.users.root = {
     initialPassword = "1234";
-    # hashedPasswordFile = "/etc/nixos/devices/nuclearbombwarhead/passwords/root.pw";
+    # hashedPasswordFile = "/etc/nixos/devices/nuclearbombconsole/passwords/root.pw";
   };
-
-  # Enable OpenGL, AMD, and Intel graphics drivers.
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      # Intel Drivers
-      intel-media-driver
-      intel-compute-runtime
-      vaapiVdpau
-      libvdpau-va-gl
-      vaapiIntel
-      # intel-ocl
-
-      # AMD Drivers
-      rocmPackages.clr.icd
-      amdvlk
-    ];
-  };
-  services.xserver.videoDrivers = [ "amdgpu" ]; 
-
-  # HIP workaround
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
-
-
-  # Stylix
-	stylix = {
-    enable = true;
-    image = /etc/nixos/backgrounds/6.jpg;
-	};
  
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -109,18 +75,13 @@ in
       };
   };
 
-  # Enable the X11 windowing system with KDE Plasma 6
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
 	# Allow unfree packages and enable Nix Flakes
 	nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Networking
   networking = {
-    hostName = "nuclearbombwarhead";
+    hostName = "nuclearbombcasing";
     networkmanager.enable = true;
   };
   services.openssh.enable = true;
@@ -130,33 +91,12 @@ in
       "--ssh"
     ];
   };
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-	# Enable sound with pipewire.
-	hardware.pulseaudio.enable = false;
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-	};
 
   # System Packages
 	environment.systemPackages = with pkgs; [
     # Basic Development
 		vim
 		wget
-
-    # Web Browsing
-		librewolf
-
-    # Windows Emulation
-    wine
-    wineWowPackages.stable
-    winetricks
-    protontricks
   ];
   
   # State Version - Change with caution,

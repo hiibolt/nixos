@@ -61,13 +61,28 @@
 		};
 		config = pkgs.config;
 
-		# Theming
-		wallpaper = "/etc/nixos/backgrounds/6.jpg";
+		hostnames = {
+			laptop = "nuclearbombconsole";           # My Laptop - Please don't tweak!
+			primary = "nuclearbombwarhead";          # CyberPowerPC Case
+			secondary = "nuclearbombpayload";        # NZXT Case
+			shitboxes = {
+				burgerbox = "nuclearbombcontroller"; # Beelink
+				firehazard = "nuclearbombcasing";    # Cardboard
+				dell = {
+					one = "nuclearbombfin1";         # Dell - 1
+					two = "nuclearbombfin2";         # Dell - 2
+				};
+			};
+		};
 	in
 	rec {
 		nixosConfigurations.default = nixosConfigurations.nuclearbombwarhead;
 		nixosConfigurations.nuclearbombwarhead = nixpkgs.lib.nixosSystem {
 			inherit system;
+
+			#
+			# "nuclearbombwarhead" is the primary system (CyberPowerPC Case)
+			#
 
 			specialArgs = {inherit inputs;};
 			modules = [
@@ -85,13 +100,23 @@
 					];
 					home-manager.backupFileExtension = "meow";
 					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit inputs;
-						inherit wallpaper;
-						hostname = "nuclearbombwarhead";
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					home-manager.users = {
+						"hiibolt" = import ./users/hiibolt/home.nix {
+							config = home-manager.nixosModules.default.config;
+							inherit pkgs;
+							inherit inputs;
+							hostname = hostnames.primary;
+							uses_plasma = true;
+							impermanence = impermanence.nixosModules.home-manager.impermanence;
+						};
+						"larkben" = import ./users/larkben/home.nix {
+							config = home-manager.nixosModules.default.config;
+							inherit pkgs;
+							inherit inputs;
+							hostname = hostnames.primary;
+							uses_plasma = true;
+							impermanence = impermanence.nixosModules.home-manager.impermanence;
+						};
 					};
 				}
 				stylix.nixosModules.stylix
@@ -102,6 +127,10 @@
 		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
 			inherit system;
+
+			#
+			# "nuclearbombconsole" is the laptop
+			#
 
 			specialArgs = {inherit inputs;};
 			modules = [
@@ -123,12 +152,55 @@
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
 						inherit inputs;
-						inherit wallpaper;
-						hostname = "nuclearbombconsole";
+						hostname = hostnames.laptop;
+						uses_plasma = true;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}
 				stylix.nixosModules.stylix
+
+				impermanence.nixosModules.impermanence
+				
+			];
+		};
+		nixosConfigurations.nuclearbombcasing = nixpkgs.lib.nixosSystem {
+			inherit system;
+
+			#
+			# "nuclearbombcasing" is the cardboard box
+			#
+
+			specialArgs = {inherit inputs;};
+			modules = [
+				disko.nixosModules.default
+
+				nix-index-database.nixosModules.nix-index
+
+				./devices/nuclearbombcasing/configuration.nix 
+				
+				home-manager.nixosModules.default {	
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.sharedModules = [ ];
+					home-manager.backupFileExtension = "meow";
+					
+					"hiibolt" = import ./users/hiibolt/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit inputs;
+						hostname = hostnames.shitboxes.firehazard;
+						uses_plasma = true;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+					"larkben" = import ./users/larkben/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit inputs;
+						hostname = hostnames.shitboxes.firehazard;
+						uses_plasma = true;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+				}
 
 				impermanence.nixosModules.impermanence
 				

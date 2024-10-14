@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let 
-	primary_users = [ "hiibolt" ];
+	primary_users = [ "hiibolt" "larkben" ];
 in
 {	
 	users.groups = {
