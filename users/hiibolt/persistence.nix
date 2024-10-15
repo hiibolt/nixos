@@ -18,6 +18,7 @@
         ".local/share/direnv"
         ".local/share/fish"
         ".config/Code"
+        ".kube"
 
         # Browser
         ".librewolf"
