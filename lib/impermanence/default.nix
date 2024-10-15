@@ -35,6 +35,8 @@
             #"/etc/rancher"
             "/etc/kubernetes"
             "/var/lib/kubernetes"
+            "/var/lib/kubelet"
+            "/var/lib/kube-proxy"
 
             # Tailscale + SSH
 	        "/etc/ssh"
