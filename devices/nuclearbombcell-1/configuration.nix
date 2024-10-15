@@ -82,7 +82,7 @@ in
 
   # Networking
   networking = {
-    hostName = "nuclearbombcasing";
+    hostName = "nuclearbombcell-1";
     networkmanager.enable = true;
   };
   services.openssh.enable = true;
