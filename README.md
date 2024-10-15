@@ -34,7 +34,7 @@ Import this configuration and run [disko](https://github.com/nix-community/disko
 
 Generate template files to conveniently build a lot of Nix's fs, then remove configuration files and copy our own in (backing up to `/persist`):
 * `sudo nixos-generate-config –no-filesystems –root /mnt`
-* `rm -f /mnt/etc/nixos/*; sudo mv /tmp/nixos/* /mnt/etc/nixos`
+* `rm -rf /mnt/etc/nixos; sudo mv /tmp/nixos /mnt/etc`
 * `mkdir -p /mnt/persist/nixos; cp -r /mnt/etc/nixos /mnt/persist; rm -f /etc/nixos/configuration.nix; cp -r /mnt/etc/nixos/* /etc/nixos`
 
 Before continuing, note the following caveats:
@@ -43,11 +43,6 @@ Before continuing, note the following caveats:
 
 Install and reboot:
 * `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
-* `reboot`
-
-Repopulate `/etc/nixos` with what we backed up, remove said backup, and rebuild/reboot:
-* `sudo cp -r /persist/nixos /etc && sudo rm -rf /persist/nixos`
-* `sudo nixos-rebuild switch --flake /etc/nixos#nuclearbombwarhead`
 * `reboot`
 
 
