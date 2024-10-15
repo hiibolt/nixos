@@ -48,6 +48,9 @@ in
 			source = ../../dotfiles/fish/config.fish;
 		};
 	};
+	home.packages = with pkgs; [
+		dconf
+	];
 
 } // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
 	inherit config;
