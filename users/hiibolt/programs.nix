@@ -4,16 +4,7 @@
     hostname,
     uses_plasma
 }:
-{
-    # KDE Plasma 6
-    # - Only applies to graphical systems!
-    plasma = import ./plasma.nix {
-		inherit config;
-		inherit pkgs;
-		inherit hostname;
-		inherit uses_plasma;
-	};
-    
+{   
     neovim = {
         enable = true;
         vimAlias = true;
@@ -107,6 +98,6 @@
             "vscord.status.details.text.notInFile" = "honk shoo mimimi";
             "vscord.status.state.text.idle" = "idling~";
             "vscord.app.name" = "Visual Studio Code";
-        };
+        }; 
     };
 }

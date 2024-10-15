@@ -24,15 +24,12 @@ in
 		inherit pkgs;
 		inherit hostname;
 		inherit uses_plasma;
-	};
-
-	# Stylization
-	stylix = import ./stylix.nix {
+	} // pkgs.lib.optionalAttrs uses_plasma (import ./plasma.nix {
 		inherit config;
 		inherit pkgs;
 		inherit hostname;
 		inherit uses_plasma;
-	};
+	});
 	
 	# Persistence
 	home.persistence."/persist/home/hiibolt" = import ./persistence.nix {
@@ -51,4 +48,10 @@ in
 			source = ../../dotfiles/fish/config.fish;
 		};
 	};
-}
+} // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
+	inherit config;
+	inherit pkgs;
+	inherit hostname;
+	inherit uses_plasma;
+})
+

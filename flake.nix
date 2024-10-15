@@ -160,7 +160,7 @@
 				stylix.nixosModules.stylix
 
 				impermanence.nixosModules.impermanence
-				
+			#	
 			];
 		};
 		nixosConfigurations.nuclearbombcasing = nixpkgs.lib.nixosSystem {
@@ -184,20 +184,20 @@
 					home-manager.sharedModules = [ ];
 					home-manager.backupFileExtension = "meow";
 					
-					"hiibolt" = import ./users/hiibolt/home.nix {
+					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
 						inherit inputs;
 						hostname = hostnames.shitboxes.firehazard;
-						uses_plasma = true;
+						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
-					"larkben" = import ./users/larkben/home.nix {
+					home-manager.users."larkben" = import ./users/larkben/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
 						inherit inputs;
 						hostname = hostnames.shitboxes.firehazard;
-						uses_plasma = true;
+						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}

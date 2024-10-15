@@ -5,15 +5,6 @@
     uses_plasma
 }:
 {
-    # KDE Plasma 6
-    # - Only applies to graphical systems!
-    plasma = import ./plasma.nix {
-		inherit config;
-		inherit pkgs;
-		inherit hostname;
-		inherit uses_plasma;
-	};
-
     vim = {
         enable = true;
         plugins = [ ];

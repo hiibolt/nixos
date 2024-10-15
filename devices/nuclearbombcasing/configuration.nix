@@ -13,7 +13,7 @@ in
     [
       # Hardware
       "${this_device_dir}/hardware/hardware-configuration.nix"
-      (import ./hardware/disko.nix { device = "/dev/nvme0n1"; })
+      (import ./hardware/disko.nix { device = "/dev/sda"; })
       "${lib_dir}/impermanence/default.nix"
 
       # System Shell
@@ -30,6 +30,7 @@ in
 
       # Users
       "${users_dir}/hiibolt/user.nix"
+      "${users_dir}/larkben/user.nix"
       "${users_dir}/groups.nix"
     ];
 

@@ -24,18 +24,15 @@ in
 		inherit pkgs;
 		inherit hostname;
 		inherit uses_plasma;
-	};
-	
-	# Persistence
-	home.persistence."/persist/home/larkben" = import ./persistence.nix {
+	} // pkgs.lib.optionalAttrs uses_plasma (import ./plasma.nix {
 		inherit config;
 		inherit pkgs;
 		inherit hostname;
 		inherit uses_plasma;
-	};
-
-	# Stylization
-	stylix = import ./stylix.nix {
+	});
+	
+	# Persistence
+	home.persistence."/persist/home/larkben" = import ./persistence.nix {
 		inherit config;
 		inherit pkgs;
 		inherit hostname;
@@ -52,4 +49,9 @@ in
 		};
 	};
 
-}
+} // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
+	inherit config;
+	inherit pkgs;
+	inherit hostname;
+	inherit uses_plasma;
+})
