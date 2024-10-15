@@ -69,8 +69,8 @@
 				burgerbox = "nuclearbombcontroller"; # Beelink
 				firehazard = "nuclearbombcasing";    # Cardboard
 				dell = {
-					one = "nuclearbombfin1";         # Dell - 1
-					two = "nuclearbombfin2";         # Dell - 2
+					one = "nuclearbombcell-1";         # Dell - 1
+					two = "nuclearbombcell-2";         # Dell - 2
 				};
 			};
 		};
@@ -197,6 +197,49 @@
 						inherit pkgs;
 						inherit inputs;
 						hostname = hostnames.shitboxes.firehazard;
+						uses_plasma = false;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+				}
+
+				impermanence.nixosModules.impermanence
+				
+			];
+		};
+		nixosConfigurations.nuclearbombcell-1 = nixpkgs.lib.nixosSystem {
+			inherit system;
+
+			#
+			# "nuclearbombcell-1" is the first of the Dell machines
+			#
+
+			specialArgs = {inherit inputs;};
+			modules = [
+				disko.nixosModules.default
+
+				nix-index-database.nixosModules.nix-index
+
+				./devices/nuclearbombcasing/configuration.nix 
+				
+				home-manager.nixosModules.default {	
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.sharedModules = [ ];
+					home-manager.backupFileExtension = "meow";
+					
+					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit inputs;
+						hostname = hostnames.shitboxes.dell.one;
+						uses_plasma = false;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+					home-manager.users."larkben" = import ./users/larkben/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit inputs;
+						hostname = hostnames.shitboxes.dell.one;
 						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
