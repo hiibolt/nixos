@@ -1,6 +1,7 @@
 {
     config,
     pkgs,
+    unstable-pkgs,
     hostname,
     uses_plasma
 }:
@@ -35,6 +36,7 @@
     };
     vscode = {
         enable = true;
+        package = unstable-pkgs.vscode;
         extensions = with pkgs.vscode-extensions; [
             # Development Environment
             github.copilot

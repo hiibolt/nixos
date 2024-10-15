@@ -8,6 +8,7 @@
 		};
 
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+		unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
 		disko = {
 			url = "github:nix-community/disko";
@@ -39,6 +40,7 @@
 
 	outputs = inputs@{
 		nixpkgs, 
+		unstable-nixpkgs,
 		disko,
 		impermanence,
 		home-manager,
@@ -55,6 +57,11 @@
 			pulseaudio = true;
 		};
 		pkgs = import nixpkgs {
+			inherit system;
+			overlays = [ ];
+			config = globalPkgsConfig;
+		};
+		unstable-pkgs = import unstable-nixpkgs {
 			inherit system;
 			overlays = [ ];
 			config = globalPkgsConfig;
@@ -104,6 +111,7 @@
 						"hiibolt" = import ./users/hiibolt/home.nix {
 							config = home-manager.nixosModules.default.config;
 							inherit pkgs;
+							inherit unstable-pkgs;
 							inherit inputs;
 							hostname = hostnames.primary;
 							uses_plasma = true;
@@ -112,6 +120,7 @@
 						"larkben" = import ./users/larkben/home.nix {
 							config = home-manager.nixosModules.default.config;
 							inherit pkgs;
+							inherit unstable-pkgs;
 							inherit inputs;
 							hostname = hostnames.primary;
 							uses_plasma = true;

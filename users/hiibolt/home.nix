@@ -1,6 +1,7 @@
 { 
 	config,
 	pkgs,
+    unstable-pkgs,
 	inputs,
 	impermanence,
 	hostname,
@@ -22,6 +23,7 @@ in
 	programs = import ./programs.nix {
 		inherit config;
 		inherit pkgs;
+		inherit unstable-pkgs;
 		inherit hostname;
 		inherit uses_plasma;
 	} // pkgs.lib.optionalAttrs uses_plasma (import ./plasma.nix {
