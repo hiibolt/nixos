@@ -45,6 +45,9 @@ Install and reboot:
 * `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
 * `reboot`
 
+Once you've rebooted, clean up and build a second time:
+* `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos`
+
 
 ## Imperative Setup
 There are some things which, for sake of security or legality, must be imperative.
