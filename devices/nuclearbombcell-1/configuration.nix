@@ -20,11 +20,11 @@ in
       "${lib_dir}/shell/default.nix"
 
       # System drivers and daemons
-      (import "${lib_dir}/kanata/default.nix" {
-        inherit config;
-        inherit pkgs;
-        keyboard_path = "${this_device_dir}/hardware/semimak.kbd";
-      })
+      #(import "${lib_dir}/kanata/default.nix" {
+      #  inherit config;
+      #  inherit pkgs;
+      #  keyboard_path = "${this_device_dir}/hardware/semimak.kbd";
+      #})
       "${lib_dir}/maintenance/default.nix"
       "${lib_dir}/k8s/node.nix"
 

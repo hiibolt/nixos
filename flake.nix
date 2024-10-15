@@ -228,7 +228,7 @@
 
 				nix-index-database.nixosModules.nix-index
 
-				./devices/nuclearbombcasing/configuration.nix 
+				./devices/nuclearbombcell-1/configuration.nix 
 				
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
@@ -239,6 +239,7 @@
 					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
+						inherit unstable-pkgs;
 						inherit inputs;
 						hostname = hostnames.shitboxes.dell.one;
 						uses_plasma = false;
@@ -247,6 +248,7 @@
 					home-manager.users."larkben" = import ./users/larkben/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
+						inherit unstable-pkgs;
 						inherit inputs;
 						hostname = hostnames.shitboxes.dell.one;
 						uses_plasma = false;
