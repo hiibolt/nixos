@@ -32,11 +32,14 @@
         hideMounts = true;
         directories = [
             # K8s
-            #"/etc/rancher"
             "/etc/kubernetes"
+            "/etc/kube-flannel"
+
             "/var/lib/kubernetes"
             "/var/lib/kubelet"
             "/var/lib/kube-proxy"
+            "/var/lib/etcd"
+            "/var/lib/cfssl"
 
             # Tailscale + SSH
 	        "/etc/ssh"

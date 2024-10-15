@@ -123,6 +123,17 @@ in
   networking = {
     hostName = "nuclearbombwarhead";
     networkmanager.enable = true;
+
+    # K8s
+    useDHCP = false;
+    defaultGateway = "10.157.25.229";
+    interface.enp6s0 = {
+      useDHCP = false;
+      ipv4.addresses = [{
+        address = "10.157.25.229";
+        prefixLength = 24;
+      }];
+    };
   };
   services.openssh.enable = true;
   services.tailscale = {
