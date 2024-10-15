@@ -32,10 +32,10 @@
         ".local/share/lutris"
         ".cache/winetricks"
         ".cache/lutris"
-        #{
-        #		directory = ".local/share/Steam";
-        #		method = "symlink";
-        #}
+        {
+        	directory = ".local/share/Steam";
+        	method = "symlink";
+        }
     ];
     files = [
         ".screenrc"

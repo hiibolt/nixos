@@ -26,6 +26,7 @@ in
         keyboard_path = "${this_device_dir}/hardware/semimak.kbd";
       })
       "${lib_dir}/maintenance/default.nix"
+      "${lib_dir}/k8s/node.nix"
 
 
       # Users

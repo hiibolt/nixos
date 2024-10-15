@@ -31,13 +31,18 @@
     environment.persistence."/persist" = {
         hideMounts = true;
         directories = [
-            "/etc/nixos"
+            # K3s
+            "/etc/rancher"
+
+            # Tailscale + SSH
 	        "/etc/ssh"
+            "/var/lib/tailscale"
+
+            "/etc/nixos"
             "/var/log"
             "/var/lib/bluetooth"
             "/var/lib/nixos"
             "/var/lib/systemd/coredump"
-            "/var/lib/tailscale"
             "/etc/NetworkManager/system-connections"
             { directory = "/var/lib/colord"; user = "colord"; group = "colord"; mode = "u=rwx,g=rx,o="; }
         ];
