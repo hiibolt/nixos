@@ -1,4 +1,4 @@
-# NixOS - Stateful HA Kubernetes Cluster - `nuclearbomb`
+# NixOS - Stateful HA Proxmox Cluster - `nuclearbomb`
 This is a set of proof-of-concept NixOS configurations that uses `impermanence` with `home-manager` and `plasma-manager` to achieve a highly stylized development system with an entirely defined state.
 
 ![image](https://github.com/user-attachments/assets/619f39ba-9237-43a0-8410-93e1924dd682)
@@ -29,8 +29,8 @@ Pick the drive you want to install NixOS on (it will be formatted, choose wisely
 * `lsblk`
 
 Import this configuration and run [disko](https://github.com/nix-community/disko) with the drive you selected:
-* `cd /tmp; git clone -b release-1.0 https://github.com/hiibolt/nixos.git`
-* `sudo nix –experimental-features “nix-command flakes” run github:nix-community/disko – –mode disko /tmp/nixos/devices/nuclearbombwarhead/hardware/disko.nix –arg device ‘“/dev/<your-drive-here>”’`
+* `cd /tmp; git clone https://github.com/hiibolt/nixos.git`
+* `sudo nix –experimental-features “nix-command flakes” run github:nix-community/disko – –mode disko /tmp/nixos/lib/disko/default.nix –arg device ‘“/dev/<your-drive-here>”’`
 
 Generate template files to conveniently build a lot of Nix's fs, then remove configuration files and copy our own in (backing up to `/persist`):
 * `sudo nixos-generate-config –no-filesystems –root /mnt`
@@ -60,10 +60,5 @@ Log into:
 * osu!lazer
 ### Download Games
 Download ZZZ through Lutris
-### Reinject Gitfiles to `/etc/nixos`
-* `cd /etc/nixos`
-* `git clone -b release-1.0 https://github.com/hiibolt/nixos.git`
-* `mv nix/.gitignore nix/.git .`
-* `rm -rf nix`
 ### Enable VSCode Server
 * `systemctl --user enable auto-fix-vscode-server.service`

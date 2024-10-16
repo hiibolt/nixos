@@ -2,89 +2,70 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{ config, pkgs, inputs, ... }:
 let
   this_device_dir = ./.;
   lib_dir         = ../../lib;
   users_dir       = ../../users;
+  workloads_dir   = ../../workloads;
+  hardware_dir    = ../../hardware;
+
+  system = {
+    hostname = "nuclearbombwarhead";
+    cpu = "intel";
+    gpu = "amd";
+    background = "6.jpg";
+
+    keyboard = {
+    layout = "semimak";
+    device = "by-id/usb-SteelSeries_Apex_Pro_TKL_Wireless-if01-event-kbd";
+    };
+  };
 in
 {
   imports =
     [
       # Hardware
-      "${this_device_dir}/hardware/hardware-configuration.nix"
-      (import ./hardware/disko.nix { device = "/dev/nvme0n1"; })
-      "${lib_dir}/impermanence/default.nix"
+      (import ../../lib/disko { device = "/dev/nvme0n1"; })
+      "${this_device_dir}/hardware-configuration.nix"
+      "${hardware_dir}/cpus/${system.cpu}.nix"
+      "${hardware_dir}/gpus/${system.gpu}.nix"
 
       # System Shell
-      "${lib_dir}/shell/default.nix"
+      "${lib_dir}/shell"
 
-      # System drivers and daemons
-      (import "${lib_dir}/kanata/default.nix" {
+      # System daemons
+      (import "${lib_dir}/kanata" {
         inherit config;
         inherit pkgs;
-        keyboard_path = "${this_device_dir}/hardware/semimak.kbd";
+        layout = system.keyboard.layout;
+        device = system.keyboard.device;
       })
-      "${lib_dir}/maintenance/default.nix"
-      "${lib_dir}/k8s/host.nix"
+      "${lib_dir}/impermanence"
+      "${lib_dir}/maintenance"
+      "${lib_dir}/common"
 
+      # Workloads
+      "${workloads_dir}/backends/docker.nix"
+      "${workloads_dir}/socials"
 
       # Users
       "${users_dir}/hiibolt/user.nix"
       "${users_dir}/larkben/user.nix"
+      "${users_dir}/root"
       "${users_dir}/groups.nix"
     ];
 
-  # Set the root password
-  users.users.root = {
-    initialPassword = "1234";
-    # hashedPasswordFile = "/etc/nixos/devices/nuclearbombwarhead/passwords/root.pw";
-  };
-
-  # Enable OpenGL, AMD, and Intel graphics drivers.
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      # Intel Drivers
-      intel-media-driver
-      intel-compute-runtime
-      vaapiVdpau
-      libvdpau-va-gl
-      vaapiIntel
-      # intel-ocl
-
-      # AMD Drivers
-      rocmPackages.clr.icd
-      amdvlk
-    ];
-  };
-  services.xserver.videoDrivers = [ "amdgpu" ]; 
-
-  # HIP workaround
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"
-  ];
-
+  # Enable the X11 windowing system with KDE Plasma 6
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Stylix
 	stylix = {
     enable = true;
-    image = /etc/nixos/backgrounds/6.jpg;
+    image = /etc/nixos/backgrounds/${system.background};
 	};
- 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-	# Set your time zone.
-	time.timeZone = "America/Chicago";
-
-	# Add system fonts
-	fonts.packages = [
-		pkgs.nerdfonts
-	];
 
   # Disable Auto-Suspend
   systemd.targets = {
@@ -94,54 +75,6 @@ in
     hybrid-sleep.enable = false;
   };
 
-	# Select internationalisation properties.
-	i18n = {
-    defaultLocale = "en_US.UTF-8";
-	  extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-      };
-  };
-
-  # Enable the X11 windowing system with KDE Plasma 6
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-
-	# Allow unfree packages and enable Nix Flakes
-	nixpkgs.config.allowUnfree = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  # Networking
-  networking = {
-    hostName = "nuclearbombwarhead";
-    networkmanager.enable = true;
-
-    # K8s
-    useDHCP = false;
-    defaultGateway = "10.157.25.229";
-    interface.enp6s0 = {
-      useDHCP = false;
-      ipv4.addresses = [{
-        address = "10.157.25.229";
-        prefixLength = 24;
-      }];
-    };
-  };
-  services.openssh.enable = true;
-  services.tailscale = {
-    enable = true;
-    extraSetFlags = [
-      "--ssh"
-    ];
-  };
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -154,6 +87,12 @@ in
 		alsa.support32Bit = true;
 		pulse.enable = true;
 	};
+
+  # Networking
+  networking = {
+    hostName = system.hostname;
+    networkmanager.enable = true;
+  };
 
   # System Packages
 	environment.systemPackages = with pkgs; [

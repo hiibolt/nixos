@@ -2,21 +2,32 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, system, ... }:
 let
   this_device_dir = ./.;
   lib_dir         = ../../lib;
   users_dir       = ../../users;
+  workloads_dir   = ../../workloads;
+  hardware_dir    = ../../hardware;
+
+  system = {
+    cpu = "intel";
+    gpu = "";
+    background = "6.jpg";
+
+    keyboard = {
+    layout = "semimak";
+    device = "by-path/platform-i8042-serio-0-event-kbd";
+    };
+  };
 in
 {
   imports =
     [
       # Hardware
-      "${this_device_dir}/hardware/hardware-configuration.nix"
-      "${this_device_dir}/hardware/fingerprint.nix"
-      "${this_device_dir}/hardware/opengl.nix"
-      (import ./hardware/disko.nix { device = "/dev/nvme0n1"; })
-      "${lib_dir}/impermanence/default.nix"
+      (import ../../lib/disko/default.nix { device = "/dev/nvme0n1"; })
+      "${this_device_dir}/hardware-configuration.nix"
+      "${hardware_dir}/cpus/${system.cpu}.nix"
 
       # System Shell
       "${lib_dir}/shell/default.nix"
@@ -25,68 +36,31 @@ in
       (import "${lib_dir}/kanata/default.nix" {
         inherit config;
         inherit pkgs;
-        keyboard_path = "${this_device_dir}/hardware/semimak.kbd";
+        layout = system.keyboard.layout;
+        device = system.keyboard.device;
       })
+      "${lib_dir}/impermanence/default.nix"
       "${lib_dir}/maintenance/default.nix"
-
+      "${lib_dir}/common/default.nix"
+      "${lib_dir}/fingerprint/default.nix"
 
       # Users
       "${users_dir}/hiibolt/user.nix"
+      "${users_dir}/root/default.nix"
       "${users_dir}/groups.nix"
     ];
 
-  # Set the root password
-  users.users.root = {
-    initialPassword = "1234";
-    # hashedPasswordFile = "/etc/nixos/devices/nuclearbombconsole/passwords/root.pw";
-  };
+  # Enable the X11 windowing system with KDE Plasma 6
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.desktopManager.plasma6.enable = true;
 
   # Stylix
 	stylix = {
     enable = true;
     image = /etc/nixos/backgrounds/6.jpg;
 	};
- 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-	# Set your time zone.
-	time.timeZone = "America/Chicago";
-
-	# Add system fonts
-	fonts.packages = [
-		pkgs.nerdfonts
-	];
-
-  # Disable Auto-Suspend
-  #systemd.targets = {
-  #  sleep.enable = false;
-  #  suspend.enable = false;
-  #  hibernate.enable = false;
-  #  hybrid-sleep.enable = false;
-  #};
-
-	# Select internationalisation properties.
-	i18n = {
-    defaultLocale = "en_US.UTF-8";
-	  extraLocaleSettings = {
-      LC_ADDRESS = "en_US.UTF-8";
-      LC_IDENTIFICATION = "en_US.UTF-8";
-      LC_MEASUREMENT = "en_US.UTF-8";
-      LC_MONETARY = "en_US.UTF-8";
-      LC_NAME = "en_US.UTF-8";
-      LC_NUMERIC = "en_US.UTF-8";
-      LC_PAPER = "en_US.UTF-8";
-      LC_TELEPHONE = "en_US.UTF-8";
-      LC_TIME = "en_US.UTF-8";
-      };
-  };
-
-  # Enable the X11 windowing system with KDE Plasma 6
-  services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  
 
 	# Allow unfree packages and enable Nix Flakes
 	nixpkgs.config.allowUnfree = true;

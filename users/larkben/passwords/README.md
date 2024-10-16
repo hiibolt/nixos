@@ -1,1 +1,0 @@
-# Generate using `mkpasswd` and place in a `*.pw`!

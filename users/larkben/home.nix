@@ -47,7 +47,7 @@ in
 	home.stateVersion = "23.11"; # Please read the comment before changing
 	home.file = {
 		".config/fish/config.fish" = {
-			source = ../../dotfiles/fish/config.fish;
+			source = ../../lib/shell/config.fish;
 		};
 	};
 	home.packages = with pkgs; [

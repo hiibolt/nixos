@@ -31,16 +31,6 @@
     environment.persistence."/persist" = {
         hideMounts = true;
         directories = [
-            # K8s
-            "/etc/kubernetes"
-            "/etc/kube-flannel"
-
-            "/var/lib/kubernetes"
-            "/var/lib/kubelet"
-            "/var/lib/kube-proxy"
-            "/var/lib/etcd"
-            "/var/lib/cfssl"
-
             # Tailscale + SSH
 	        "/etc/ssh"
             "/var/lib/tailscale"
@@ -74,20 +64,12 @@
         ''
         chown -R hiibolt /etc/nixos
         '';
-        chown-k8s-hiibolt.text = 
-        ''
-        chown -R hiibolt /var/lib/kubernetes
-        '';
     };
     system.userActivationScripts = {
         remove-gtk-files.text = 
         ''
         rm -f ~/.gtkrc-2.0
         rm -f ~/.gtkrc-2.0.meow
-        '';
-        link-k8s-config.text = 
-        ''
-        mkdir ~/.kube && ln -s /etc/kubernetes/cluster-admin.kubeconfig ~/.kube/config
         '';
     };
 }

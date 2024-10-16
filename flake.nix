@@ -67,20 +67,6 @@
 			config = globalPkgsConfig;
 		};
 		config = pkgs.config;
-
-		hostnames = {
-			laptop = "nuclearbombconsole";           # My Laptop - Please don't tweak!
-			primary = "nuclearbombwarhead";          # CyberPowerPC Case
-			secondary = "nuclearbombpayload";        # NZXT Case
-			shitboxes = {
-				burgerbox = "nuclearbombcontroller"; # Beelink
-				firehazard = "nuclearbombcasing";    # Cardboard
-				dell = {
-					one = "nuclearbombcell-1";         # Dell - 1
-					two = "nuclearbombcell-2";         # Dell - 2
-				};
-			};
-		};
 	in
 	rec {
 		nixosConfigurations.default = nixosConfigurations.nuclearbombwarhead;
@@ -113,7 +99,7 @@
 							inherit pkgs;
 							inherit unstable-pkgs;
 							inherit inputs;
-							hostname = hostnames.primary;
+							hostname = "nuclearbombwarhead";
 							uses_plasma = true;
 							impermanence = impermanence.nixosModules.home-manager.impermanence;
 						};
@@ -122,7 +108,7 @@
 							inherit pkgs;
 							inherit unstable-pkgs;
 							inherit inputs;
-							hostname = hostnames.primary;
+							hostname = "nuclearbombwarhead";
 							uses_plasma = true;
 							impermanence = impermanence.nixosModules.home-manager.impermanence;
 						};
@@ -161,7 +147,7 @@
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
 						inherit inputs;
-						hostname = hostnames.laptop;
+						hostname = "nuclearbombconsole";
 						uses_plasma = true;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
@@ -170,49 +156,6 @@
 
 				impermanence.nixosModules.impermanence
 			#	
-			];
-		};
-		nixosConfigurations.nuclearbombcasing = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			#
-			# "nuclearbombcasing" is the cardboard box
-			#
-
-			specialArgs = {inherit inputs;};
-			modules = [
-				disko.nixosModules.default
-
-				nix-index-database.nixosModules.nix-index
-
-				./devices/nuclearbombcasing/configuration.nix 
-				
-				home-manager.nixosModules.default {	
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ ];
-					home-manager.backupFileExtension = "meow";
-					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit inputs;
-						hostname = hostnames.shitboxes.firehazard;
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-					home-manager.users."larkben" = import ./users/larkben/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit inputs;
-						hostname = hostnames.shitboxes.firehazard;
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-				}
-
-				impermanence.nixosModules.impermanence
-				
 			];
 		};
 		nixosConfigurations.nuclearbombcell-1 = nixpkgs.lib.nixosSystem {
@@ -241,7 +184,7 @@
 						inherit pkgs;
 						inherit unstable-pkgs;
 						inherit inputs;
-						hostname = hostnames.shitboxes.dell.one;
+						hostname = "nuclearbombcell-1";
 						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
@@ -250,7 +193,7 @@
 						inherit pkgs;
 						inherit unstable-pkgs;
 						inherit inputs;
-						hostname = hostnames.shitboxes.dell.one;
+						hostname = "nuclearbombcell-1";
 						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
