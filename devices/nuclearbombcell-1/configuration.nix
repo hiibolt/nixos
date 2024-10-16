@@ -25,7 +25,7 @@ in
   imports =
     [
       # Hardware
-      (import ../../lib/disko/default.nix { device = "/dev/nvme0n1"; })
+      (import ../../lib/disko/default.nix { device = "/dev/sda"; })
       "${this_device_dir}/hardware-configuration.nix"
       "${hardware_dir}/cpus/${system.cpu}.nix"
 
