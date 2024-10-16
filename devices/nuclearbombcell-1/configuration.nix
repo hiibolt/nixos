@@ -85,6 +85,17 @@ in
   networking = {
     hostName = "nuclearbombcell-1";
     networkmanager.enable = true;
+
+    # K8s
+    useDHCP = false;
+    defaultGateway = "10.157.29.234";
+    #interface.enp0s31f6 = {
+    #  useDHCP = false;
+    #  ipv4.addresses = [{
+    #    address = "10.157.29.234";
+    #    prefixLength = 24;
+    #  }];
+    #};
   };
   services.openssh.enable = true;
   services.tailscale = {

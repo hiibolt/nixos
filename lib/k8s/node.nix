@@ -6,7 +6,10 @@ let
 in
 {
   # resolve master hostname
-  networking.extraHosts = "${kubeMasterIP} ${kubeMasterHostname}";
+  networking.extraHosts = ''
+      10.157.25.229 nuclearbombwarhead
+      10.157.29.234 nuclearbombcell-1
+    '';
   networking.firewall.allowedTCPPorts = [
       6443
       2379
