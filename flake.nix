@@ -146,6 +146,7 @@
 					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
+						inherit unstable-pkgs;
 						inherit inputs;
 						hostname = "nuclearbombconsole";
 						uses_plasma = true;
