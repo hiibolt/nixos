@@ -14,7 +14,10 @@
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
-
+		sops-nix = {
+			url = "github:Mic92/sops-nix";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
 		impermanence = {
 			url = "github:nix-community/impermanence";
 		};
@@ -42,6 +45,7 @@
 		nixpkgs, 
 		unstable-nixpkgs,
 		disko,
+		sops-nix,
 		impermanence,
 		home-manager,
 		plasma-manager,
@@ -79,11 +83,11 @@
 
 			specialArgs = {inherit inputs;};
 			modules = [
-				disko.nixosModules.default
-
 				nix-index-database.nixosModules.nix-index
-
 				./devices/nuclearbombwarhead/configuration.nix 
+
+				disko.nixosModules.default
+				impermanence.nixosModules.impermanence
 				
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
@@ -92,7 +96,6 @@
 						plasma-manager.homeManagerModules.plasma-manager
 					];
 					home-manager.backupFileExtension = "meow";
-					
 					home-manager.users = {
 						"hiibolt" = import ./users/hiibolt/home.nix {
 							config = home-manager.nixosModules.default.config;
@@ -114,10 +117,7 @@
 						};
 					};
 				}
-				stylix.nixosModules.stylix
-
-				impermanence.nixosModules.impermanence
-				
+				stylix.nixosModules.stylix				
 			];
 		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {

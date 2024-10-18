@@ -36,4 +36,10 @@
       "--ssh"
     ];
   };
+
+  # Reuirements for SOPS + age
+	environment.systemPackages = with pkgs; [
+    sops
+    age
+  ];
 }

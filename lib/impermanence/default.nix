@@ -35,6 +35,9 @@
 	        "/etc/ssh"
             "/var/lib/tailscale"
 
+            # SOPS
+            "/root/.config/sops"
+
             "/etc/nixos"
             "/var/log"
             "/var/lib/bluetooth"

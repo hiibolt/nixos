@@ -30,6 +30,7 @@ in
       "${this_device_dir}/hardware-configuration.nix"
       "${hardware_dir}/cpus/${system.cpu}.nix"
       "${hardware_dir}/gpus/${system.gpu}.nix"
+      inputs.sops-nix.nixosModules.sops
 
       # System Shell
       "${lib_dir}/shell"
@@ -46,8 +47,10 @@ in
       "${lib_dir}/common"
 
       # Workloads
+      "${workloads_dir}/cf-tunnels/nuclearbombwarhead.nix"
       "${workloads_dir}/backends/docker.nix"
-      "${workloads_dir}/socials"
+      "${workloads_dir}/deployments/socials"
+      "${workloads_dir}/deployments/r6rs"
 
       # Users
       "${users_dir}/hiibolt/user.nix"
@@ -55,6 +58,16 @@ in
       "${users_dir}/root"
       "${users_dir}/groups.nix"
     ];
+
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+
+  sops.age.keyFile = "/persist/var/lib/sops-nix/keys.txt";
+
+  sops.secrets = {
+    example-key = { };
+    "myservice/my_subdir/my_secret" = { };
+  };
 
   # Enable the X11 windowing system with KDE Plasma 6
   services.xserver.enable = true;
