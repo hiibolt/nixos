@@ -204,5 +204,51 @@
 				
 			];
 		};
+
+		nixosConfigurations.nuclearbombcell-2 = nixpkgs.lib.nixosSystem {
+			inherit system;
+
+			#
+			# "nuclearbombcell-2" is the burger box
+			#
+
+			specialArgs = {inherit inputs;};
+			modules = [
+				disko.nixosModules.default
+
+				nix-index-database.nixosModules.nix-index
+
+				./devices/nuclearbombcell-2/configuration.nix 
+				
+				home-manager.nixosModules.default {	
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.sharedModules = [ ];
+					home-manager.backupFileExtension = "meow";
+					
+					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit unstable-pkgs;
+						inherit inputs;
+						hostname = "nuclearbombcell-2";
+						uses_plasma = false;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+					home-manager.users."larkben" = import ./users/larkben/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit unstable-pkgs;
+						inherit inputs;
+						hostname = "nuclearbombcell-2";
+						uses_plasma = false;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+				}
+
+				impermanence.nixosModules.impermanence
+				
+			];
+		};
 	};
 }

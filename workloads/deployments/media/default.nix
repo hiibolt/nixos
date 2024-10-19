@@ -1,20 +1,6 @@
 { config, lib, pkgs, inputs, ... }:
 {
-    # qBittorrent
-    #sops.secrets = {
-    #    "deployments/dykm/sherlock/port" = { 
-    #        owner = "hiibolt";
-    #    };
-    #    "deployments/dykm/sherlock/proxy_link" = { 
-    #        owner = "hiibolt";
-    #    };
-    #};
-    #sops.templates."deployments/dykm/sherlock.env" = {
-    #    content = ''
-    #    PORT=${config.sops.placeholder."deployments/dykm/sherlock/port"}
-    #    PROXY_LINK=${config.sops.placeholder."deployments/dykm/sherlock/proxy_link"}
-    #    '';
-    #};
+    # qBittorrent - Torrenting
     virtualisation.oci-containers.containers = {
         media-qbittorrentvpn = {
             image = "linuxserver/qbittorrent:latest";
@@ -43,6 +29,8 @@
             cmd = [ ];
         };
     };
+
+    # FlareSolverr - Cloudflare Bypass
     virtualisation.oci-containers.containers = {
         media-flaresolverr = {
             image = "ghcr.io/flaresolverr/flaresolverr:latest";
@@ -56,6 +44,8 @@
             cmd = [ ];
         };
     };
+
+    # Prowlarr - Media Management
     virtualisation.oci-containers.containers = {
         media-prowlarr = {
             image = "lscr.io/linuxserver/prowlarr:latest";
@@ -77,6 +67,8 @@
             cmd = [ ];
         };
     };
+
+    # Jellyfin - Media Server
     virtualisation.oci-containers.containers = {
         media-jellyfin = {
             image = "jellyfin/jellyfin:latest";
