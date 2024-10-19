@@ -4,7 +4,7 @@
     virtualisation.oci-containers.containers = {
         hiibolt-socials = {
             image = "ghcr.io/hiibolt/socials:latest";
-            ports = [ "127.0.0.1:4000:4000" ];
+            ports = [ "127.0.0.1:3001:4000" ];
             volumes = [ ];
             cmd = [ ];
         };

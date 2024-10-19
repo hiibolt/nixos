@@ -50,6 +50,7 @@ in
       "${workloads_dir}/cf-tunnels/nuclearbombwarhead.nix"
       "${workloads_dir}/backends/docker.nix"
       "${workloads_dir}/deployments/hiibolt"
+      "${workloads_dir}/deployments/media"
       "${workloads_dir}/deployments/r6rs"
       "${workloads_dir}/deployments/dykm"
 
