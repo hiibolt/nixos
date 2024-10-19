@@ -49,8 +49,9 @@ in
       # Workloads
       "${workloads_dir}/cf-tunnels/nuclearbombwarhead.nix"
       "${workloads_dir}/backends/docker.nix"
-      "${workloads_dir}/deployments/socials"
+      "${workloads_dir}/deployments/hiibolt"
       "${workloads_dir}/deployments/r6rs"
+      "${workloads_dir}/deployments/dykm"
 
       # Users
       "${users_dir}/hiibolt/user.nix"

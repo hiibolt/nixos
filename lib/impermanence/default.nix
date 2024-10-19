@@ -31,8 +31,11 @@
     environment.persistence."/persist" = {
         hideMounts = true;
         directories = [
-            # Tailscale + SSH
-	        "/etc/ssh"
+	    # Workloads
+	    "/workloads"
+
+	    # Tailscale + SSH
+	    "/etc/ssh"
             "/var/lib/tailscale"
 
             # SOPS

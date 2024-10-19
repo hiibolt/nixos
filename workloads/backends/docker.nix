@@ -5,6 +5,6 @@
         storageDriver = "btrfs";
     };
 
-    users.users.hiibolt.extraGroups = [ "docker" ];
-    users.users.larkben.extraGroups = [ "docker" ];
+    users.users.hiibolt.extraGroups = [ "docker" "podman" ];
+    users.users.larkben.extraGroups = [ "docker" "podman" ];
 }

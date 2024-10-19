@@ -37,6 +37,21 @@
     ];
   };
 
+  # Glances
+  systemd.services."glances" = {
+    enable = true;
+    description = "Glances System Monitor";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      ExecStart = "${pkgs.glances}/bin/glances -w";
+      Restart = "always";
+      RestartSec = "30";
+      User = "root";
+    };
+  };
+
+
   # Reuirements for SOPS + age
 	environment.systemPackages = with pkgs; [
     sops
