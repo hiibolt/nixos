@@ -71,6 +71,12 @@ in
     "myservice/my_subdir/my_secret" = { };
   };
 
+  # Disable NVMe Write Cache
+  services.udev.extraRules = 
+    ''
+    ACTION=="add", KERNEL=="nvme*", RUN+="${pkgs.nvme-cli}/bin/nvme set-feature -f 6 -V 0 %N"
+    '';
+
   # Enable the X11 windowing system with KDE Plasma 6
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
@@ -111,6 +117,9 @@ in
 
   # System Packages
 	environment.systemPackages = with pkgs; [
+    # Drive Management
+    nvme-cli
+
     # Basic Development
 		vim
 		wget
