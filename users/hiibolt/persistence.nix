@@ -14,6 +14,9 @@
         ".local/share/keyrings"
         ".local/share/kwalletd"
 
+        # Logseq
+        ".config/logseq"
+
         # Shell & Dev
         ".local/share/direnv"
         ".local/share/fish"
