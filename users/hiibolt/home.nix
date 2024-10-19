@@ -52,6 +52,7 @@ in
 	};
 	home.packages = with pkgs; [
 		dconf
+		google-chrome
 	];
 } // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
 	inherit config;
