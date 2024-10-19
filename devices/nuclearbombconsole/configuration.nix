@@ -91,17 +91,8 @@ in
 		pulse.enable = true;
 	};
 
-  # Disable NVMe Write Cache
-  services.udev.extraRules = 
-    ''
-    ACTION=="add", KERNEL=="nvme*", RUN+="${pkgs.nvme-cli}/bin/nvme set-feature -f 6 -V 0 %N"
-    '';
-
   # System Packages
 	environment.systemPackages = with pkgs; [
-    # Drive Management
-    nvme-cli
-    
     # Basic Development
 		vim
 		wget

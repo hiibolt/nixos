@@ -117,9 +117,6 @@ in
 
   # System Packages
 	environment.systemPackages = with pkgs; [
-    # Drive Management
-    nvme-cli
-
     # Basic Development
 		vim
 		wget
