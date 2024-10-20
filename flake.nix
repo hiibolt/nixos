@@ -120,6 +120,54 @@
 				stylix.nixosModules.stylix				
 			];
 		};
+		nixosConfigurations.nuclearbombsoc = nixpkgs.lib.nixosSystem {
+			inherit system;
+
+			#
+			# "nuclearbombsoc" is the laptop
+			#
+
+			specialArgs = {inherit inputs;};
+			modules = [
+				disko.nixosModules.default
+
+				nix-index-database.nixosModules.nix-index
+
+				./devices/nuclearbombsoc/configuration.nix 
+				
+				home-manager.nixosModules.default {	
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
+					home-manager.sharedModules = [ 
+						plasma-manager.homeManagerModules.plasma-manager
+					];
+					home-manager.backupFileExtension = "meow";
+					
+					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit unstable-pkgs;
+						inherit inputs;
+						hostname = "nuclearbombsoc";
+						uses_plasma = true;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+					"larkben" = import ./users/larkben/home.nix {
+						config = home-manager.nixosModules.default.config;
+						inherit pkgs;
+						inherit unstable-pkgs;
+						inherit inputs;
+						hostname = "nuclearbombsoc";
+						uses_plasma = true;
+						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					};
+				}
+				stylix.nixosModules.stylix
+
+				impermanence.nixosModules.impermanence
+			#	
+			];
+		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
 			inherit system;
 
