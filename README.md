@@ -62,3 +62,17 @@ Log into:
 Download ZZZ through Lutris
 ### Enable VSCode Server
 * `systemctl --user enable auto-fix-vscode-server.service`
+
+
+## Adding Additional Machines
+### Graphical Machines
+- Clone one of the existing machines with a GUI
+- Rename usernames
+- Add users
+- Add per-machine desktop file to `.../<user>/desktops/<hostname>.nix`
+- Add machine to `flake.nix`
+### TTY-Only Machines
+- Clone one of the existing machines without a GUI
+- Rename usernames
+- Add users
+- Add machine to `flake.nix`
