@@ -45,8 +45,8 @@ Install and reboot:
 * `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
 * `reboot`
 
-Once you've rebooted, clean up and build a second time:
-* `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos && rb-s`
+Once you've rebooted, clean up, build, and reboot a second time:
+* `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos && rb-s && reboot`
 
 
 ## Imperative Setup
