@@ -143,23 +143,25 @@
 					];
 					home-manager.backupFileExtension = "meow";
 					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombsoc";
-						uses_plasma = true;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-					"larkben" = import ./users/larkben/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombsoc";
-						uses_plasma = true;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
+					home-manager.users = {
+						"hiibolt" = import ./users/hiibolt/home.nix {
+							config = home-manager.nixosModules.default.config;
+							inherit pkgs;
+							inherit unstable-pkgs;
+							inherit inputs;
+							hostname = "nuclearbombsoc";
+							uses_plasma = true;
+							impermanence = impermanence.nixosModules.home-manager.impermanence;
+						};
+						"larkben" = import ./users/larkben/home.nix {
+							config = home-manager.nixosModules.default.config;
+							inherit pkgs;
+							inherit unstable-pkgs;
+							inherit inputs;
+							hostname = "nuclearbombsoc";
+							uses_plasma = true;
+							impermanence = impermanence.nixosModules.home-manager.impermanence;
+						};
 					};
 				}
 				stylix.nixosModules.stylix
