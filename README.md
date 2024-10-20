@@ -16,7 +16,7 @@ I develop locally, for now. I have yet to find a suitible cloud development solu
 
 * `~/Games`
 
-I would be okay with placing it in the Nix Store somehow, similar to how `osu!laser` is packaged, but it seems like there isn't a Nix-y way to do so yet :(
+I would be okay with placing Lutris games in the Nix Store somehow, similar to how `osu!laser` is packaged, but it seems like there isn't a Nix-y way to do so yet :(
 
 ## Installation and Setup
 Enter sudo:
@@ -46,7 +46,7 @@ Install and reboot:
 * `reboot`
 
 Once you've rebooted, clean up and build a second time:
-* `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos`
+* `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos && rb-s`
 
 
 ## Imperative Setup
