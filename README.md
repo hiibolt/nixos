@@ -41,6 +41,10 @@ Before continuing, note the following caveats:
 - If you have 16GB or less of RAM, consider switching `TMPDIR` prior to building or you may run into issues. Alternatively, use the `release-minimal` branch.
 - This installation will likely conflict with any RAID drive formations. Consider disabling it in BIOS or reworking the `disko` setup.
 
+Install and reboot on sub-32GB RAM:
+* `sudo mkdir -p /mnt/persist/hypermeow && TMPDIR=/mnt/persist/hypermeow nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
+* `sudo rm -rf /mnt/persist/hypermeow/* && reboot`
+
 Install and reboot:
 * `nixos-install –root /mnt –flake /mnt/etc/nixos#nuclearbombwarhead`
 * `reboot`
