@@ -15,8 +15,8 @@
     enable = true;
     shellAliases = {
       ff = "fastfetch";
-      rb-s = "sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace";
-      rb-b = "sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace";
+      rb-s = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
+      rb-b = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
     };
   };
   users.defaultUserShell = pkgs.fish;
