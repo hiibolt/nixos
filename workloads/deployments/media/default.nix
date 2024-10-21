@@ -22,6 +22,7 @@
                 TZ="America/New_York";
                 WEBUI_PORT="8080";
                 TORRENTING_PORT="6881";
+                LAN_NETWORK="192.168.1.0/24, 100.64.0.0/10";
             };
             environmentFiles = [
                 #/run/secrets-rendered/deployments/dykm/sherlock.env
@@ -74,6 +75,7 @@
             image = "jellyfin/jellyfin:latest";
             ports = [
                 "127.0.0.1:8096:8096"
+                "100.96.46.76:8096:8096"
             ];
             volumes = [ 
                 "/persist/workloads/media/jellyfin/config:/config"

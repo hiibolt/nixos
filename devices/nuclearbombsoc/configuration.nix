@@ -45,6 +45,9 @@ in
       "${lib_dir}/common/default.nix"
       "${lib_dir}/fingerprint/default.nix"
 
+      # Workloads
+      "${workloads_dir}/deployments/mc"
+
       # Users
       "${users_dir}/hiibolt/user.nix"
       "${users_dir}/larkben/user.nix"
