@@ -27,6 +27,9 @@
                 "--network=host"
                 "--privileged"
             ];
+            environment = {
+                HOMEPAGE_CONFIG_DIR = "/app/config";
+            };
             environmentFiles = [ ];
             cmd = [ ];
         };

@@ -8,9 +8,9 @@
 	uses_plasma
 }:
 let
-	vscode-server = fetchTarball {
-		url = "https://github.com/msteen/nixos-vscode-server/tarball/master";
-		sha256 = "1rq8mrlmbzpcbv9ys0x88alw30ks70jlmvnfr2j8v830yy5wvw7h";
+	vscode-server = fetchGit {
+		url = "https://github.com/msteen/nixos-vscode-server.git";
+		rev = "8b6db451de46ecf9b4ab3d01ef76e59957ff549f";
 	};
 in
 { 
@@ -53,6 +53,14 @@ in
 	home.packages = with pkgs; [
 		dconf
 		google-chrome
+	] ++ [
+		(unstable-pkgs.prismlauncher.override {
+			jdks = with pkgs; [
+				temurin-bin-21
+				temurin-bin-17
+				zulu8
+			];
+		}) 
 	];
 } // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
 	inherit config;
