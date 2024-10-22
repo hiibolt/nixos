@@ -33,6 +33,7 @@
         ".config/sh.cider.electron"
 
         # Games
+        ".local/share/PrismLauncher"
         ".local/share/lutris"
         ".cache/winetricks"
         ".cache/lutris"
