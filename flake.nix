@@ -312,7 +312,7 @@
 
 				nix-index-database.nixosModules.nix-index
 
-				./devices/nuclearbombcell-1/configuration.nix 
+				./devices/nuclearbombcell-3/configuration.nix 
 				
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
