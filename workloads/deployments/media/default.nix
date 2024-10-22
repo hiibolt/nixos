@@ -96,4 +96,28 @@
             cmd = [ ];
         };
     };
+
+    # Sonarr - Media Management (Anime)
+    virtualisation.oci-containers.containers = {
+        media-sonarr = {
+            image = "linuxserver/sonarr:latest";
+            ports = [
+                "127.0.0.1:8989:8989"
+                "100.96.46.76:8989:8989"
+            ];
+            volumes = [ 
+                "/persist/workloads/media/sonarr/config:/config"
+                "/persist/workloads/media/library/anime:/tv"
+            ];
+            extraOptions = [
+                "--network=host"
+            ];
+            environment = {
+                PUID="1000";
+                PGID="1000";
+            };
+            environmentFiles = [ ];
+            cmd = [ ];
+        };
+    };
 }
