@@ -52,6 +52,13 @@ Install and reboot:
 Once you've rebooted, clean up, build, and reboot a second time:
 * `sudo mv /persist/nixos/* /persist/nixos/.* /etc/nixos && sudo rm -rf /persist/nixos && rb-s && reboot`
 
+## Firing up RAID1 on any devices needing it:
+* `sudo wipefs --all /dev/sda`
+* `sudo wipefs --all /dev/sdb`
+* `sudo pvcreate /dev/sda`
+* `sudo pvcreate /dev/sdb`
+* `sudo vgcreate vgraid /dev/sda /dev/sdb`
+* `sudo lvcreate --type raid1 -m 1 -l 100%FREE -n lvraid vgraid`
 
 ## Imperative Setup
 There are some things which, for sake of security or legality, must be imperative.
