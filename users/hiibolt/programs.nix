@@ -8,11 +8,26 @@
 {   
     neovim = {
         enable = true;
-        vimAlias = true;
         extraPackages = [ ];
         extraLuaPackages = ps: [ ];
-        extraConfig = '''';
-        extraLuaConfig = '''';
+        extraConfig = ''
+            syntax enable
+            colorscheme catppuccin-frappe
+            '';
+        extraLuaConfig = ''
+            require("bufferline").setup()
+            require("nvim-treesitter.configs").setup({
+                highlight = { enable = true }
+            })
+            require('transparent').setup({})
+            '';
+        plugins = with pkgs.vimPlugins; [
+            catppuccin-nvim
+            bufferline-nvim
+            nvim-treesitter.withAllGrammars
+            nvim-web-devicons
+            transparent-nvim
+        ];
     };
     git = {
         enable = true;
