@@ -44,7 +44,6 @@
             # SOPS
             "/root/.config/sops"
 
-            "/etc/
             "/etc/nixos"
             "/var/log"
             "/var/lib/bluetooth"
