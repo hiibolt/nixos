@@ -31,16 +31,20 @@
     environment.persistence."/persist" = {
         hideMounts = true;
         directories = [
-	    # Workloads
-	    "/workloads"
+            # Media Library
+            #"/library"
 
-	    # Tailscale + SSH
-	    "/etc/ssh"
+            # Workloads
+            "/workloads"
+
+            # Tailscale + SSH
+            "/etc/ssh"
             "/var/lib/tailscale"
 
             # SOPS
             "/root/.config/sops"
 
+            "/etc/
             "/etc/nixos"
             "/var/log"
             "/var/lib/bluetooth"

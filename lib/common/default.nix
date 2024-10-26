@@ -59,7 +59,11 @@
 
   # Reuirements for SOPS + age
 	environment.systemPackages = with pkgs; [
+    # Drives
     nvme-cli
+    mdadm
+
+    # Security
     sops
     age
   ];

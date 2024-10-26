@@ -137,6 +137,54 @@ in
         };
     };
 
+    # Radarr - Media Management (Movies)
+    virtualisation.oci-containers.containers = {
+        media-radarr = {
+            image = "linuxserver/radarr:latest";
+            ports = [
+                "127.0.0.1:7878:7878"
+                "100.96.46.76:7878:7878"
+            ];
+            volumes = [ 
+                "/persist/workloads/media/radarr/config:/config"
+                "/persist/workloads/media/library/movies:/movies" 
+                "/persist/workloads/media/qbittorrent/qBittorrent/downloads/:/downloads"
+            ];
+            extraOptions = [
+                "--network=host"
+            ];
+            environment = {
+                PUID="1000";
+                PGID="1000";
+            };
+            environmentFiles = [ ];
+            cmd = [ ];
+        };
+    };
+
+    # Jellyseerr - Media Request GUI (User-Facing)
+    virtualisation.oci-containers.containers = {
+        media-jellyseerr = {
+            image = "fallenbagel/jellyseerr:latest";
+            ports = [
+                "127.0.0.1:5055:5055"
+                "100.96.46.76:5055:5055"
+            ];
+            volumes = [ 
+                "/persist/workloads/media/jellyseerr/config:/app/config"
+            ];
+            extraOptions = [
+                "--network=host"
+            ];
+            environment = {
+                PUID="1000";
+                PGID="1000";
+            };
+            environmentFiles = [ ];
+            cmd = [ ];
+        };
+    };
+
     # Jellyfin-RPC - Discord Status RPC for Jellyfin
     sops.secrets = {
         "deployments/media/jellyfin-rpc/jellyfin-api-key" = { 
@@ -176,27 +224,4 @@ in
             RestartSec = "30";
         };
     };
-
-
-    #systemd.services.create-anb-server = {
-    #    enable = true;
-    #    description = "Create - Above N Beyond Server";
-    #    after = [ "network.target" ];
-    #    wantedBy = [ "multi-user.target" ];
-    #    serviceConfig = {
-    #        WorkingDirectory = "/workloads/mc/create-anb-server";
-    #        ExecStart = ''${pkgs.jdk8}/bin/java -Xmx8G -Xms8G \
-    #          -Dsun.rmi.dgc.server.gcInterval=2147483646 \
-    #          -XX:+UnlockExperimentalVMOptions \
-    #          -XX:G1NewSizePercent=0 \
-    #          -XX:G1ReservePercent=20 \
-    #          -XX:MaxGCPauseMillis=50 \
-    #          -XX:G1HeapRegionSize=32M \
-    #          -XX:+UseG1GC \
-    #          -jar ./forge-1.16.5-36.2.26.jar nogui'';
-    #        Restart = "always";
-    #        RestartSec = "30";
-    #        User = "root";
-    #    };
-    #};
 }
