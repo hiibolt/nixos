@@ -26,7 +26,7 @@ in
   imports =
     [
       # Hardware
-      (import ../../lib/disko { device = "/dev/nvme0n1"; })
+      (import ./disko.nix { device = "/dev/nvme0n1"; })
       "${this_device_dir}/hardware-configuration.nix"
       "${hardware_dir}/cpus/${system.cpu}.nix"
       "${hardware_dir}/gpus/${system.gpu}.nix"
@@ -117,6 +117,10 @@ in
 
   # System Packages
 	environment.systemPackages = with pkgs; [
+    # Drives
+    nvme-cli
+    mdadm
+
     # Basic Development
 		vim
 		wget

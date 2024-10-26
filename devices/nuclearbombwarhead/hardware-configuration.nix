@@ -12,13 +12,23 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" ];
+  boot.initrd.kernelModules = [ "dm-snapshot" "amdgpu" "dm-raid" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   boot.kernelParams = [
     "module_blacklist=i915" # Disable Intel graphics driver
     "split_lock_detect=off" # Disable split lock detection (highly dangerous)
   ]; 
+  #boot.swraid.enable = true;
+  #boot.swraid.mdadmConf = ''
+  #  MAILADDR me@hiibolt.com
+  #  ARRAY /dev/md0 metadata=1.2 UUID=5707294e:8fa90cf9:9e2aa47b:0c6c5ee5
+  #'';
+
+  #fileSystems."/library" = {
+  #  device = "/dev/vgraid/lvraid";
+  #  fsType = "ext4";
+  #};
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
