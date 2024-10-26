@@ -44,6 +44,9 @@
             # SOPS
             "/root/.config/sops"
 
+            # Podman
+            "/var/lib/containers"
+
             "/etc/nixos"
             "/var/log"
             "/var/lib/bluetooth"

@@ -4,9 +4,10 @@
 	"kwinrc"."Desktops"."Id_3" = "d24dfdcb-1ed5-4ce1-824f-06b115df8873";
 	"kwinrc"."Desktops"."Number" = 3;
 	"kwinrc"."Desktops"."Rows" = 2;
-	"kwinrc"."Tiling"."padding" = 12;
+	"kwinrc"."Tiling"."padding" = 14;
 	"kwinrc"."Tiling/cbc2ee2d-43b8-5fed-8410-299addbcca52"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.45833333333333337},{\"height\":0.5416666666666666}],\"width\":0.3911458333333333},{\"width\":0.6088541666666627}]}";
-	"kwinrc"."Tiling/d3b153ee-5d4a-5046-a2e9-ded4dc797d82"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.6083333333333305},{\"width\":0.3916666666666695}]}";
+    "kwinrc"."Tiling/d3b153ee-5d4a-5046-a2e9-ded4dc797d82"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.6083333333333305},{\"width\":0.3916666666666695}]}";
+    "kwinrc"."Tiling/e682eb5d-fc4e-5ecc-9e62-862c62d97cfc"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.5},{\"height\":0.5}],\"width\":0.3864583333333313},{\"width\":0.6135416666666629}]}";
 	"kscreenlockerrc"."Daemon"."Autolock" = false;
     "kscreenlockerrc"."Daemon"."LockOnResume" = false;
 }
