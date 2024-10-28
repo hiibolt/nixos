@@ -11,6 +11,7 @@
         extraPackages = [ ];
         extraLuaPackages = ps: [ ];
         extraConfig = ''
+            set number
             syntax enable
             colorscheme catppuccin-frappe
             '';
