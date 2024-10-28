@@ -97,6 +97,9 @@
         enable = true;
         userName = "larkben";
         userEmail = "my_git_username@gmail.com";
+        extraConfig = {
+            safe.directory = "*";
+        };
     };
     gh = {
         enable = true;

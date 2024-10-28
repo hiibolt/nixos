@@ -74,7 +74,8 @@
     system.activationScripts = {
         chown-nixos-hiibolt.text =
         ''
-        chown -R hiibolt /etc/nixos
+        chown -R hiibolt:nix-editor /etc/nixos
+        chmod -R g+w /etc/nixos
         '';
     };
     system.userActivationScripts = {
