@@ -39,10 +39,7 @@
         ".cache/winetricks"
         ".cache/lutris"
         ".steam"
-        {
-        	directory = ".local/share/Steam";
-        	method = "symlink";
-        }
+        ".local/share/Steam"
     ];
     files = [
         ".screenrc"
