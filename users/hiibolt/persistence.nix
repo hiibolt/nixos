@@ -38,6 +38,7 @@
         ".local/share/lutris"
         ".cache/winetricks"
         ".cache/lutris"
+        ".steam"
         {
         	directory = ".local/share/Steam";
         	method = "symlink";
