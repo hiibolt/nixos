@@ -124,6 +124,10 @@ in
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  programs.corectrl = {
+    enable = true;
+  };
+
   # System Packages
 	environment.systemPackages = with pkgs; [
     # Drives

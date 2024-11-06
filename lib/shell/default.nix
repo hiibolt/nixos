@@ -14,6 +14,8 @@
   programs.fish = {
     enable = true;
     shellAliases = {
+      ka = "systemctl start kanata.service";
+      kd = "systemctl stop kanata.service";
       ff = "fastfetch";
       rb-s = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
       rb-b = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";

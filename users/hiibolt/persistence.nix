@@ -7,7 +7,10 @@
 {
     directories = [
         "Development"
-        "Games"
+        {
+            directory = "Games";
+            method = "symlink";
+        }
         ".gnupg"
         ".ssh"
         ".nixops"
@@ -38,8 +41,6 @@
         ".local/share/lutris"
         ".cache/winetricks"
         ".cache/lutris"
-        ".steam"
-        ".local/share/Steam"
     ];
     files = [
         ".screenrc"
