@@ -53,7 +53,6 @@ in
       "${workloads_dir}/deployments/hiibolt"
       "${workloads_dir}/deployments/media"
       "${workloads_dir}/deployments/r6rs"
-      #"${workloads_dir}/deployments/dykm"
 
       # Users
       "${users_dir}/hiibolt/user.nix"
