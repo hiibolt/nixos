@@ -9,6 +9,7 @@
 
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 		unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+		nixos-wsl.url = "github:nix-community/nixos-wsl";
 
 		disko = {
 			url = "github:nix-community/disko";
@@ -44,6 +45,7 @@
 	outputs = inputs@{
 		nixpkgs, 
 		unstable-nixpkgs,
+		nixos-wsl,
 		disko,
 		sops-nix,
 		impermanence,
@@ -74,6 +76,13 @@
 	in
 	rec {
 		nixosConfigurations.default = nixosConfigurations.nuclearbombwarhead;
+		nixosConfigurations.nuclearbombwsl = nixpkgs.lib.nixosSystem {
+			inherit system;
+			modules = [
+				./devices/nuclearbombwsl/configuration.nix
+				nixos-wsl.nixosModules.wsl
+			];
+		};
 		nixosConfigurations.nuclearbombwarhead = nixpkgs.lib.nixosSystem {
 			inherit system;
 
