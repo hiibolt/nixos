@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   # Enable OpenGL, AMD, and Intel graphics drivers
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
   };
 

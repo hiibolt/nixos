@@ -5,8 +5,7 @@
     "kwinrc"."Desktops"."Number" = 3;
     "kwinrc"."Desktops"."Rows" = 2;
     "kwinrc"."Tiling"."padding" = 12;
-	"kwinrc"."Tiling/74b4fdef-9b2a-5fc1-b08a-6f1f8405831d"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.5135416666666667},{\"height\":0.4864583333333333}],\"width\":0.384765625},{\"width\":0.6152343749999988}]}";
-	"kwinrc"."Tiling/4961dc1d-267e-5261-8e34-f555b8f4cca6"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"width\":0.6026041666666668},{\"width\":0.39739583333333317}]}";
+	"kwinrc"."Tiling/ca07556f-2bba-5b41-85ee-0888728e2a79"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.5},{\"height\":0.5}],\"width\":0.39778645833333326},{\"width\":0.6022135416666659}]}";
     "kcminputrc"."Libinput/1267/12753/VEN_04F3:00 04F3:31D1 Touchpad"."ClickMethod" = 2;
 	"kcminputrc"."Libinput/1267/12753/VEN_04F3:00 04F3:31D1 Touchpad"."NaturalScroll" = true;
 }

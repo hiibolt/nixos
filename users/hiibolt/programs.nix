@@ -105,8 +105,15 @@
             }
         ];
         userSettings = {
+            "chat.editor.fontFamily" = pkgs.lib.mkForce  "DejaVu Sans Mono";
+            "chat.editor.fontSize" = pkgs.lib.mkForce 14.0;
+            "debug.console.fontFamily" = pkgs.lib.mkForce "DejaVu Sans Mono";
+            "debug.console.fontSize" = pkgs.lib.mkForce 14.0;
             "editor.fontFamily" = pkgs.lib.mkForce "'DejaVu Sans Mono'";
-            "terminal.integrated.fontFamily" = "'DejaVu Sans Mono'";
+            "editor.fontSize" = pkgs.lib.mkForce 14.0;
+            "editor.inlayHints.fontFamily" = pkgs.lib.mkForce "DejaVu Sans Mono";
+            "editor.inlineSuggest.fontFamily" = pkgs.lib.mkForce "DejaVu Sans Mono";
+            "editor.minimap.sectionHeaderFontSize" = 10.285714285714286;
             "workbench.colorTheme" = "Stylix";
             "git.autofetch" = true;
             "security.workspace.trust.enabled" = false;

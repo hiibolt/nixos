@@ -2,9 +2,9 @@
 {
   # Enable OpenGL, AMD, and Intel graphics drivers.
   hardware = {
-    graphics.enable32Bit = true;
-    opengl = {
+    graphics = {
       enable = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         # Intel Drivers
         intel-media-driver

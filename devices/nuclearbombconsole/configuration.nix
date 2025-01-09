@@ -58,7 +58,7 @@ in
   # Stylix
 	stylix = {
     enable = true;
-    image = /etc/nixos/backgrounds/${system.background};
+    image = ../../backgrounds/6.jpg;
 	};
   
 
