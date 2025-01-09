@@ -8,7 +8,6 @@
 	stylix = {
 		targets.kde = {
 			enable = true;
-			service = true;
 		};
 		fonts.sizes = {
 			applications = 10;

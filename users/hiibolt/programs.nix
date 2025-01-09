@@ -105,7 +105,7 @@
             }
         ];
         userSettings = {
-            "editor.fontFamily" = "'DejaVu Sans Mono'";
+            "editor.fontFamily" = pkgs.lib.mkForce "'DejaVu Sans Mono'";
             "terminal.integrated.fontFamily" = "'DejaVu Sans Mono'";
             "workbench.colorTheme" = "Stylix";
             "git.autofetch" = true;

@@ -7,7 +7,7 @@
 			flake = false;
 		};
 
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+		nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 		unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixos-wsl.url = "github:nix-community/nixos-wsl";
 
@@ -24,7 +24,7 @@
 		};
 
 		home-manager = {
-			url = "github:nix-community/home-manager/release-24.05";
+			url = "github:nix-community/home-manager/release-24.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		plasma-manager = {
@@ -33,7 +33,7 @@
 			inputs.home-manager.follows = "home-manager";
 		};
     	stylix = {
-			url = "github:hiibolt/stylix?rev=abcd2036a1420779f6925f0db5aea86b86ae3ac6";
+			url = "github:danth/stylix";
 		};
 
     	nix-index-database = {
