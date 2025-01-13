@@ -19,6 +19,7 @@
 
         # Logseq
         ".config/logseq"
+        ".logseq"
 
         # Shell & Dev
         ".local/share/direnv"
