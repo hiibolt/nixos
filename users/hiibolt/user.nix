@@ -17,6 +17,7 @@
         # Development
         gh
         git
+        postman
 
         # Web
 		    librewolf

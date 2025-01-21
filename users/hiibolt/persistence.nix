@@ -17,6 +17,9 @@
         ".local/share/keyrings"
         ".local/share/kwalletd"
 
+        # Postman
+        ".config/Postman"
+
         # Logseq
         ".config/logseq"
         ".logseq"
