@@ -16,6 +16,7 @@
         ".nixops"
         ".local/share/keyrings"
         ".local/share/kwalletd"
+        "/etc/cdi"
 
         # Postman
         ".config/Postman"

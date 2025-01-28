@@ -6,5 +6,4 @@
     };
 
     users.users.hiibolt.extraGroups = [ "docker" "podman" ];
-    users.users.larkben.extraGroups = [ "docker" "podman" ];
 }

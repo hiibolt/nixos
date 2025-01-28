@@ -50,7 +50,6 @@ in
 
       # Users
       "${users_dir}/hiibolt/user.nix"
-      "${users_dir}/larkben/user.nix"
       "${users_dir}/root/default.nix"
       "${users_dir}/groups.nix"
     ];

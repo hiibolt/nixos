@@ -13,7 +13,7 @@ let
   system = {
     hostname = "nuclearbombwarhead";
     cpu = "intel";
-    gpu = "amd";
+    gpu = "nvidia";
     background = "6.jpg";
 
     keyboard = {
@@ -53,10 +53,15 @@ in
       "${workloads_dir}/deployments/hiibolt"
       "${workloads_dir}/deployments/media"
       "${workloads_dir}/deployments/r6rs"
+      (import "${workloads_dir}/deployments/ai" {
+        inherit config;
+        inherit pkgs;
+        inherit unstable-pkgs;
+        inherit inputs;
+      })
 
       # Users
       "${users_dir}/hiibolt/user.nix"
-      "${users_dir}/larkben/user.nix"
       "${users_dir}/root"
       "${users_dir}/groups.nix"
     ];
@@ -85,7 +90,7 @@ in
   # Stylix
 	stylix = {
     enable = true;
-    image = /etc/nixos/backgrounds/${system.background};
+    image = ../../backgrounds/6.jpg;
 	};
 
   # Disable Auto-Suspend

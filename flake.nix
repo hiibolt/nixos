@@ -117,15 +117,6 @@
 							uses_plasma = true;
 							impermanence = impermanence.nixosModules.home-manager.impermanence;
 						};
-						"larkben" = import ./users/larkben/home.nix {
-							config = home-manager.nixosModules.default.config;
-							inherit pkgs;
-							inherit unstable-pkgs;
-							inherit inputs;
-							hostname = "nuclearbombwarhead";
-							uses_plasma = true;
-							impermanence = impermanence.nixosModules.home-manager.impermanence;
-						};
 					};
 				}
 				stylix.nixosModules.stylix				
@@ -156,15 +147,6 @@
 					
 					home-manager.users = {
 						"hiibolt" = import ./users/hiibolt/home.nix {
-							config = home-manager.nixosModules.default.config;
-							inherit pkgs;
-							inherit unstable-pkgs;
-							inherit inputs;
-							hostname = "nuclearbombsoc";
-							uses_plasma = true;
-							impermanence = impermanence.nixosModules.home-manager.impermanence;
-						};
-						"larkben" = import ./users/larkben/home.nix {
 							config = home-manager.nixosModules.default.config;
 							inherit pkgs;
 							inherit unstable-pkgs;
@@ -250,15 +232,6 @@
 						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
-					home-manager.users."larkben" = import ./users/larkben/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombcell-1";
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
 				}
 
 				impermanence.nixosModules.impermanence
@@ -296,15 +269,6 @@
 						uses_plasma = false;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
-					home-manager.users."larkben" = import ./users/larkben/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombcell-2";
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
 				}
 
 				impermanence.nixosModules.impermanence
@@ -332,15 +296,6 @@
 					home-manager.backupFileExtension = "meow";
 					
 					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombcell-3";
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-					home-manager.users."larkben" = import ./users/larkben/home.nix {
 						config = home-manager.nixosModules.default.config;
 						inherit pkgs;
 						inherit unstable-pkgs;
