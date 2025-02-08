@@ -13,7 +13,7 @@ let
   system = {
     cpu = "intel";
     gpu = "";
-    background = "6.jpg";
+    background = "8.jpg";
 
     keyboard = {
     layout = "semimak";
@@ -58,7 +58,7 @@ in
   # Stylix
 	stylix = {
     enable = true;
-    image = ../../backgrounds/6.jpg;
+    image = ../../backgrounds/8.jpg;
 	};
   
 
@@ -83,6 +83,9 @@ in
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
+
+  # Enable Docker
+  virtualisation.docker.enable = true;
 
 	# Enable sound with pipewire.
 	hardware.pulseaudio.enable = false;
