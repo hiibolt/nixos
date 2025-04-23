@@ -1,3 +1,6 @@
+# Useful commands:
+# - Update single dep `nix flake lock --update-input nixpkgs`
+
 {
 	description = "Configuration for multiple of @hiibolt's systems.";
 

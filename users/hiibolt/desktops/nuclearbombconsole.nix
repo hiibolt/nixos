@@ -1,8 +1,9 @@
 {
-	"kwinrc"."Desktops"."Id_1" = "ef771176-13b3-4708-9da2-61d94b31ff2b";
+    "kwinrc"."Desktops"."Id_1" = "ef771176-13b3-4708-9da2-61d94b31ff2b";
     "kwinrc"."Desktops"."Id_2" = "4dc67b5c-ba05-414d-9033-1886747bf819";
     "kwinrc"."Desktops"."Id_3" = "bac84481-9350-41dc-9d31-74998acb2002";
-    "kwinrc"."Desktops"."Number" = 3;
+    "kwinrc"."Desktops"."Id_4" = "003e727b-53fe-4ae8-b23e-ac4e01a6ae0c";
+    "kwinrc"."Desktops"."Number" = 4;
     "kwinrc"."Desktops"."Rows" = 2;
     "kwinrc"."Tiling"."padding" = 12;
 	"kwinrc"."Tiling/ca07556f-2bba-5b41-85ee-0888728e2a79"."tiles" = "{\"layoutDirection\":\"horizontal\",\"tiles\":[{\"layoutDirection\":\"vertical\",\"tiles\":[{\"height\":0.5},{\"height\":0.5}],\"width\":0.39778645833333326},{\"width\":0.6022135416666659}]}";

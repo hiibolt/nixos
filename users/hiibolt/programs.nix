@@ -59,20 +59,18 @@
     };
     vscode = {
         enable = true;
-        package = unstable-pkgs.vscode;
+        package = pkgs.vscode;
         extensions = with pkgs.vscode-extensions; [
             # Development Environment
             github.copilot
 
             # Language Support
             bbenoist.nix
+            rust-lang.rust-analyzer
+
+            # Design
+            leonardssh.vscord
         ]  ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-            #{
-            #	name = "remote-ssh-edit";
-            #	publisher = "ms-vscode-remote";
-            #	version = "0.47.2";
-            #	sha256 = "1hp6gjh4xp2m1xlm1jsdzxw9d8frkiidhph6nvl24d0h8z34w49g";
-            #}
             {
                 name = "remote-ssh";
                 publisher = "ms-vscode-remote";
@@ -86,12 +84,6 @@
                 sha256 = "LcAomgK91hnJWqAW4I0FAgTOwr8Kwv7ZhvGCgkokKuY=";
             }
             {
-                name = "vscord";
-                publisher = "LeonardSSH";
-                version = "5.2.13";
-                sha256 = "Jgm3ekXFLhylX7RM6tdfi+lRLrcl4UQGmRHbr27M59M=";
-            }
-            {
                 name = "remote-explorer";
                 publisher = "ms-vscode";
                 version = "0.5.2024081309";
@@ -102,6 +94,12 @@
                 publisher = "ms-vscode-remote";
                 version = "0.25.0";
                 sha256 = "CleLZvH40gidW6fqonZv/E/VO8IDI+QU4Zymo0n35Ns=";
+            }
+            {
+                name = "cpptools";
+                publisher = "ms-vscode";
+                version = "1.23.6";
+                sha256 = "4wU4zoddbJVGvYO7VLORB1nrqfXXXynUG+VyM5rdw/U=";
             }
         ];
         userSettings = {

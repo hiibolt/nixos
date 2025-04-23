@@ -19,6 +19,8 @@
         git
         postman
         skopeo
+        racket
+        rustdesk
 
         # Web
 		    librewolf

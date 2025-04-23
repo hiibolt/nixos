@@ -58,6 +58,27 @@ in
   # Stylix
 	stylix = {
     enable = true;
+    base16Scheme = {
+      "base00" = "1b192e";
+      "base01" = "47464c";
+      "base02" = "796570";
+      "base03" = "909ccc";
+      "base04" = "acb8de";
+      "base05" = "d3e5f1";
+      "base06" = "ffebfa";
+      "base07" = "fcecf9";
+      "base08" = "909287";
+      "base09" = "bc7d9c";
+      "base0A" = "7e93a6";
+      "base0B" = "a48b87";
+      "base0C" = "7c90c5";
+      "base0D" = "9e8c9c";
+      "base0E" = "589f77";
+      "base0F" = "9e86c0";
+      "scheme" = "Stylix";
+      "author" = "Stylix";
+      "slug" = "stylix";
+    };
     image = ../../backgrounds/8.jpg;
 	};
   

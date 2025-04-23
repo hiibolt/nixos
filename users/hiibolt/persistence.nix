@@ -7,10 +7,7 @@
 {
     directories = [
         "Development"
-        {
-            directory = "Games";
-            method = "symlink";
-        }
+        "Games"
         ".gnupg"
         ".ssh"
         ".nixops"
