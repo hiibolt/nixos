@@ -88,10 +88,10 @@ in
   services.desktopManager.plasma6.enable = true;
 
   # Stylix
-	stylix = {
+  stylix = {
     enable = true;
     image = ../../backgrounds/6.jpg;
-	};
+  };
 
   # Disable Auto-Suspend
   systemd.targets = {
@@ -104,15 +104,15 @@ in
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-	# Enable sound with pipewire.
-	hardware.pulseaudio.enable = false;
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-	};
+  # Enable sound with pipewire.
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   # Networking
   networking = {
@@ -133,17 +133,17 @@ in
   };
 
   # System Packages
-	environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; [
     # Drives
     nvme-cli
     mdadm
 
     # Basic Development
-		vim
-		wget
+    vim
+    wget
 
     # Web Browsing
-		librewolf
+    librewolf
 
     # Windows Emulation
     wine
