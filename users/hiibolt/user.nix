@@ -22,8 +22,9 @@
         racket
         rustdesk
 
-        # Web
+        # Web & Office
 		    librewolf
+        libreoffice
 
         # Note-taking
         logseq

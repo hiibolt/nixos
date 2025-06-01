@@ -78,6 +78,12 @@
                 sha256 = "CUGzDEZIqIJqGmA+ymZTbcA7DPRF6fj37WW7CnRHkPE=";
             }
             {
+                name = "vscode-sshfs";
+                publisher = "Kelvin";
+                version = "1.26.1";
+                sha256 = "WO9vYELNvwmuNeI05sUBE969KAiKYtrJ1fRfdZx3OYU=";
+            }
+            {
                 name = "glassit";
                 publisher = "s-nlf-fh";
                 version = "0.2.6";
