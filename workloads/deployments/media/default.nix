@@ -90,7 +90,7 @@ in
             image = "jellyfin/jellyfin:latest";
             ports = [
                 "127.0.0.1:8096:8096"
-                "100.96.46.76:8096:8096"
+                "100.125.122.93:8096:8096"
             ];
             volumes = [ 
                 "/persist/workloads/media/jellyfin/config:/config"
@@ -118,7 +118,7 @@ in
             image = "linuxserver/sonarr:latest";
             ports = [
                 "127.0.0.1:8989:8989"
-                "100.96.46.76:8989:8989"
+                "100.125.122.93:8989:8989"
             ];
             volumes = [ 
                 "/persist/workloads/media/sonarr/config:/config"
@@ -143,12 +143,36 @@ in
             image = "linuxserver/radarr:latest";
             ports = [
                 "127.0.0.1:7878:7878"
-                "100.96.46.76:7878:7878"
+                "100.125.122.93:7878:7878"
             ];
             volumes = [ 
                 "/persist/workloads/media/radarr/config:/config"
                 "/persist/workloads/media/library/movies:/movies" 
                 "/persist/workloads/media/qbittorrent/qBittorrent/downloads/:/downloads"
+            ];
+            extraOptions = [
+                "--network=host"
+            ];
+            environment = {
+                PUID="1000";
+                PGID="1000";
+            };
+            environmentFiles = [ ];
+            cmd = [ ];
+        };
+    };
+
+    # Bazarr - Subtitle Management
+    virtualisation.oci-containers.containers = {
+        media-bazarr = {
+            image = "linuxserver/bazarr:latest";
+            ports = [
+                "127.0.0.1:6767:6767"
+                "100.125.122.93:6767:6767"
+            ];
+            volumes = [ 
+                "/persist/workloads/media/bazarr/config:/config"
+                "/persist/workloads/media/library/tv:/tv"
             ];
             extraOptions = [
                 "--network=host"
@@ -168,7 +192,7 @@ in
             image = "fallenbagel/jellyseerr:latest";
             ports = [
                 "127.0.0.1:5055:5055"
-                "100.96.46.76:5055:5055"
+                "100.125.122.93:5055:5055"
             ];
             volumes = [ 
                 "/persist/workloads/media/jellyseerr/config:/app/config"

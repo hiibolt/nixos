@@ -53,12 +53,6 @@ in
       "${workloads_dir}/deployments/hiibolt"
       "${workloads_dir}/deployments/media"
       "${workloads_dir}/deployments/r6rs"
-      (import "${workloads_dir}/deployments/ai" {
-        inherit config;
-        inherit pkgs;
-        inherit unstable-pkgs;
-        inherit inputs;
-      })
 
       # Users
       "${users_dir}/hiibolt/user.nix"

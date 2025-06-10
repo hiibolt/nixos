@@ -123,7 +123,7 @@
         UBISOFT_AUTH_EMAIL=${config.sops.placeholder."deployments/r6rs/r6econ/ubi_auth_email"}
         UBISOFT_AUTH_PW=${config.sops.placeholder."deployments/r6rs/r6econ/ubi_auth_pw"}
         DISCORD_BOT_TOKEN=${config.sops.placeholder."deployments/r6rs/r6econ/discord_token"}
-        PROXY_LINK=${config.sops.placeholder."deployments/r6rs/sherlock/proxy_link"}
+        PROXY_URL=${config.sops.placeholder."deployments/r6rs/sherlock/proxy_link"}
 
         GUILD_ID=${config.sops.placeholder."deployments/r6rs/r6rs/guild_id"}
         SNUSBASE_API_KEY=${config.sops.placeholder."deployments/r6rs/r6rs/snusbase_api_key"}

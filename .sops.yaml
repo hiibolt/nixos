@@ -1,7 +1,7 @@
 keys:
-  - &primary age1drcptedmhw32ygg47s2gyef0j694luqherykw6sfpra749qdwcdsm5wele
+  - &primary age1f2vy8k8jrn06c5w6lslamsgmcz3enp5w0nec8ga24zky4g7cx5ysdyhyvt
 creation_rules:
-  - path_regex: secrets/secrets.yaml
+  - path_regex: secrets/secrets.yaml$
     key_groups:
       - age:
         - *primary

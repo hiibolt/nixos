@@ -18,6 +18,9 @@
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
+
+		# To edit sops, switch to superuser and run the following:
+		# * `sops secrets/secrets.yaml`
 		sops-nix = {
 			url = "github:Mic92/sops-nix";
 			inputs.nixpkgs.follows = "nixpkgs";
