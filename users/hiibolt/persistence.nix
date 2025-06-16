@@ -14,6 +14,7 @@
         ".local/share/keyrings"
         ".local/share/kwalletd"
         "/etc/cdi"
+        "VirtualBox VMs"
 
         # Postman
         ".config/Postman"

@@ -42,7 +42,7 @@
 
 (deflayer secondlayer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    1    2    3    4    _    _    S-f5    f5   up   C-S-f9    _    _    _
+  _    1    2    3    4    f3    _    S-f5    f5   up   C-S-f9    _    _    _
   _    5    6    7    8    esc    _    f9    left    down    rght    _    _
   _    \    /    9    0    _    _    C-grv    _    _    _    _
   _    _    _              _              _    _    _

@@ -12,7 +12,7 @@
     description = "hiibolt";
     initialPassword = "1234";
     # hashedPasswordFile = "/etc/nixos/users/hiibolt/passwords/hiibolt.pw";
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" "docker" "vboxusers" ];
     packages = with pkgs; [
         # Development
         gh

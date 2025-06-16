@@ -81,7 +81,8 @@ in
     };
     image = ../../backgrounds/8.jpg;
 	};
-  
+
+  virtualisation.virtualbox.host.enable = true;
 
 	# Allow unfree packages and enable Nix Flakes
 	nixpkgs.config.allowUnfree = true;
