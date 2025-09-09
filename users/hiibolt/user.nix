@@ -20,8 +20,6 @@
         postman
         skopeo
         racket
-        rustdesk
-        pw3270
 
         # Web & Office
 		    librewolf

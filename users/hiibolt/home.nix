@@ -5,7 +5,6 @@
 	inputs,
 	impermanence,
 	hostname,
-	uses_plasma
 }:
 let
 	vscode-server = fetchGit {
@@ -23,22 +22,14 @@ in
 	programs = import ./programs.nix {
 		inherit config;
 		inherit pkgs;
+		inherit hostname;
 		inherit unstable-pkgs;
-		inherit hostname;
-		inherit uses_plasma;
-	} // pkgs.lib.optionalAttrs uses_plasma (import ./plasma.nix {
-		inherit config;
-		inherit pkgs;
-		inherit hostname;
-		inherit uses_plasma;
-	});
+	};
 	
 	# Persistence
 	home.persistence."/persist/home/hiibolt" = import ./persistence.nix {
 		inherit config;
 		inherit pkgs;
-		inherit hostname;
-		inherit uses_plasma;
 	};
 
 	# VSC Server
@@ -62,10 +53,5 @@ in
 			];
 		}) 
 	];
-} // pkgs.lib.optionalAttrs uses_plasma (import ./stylix.nix {
-	inherit config;
-	inherit pkgs;
-	inherit hostname;
-	inherit uses_plasma;
-})
+}
 

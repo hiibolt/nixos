@@ -2,8 +2,7 @@
     config,
     pkgs,
     unstable-pkgs,
-    hostname,
-    uses_plasma
+    hostname
 }:
 {   
     neovim = {
