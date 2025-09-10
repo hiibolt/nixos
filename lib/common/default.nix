@@ -5,7 +5,7 @@
 
 	# Add system fonts
 	fonts.packages = [
-		pkgs.nerd-fonts.mononoki
+		pkgs.nerdfonts
 	];
 
 	# Select internationalisation properties.

@@ -1,6 +1,8 @@
 { 
 	config,
-	pkgs
+	pkgs,
+	hostname,
+	uses_plasma
 }:
 {
     directories = [
