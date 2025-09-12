@@ -52,7 +52,6 @@ in
 	};
 	home.packages = with pkgs; [
 		dconf
-		google-chrome
 	] ++ [
 		(unstable-pkgs.prismlauncher.override {
 			jdks = with pkgs; [

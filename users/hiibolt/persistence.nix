@@ -47,6 +47,7 @@
     ];
     files = [
         ".screenrc"
+        ".config/kwinoutputconfig.json"
 
         # Git
         ".config/gh/hosts.yml"

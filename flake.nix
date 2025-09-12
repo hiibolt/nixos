@@ -128,47 +128,6 @@
 				stylix.nixosModules.stylix				
 			];
 		};
-		nixosConfigurations.nuclearbombsoc = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			#
-			# "nuclearbombsoc" is the laptop
-			#
-
-			specialArgs = {inherit inputs;};
-			modules = [
-				disko.nixosModules.default
-
-				nix-index-database.nixosModules.nix-index
-
-				./devices/nuclearbombsoc/configuration.nix 
-				
-				home-manager.nixosModules.default {	
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ 
-						plasma-manager.homeManagerModules.plasma-manager
-					];
-					home-manager.backupFileExtension = "meow";
-					
-					home-manager.users = {
-						"hiibolt" = import ./users/hiibolt/home.nix {
-							config = home-manager.nixosModules.default.config;
-							inherit pkgs;
-							inherit unstable-pkgs;
-							inherit inputs;
-							hostname = "nuclearbombsoc";
-							uses_plasma = true;
-							impermanence = impermanence.nixosModules.home-manager.impermanence;
-						};
-					};
-				}
-				stylix.nixosModules.stylix
-
-				impermanence.nixosModules.impermanence
-			#	
-			];
-		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
 			inherit system;
 
@@ -208,11 +167,11 @@
 			#	
 			];
 		};
-		nixosConfigurations.nuclearbombcell-1 = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.nuclearbombchassis = nixpkgs.lib.nixosSystem {
 			inherit system;
 
 			#
-			# "nuclearbombcell-1" is the first of the Dell machines
+			# "nuclearbombchassis" is the main machine
 			#
 
 			specialArgs = {inherit inputs;};
@@ -221,12 +180,14 @@
 
 				nix-index-database.nixosModules.nix-index
 
-				./devices/nuclearbombcell-1/configuration.nix 
+				./devices/nuclearbombchassis/configuration.nix 
 				
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ ];
+					home-manager.sharedModules = [ 
+						plasma-manager.homeManagerModules.plasma-manager
+					];
 					home-manager.backupFileExtension = "meow";
 					
 					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
@@ -234,86 +195,15 @@
 						inherit pkgs;
 						inherit unstable-pkgs;
 						inherit inputs;
-						hostname = "nuclearbombcell-1";
-						uses_plasma = false;
+						hostname = "nuclearbombchassis";
+						uses_plasma = true;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}
+				stylix.nixosModules.stylix
 
 				impermanence.nixosModules.impermanence
-				
-			];
-		};
-
-		nixosConfigurations.nuclearbombcell-2 = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			#
-			# "nuclearbombcell-2" is the burger box
-			#
-
-			specialArgs = {inherit inputs;};
-			modules = [
-				disko.nixosModules.default
-
-				nix-index-database.nixosModules.nix-index
-
-				./devices/nuclearbombcell-2/configuration.nix 
-				
-				home-manager.nixosModules.default {	
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ ];
-					home-manager.backupFileExtension = "meow";
-					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombcell-2";
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-				}
-
-				impermanence.nixosModules.impermanence
-				
-			];
-		};nixosConfigurations.nuclearbombcell-3 = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			#
-			# "nuclearbombcell-3" is the first of the Dell machines
-			#
-
-			specialArgs = {inherit inputs;};
-			modules = [
-				disko.nixosModules.default
-
-				nix-index-database.nixosModules.nix-index
-
-				./devices/nuclearbombcell-3/configuration.nix 
-				
-				home-manager.nixosModules.default {	
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ ];
-					home-manager.backupFileExtension = "meow";
-					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombcell-3";
-						uses_plasma = false;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-				}
-
-				impermanence.nixosModules.impermanence
-				
+			#	
 			];
 		};
 	};

@@ -21,14 +21,10 @@
         skopeo
         racket
         rustdesk
-        pw3270
 
         # Web & Office
 		    librewolf
         libreoffice
-
-        # Note-taking
-        logseq
 
         # Vesktop
         vesktop
