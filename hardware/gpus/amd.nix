@@ -15,6 +15,9 @@
       ];
     };
   };
+  environment.systemPackages = with pkgs; [
+    vulkan-tools
+  ];
   services.xserver.videoDrivers = [ "amdgpu" ]; 
 
   # HIP workaround

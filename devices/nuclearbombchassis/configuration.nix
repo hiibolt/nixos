@@ -11,8 +11,6 @@ let
   hardware_dir    = ../../hardware;
 
   system = {
-    cpu = "intel";
-    gpu = "";
     background = "8.jpg";
 
     keyboard = {
@@ -27,7 +25,8 @@ in
       # Hardware
       (import ../../lib/disko/default.nix { device = "/dev/nvme0n1"; })
       "${this_device_dir}/hardware-configuration.nix"
-      "${hardware_dir}/cpus/${system.cpu}.nix"
+      "${hardware_dir}/cpus/intel.nix"
+      "${hardware_dir}/gpus/amd.nix"
 
       # System Shell
       "${lib_dir}/shell/default.nix"

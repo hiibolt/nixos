@@ -42,12 +42,21 @@
         ".local/share/osu"
         ".local/share/PrismLauncher"
         ".local/share/lutris"
+        {
+            directory = ".local/share/Steam";
+            method = "symlink";
+        }
+        {
+            directory = ".steam";
+            method = "symlink";
+        }
         ".cache/winetricks"
         ".cache/lutris"
     ];
     files = [
         ".screenrc"
         ".config/kwinoutputconfig.json"
+        ".config/plasma-org.kde.plasma.desktop-appletsrc"
 
         # Git
         ".config/gh/hosts.yml"
