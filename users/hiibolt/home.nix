@@ -53,6 +53,7 @@ in
 	home.packages = with pkgs; [
 		dconf
 	] ++ [
+		unstable-pkgs.osu-lazer-bin
 		(unstable-pkgs.prismlauncher.override {
 			jdks = with pkgs; [
 				temurin-bin-21

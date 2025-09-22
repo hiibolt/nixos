@@ -36,7 +36,6 @@
         (pkgs.callPackage ./cider/default.nix {})
 
         # Games
-        osu-lazer-bin
         (lutris.override {
           extraLibraries = pkgs: [
             libadwaita
