@@ -20,11 +20,13 @@
         postman
         skopeo
         racket
-        rustdesk
 
         # Web & Office
 		    librewolf
         libreoffice
+
+        # Note-taking
+        anki
 
         # Vesktop
         vesktop

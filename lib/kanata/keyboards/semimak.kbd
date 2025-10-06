@@ -23,27 +23,27 @@
 ;; The first layer defined is the layer that will be active by default when
 ;; kanata starts up. 
 (deflayer semimak
-  grv  XX  XX    [    ]   XX   XX   XX   XX   XX    -    =    XX    bspc
+  grv  XX  XX    [    ]   XX   XX   XX   XX   XX    -    =    (layer-switch qwerty)    bspc
   tab  f    l    h    v    z    XX    q    w    u    o    y    @scd    ;
   caps  s    r    n    t    k    XX    c    d    e    a    i    ret
   x      '    b    m    j    XX   XX    p    g    ,    .    rsft
   lctl lmet lalt           spc            rshift rmet rctl
 )
-
-;; defalias is used to declare a shortcut for a more complicated action to keep
-;; the deflayer declarations clean and aligned. The alignment in deflayers is not
-;; necessary, but is strongly recommended for ease of understanding visually.
-;;
-;; Aliases are referred to by `@<alias_name>`.
 (defalias
-  ;; Hold prtsc to toggle to symbol keys, otherwise just act as prtsc anyway
   scd  (layer-toggle secondlayer)
 )
-
 (deflayer secondlayer
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
   _    1    2    3    4    f3    _    S-f5    f5   up   C-S-f9    _    _    _
   _    5    6    7    8    esc    _    f9    left    down    rght    _    _
   _    \    /    9    0    _    _    C-grv    _    _    _    _
   _    _    _              _              _    _    _
+)
+
+(deflayer qwerty
+  grv  1    2    3    4    5    6    7    8    9    0    - (layer-switch semimak)        bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
