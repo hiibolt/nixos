@@ -35,6 +35,7 @@
         fastfetch
 
         # Music
+        spotify
         (pkgs.callPackage ./cider/default.nix {})
 
         # Games
