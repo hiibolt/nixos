@@ -11,7 +11,7 @@ let
   hardware_dir    = ../../hardware;
 
   system = {
-    background = "8.jpg";
+    background = "10.jpg";
 
     keyboard = {
       layout = "semimak";
@@ -78,8 +78,9 @@ in
       "author" = "Stylix";
       "slug" = "stylix";
     };
-    image = ../../backgrounds/8.jpg;
+    image = ../../backgrounds/10.jpg;
 	};
+  
 
   virtualisation.virtualbox.host.enable = true;
 
