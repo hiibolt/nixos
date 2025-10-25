@@ -44,6 +44,7 @@
         sysstat
         nmap
         dnsutils
+        inetutils
 
         # Music
         spotify
