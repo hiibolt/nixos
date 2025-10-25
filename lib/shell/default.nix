@@ -17,6 +17,32 @@
       ka = "systemctl start kanata.service";
       kd = "systemctl stop kanata.service";
       ff = "fastfetch";
+      k = "kubectl";
+      kgp = "kubectl get pods";
+      kgpa = "kubectl get pods --all-namespaces";
+      kgd = "kubectl get deployments";
+      kgs = "kubectl get services";
+      kgn = "kubectl get nodes";
+      kgns = "kubectl get namespaces";
+      
+      kdp = "kubectl describe pod";
+      kdd = "kubectl describe deployment";
+      kds = "kubectl describe service";
+      kdn = "kubectl describe node";
+      
+      kdelp = "kubectl delete pod";
+      kdeld = "kubectl delete deployment";
+      kdels = "kubectl delete service";
+      
+      kl = "kubectl logs";
+      klf = "kubectl logs -f";
+      
+      ksc = "kubectl config set-context --current --namespace";
+      
+      kex = "kubectl exec -it";
+      
+      ktop = "kubectl top nodes";
+      ktopp = "kubectl top pods";
       rb-s = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
       rb-b = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
     };

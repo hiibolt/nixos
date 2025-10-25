@@ -124,6 +124,9 @@ in
     # Basic Development
 		vim
 		wget
+    ventoy
+    gimp
+    kubectl
 
     # Web Browsing
 		librewolf

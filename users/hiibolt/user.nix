@@ -24,6 +24,13 @@
         # Web & Office
 		    librewolf
         libreoffice
+        zoom-us
+        (pkgs.wrapOBS {
+          plugins = with pkgs.obs-studio-plugins; [
+            obs-backgroundremoval
+            obs-composite-blur
+          ];
+        })
 
         # Note-taking
         anki
@@ -31,8 +38,12 @@
         # Vesktop
         vesktop
 
-        # Shell Utilities
+        # System Utilities
         fastfetch
+        lsof
+        sysstat
+        nmap
+        dnsutils
 
         # Music
         spotify

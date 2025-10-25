@@ -58,3 +58,4 @@ function boilerplate -d "Grabs a boilerplate from https://github.com/boltr6/nix-
 end
 set_color -i cyan
 set fish_greeting "Don't stop 'till Stanford"
+kubectl completion fish | source
