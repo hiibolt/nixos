@@ -45,6 +45,7 @@
         nmap
         dnsutils
         inetutils
+        tcpdump
 
         # Music
         spotify
