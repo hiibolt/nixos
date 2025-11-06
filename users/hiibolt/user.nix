@@ -21,6 +21,7 @@
         skopeo
         racket
         argocd
+        kubernetes-helm
 
         # Web & Office
 		    librewolf
