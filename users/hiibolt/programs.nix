@@ -134,6 +134,7 @@
             "vscord.status.details.text.notInFile" = "honk shoo mimimi";
             "vscord.status.state.text.idle" = "idling~";
             "vscord.app.name" = "Visual Studio Code";
+            "vscord.status.buttons.button1.active.enabled" = "true";
         }; 
     };
 }

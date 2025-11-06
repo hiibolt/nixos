@@ -20,6 +20,7 @@
         postman
         skopeo
         racket
+        argocd
 
         # Web & Office
 		    librewolf
@@ -46,6 +47,10 @@
         dnsutils
         inetutils
         tcpdump
+        dnsutils
+        tcpdump
+        ethtool
+        mtr
 
         # Music
         spotify
