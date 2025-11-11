@@ -127,6 +127,8 @@ in
     ventoy
     gimp
     kubectl
+    xdg-desktop-portal
+    xdg-desktop-portal-kde
 
     # Web Browsing
 		librewolf

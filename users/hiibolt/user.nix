@@ -22,6 +22,7 @@
         racket
         argocd
         kubernetes-helm
+        yq-go
 
         # Web & Office
 		    librewolf
