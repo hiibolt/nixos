@@ -59,18 +59,27 @@
     };
     vscode = {
         enable = true;
-        package = pkgs.vscode;
-        extensions = with pkgs.vscode-extensions; [
-            # Development Environment
-            github.copilot
-
+        package = unstable-pkgs.vscode;
+        extensions = with unstable-pkgs.vscode-extensions; [
             # Language Support
             bbenoist.nix
             rust-lang.rust-analyzer
 
             # Design
             leonardssh.vscord
-        ]  ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        ]  ++ unstable-pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+                name="copilot";
+                publisher="GitHub";
+                version="1.383.1811";
+                sha256="sha256-XDWYy65u6edMcA1mrqlYJ/TAlq1W5SEA3TLRlGxCIaM=";
+            }
+            {
+                name="copilot-chat";
+                publisher="GitHub";
+                version="0.32.0";
+                sha256="sha256-0B4ZJd2D+GY2CpVB4gyJ3NHiLS1HiG948Ycu7UCysF0=";
+            }
             {
                 name = "remote-ssh";
                 publisher = "ms-vscode-remote";
