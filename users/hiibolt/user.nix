@@ -22,6 +22,7 @@
         racket
         argocd
         kubernetes-helm
+        kubectl
         yq-go
 
         # Web & Office
