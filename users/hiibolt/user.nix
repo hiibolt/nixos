@@ -54,6 +54,7 @@
         tcpdump
         ethtool
         mtr
+        filelight
 
         # Music
         spotify

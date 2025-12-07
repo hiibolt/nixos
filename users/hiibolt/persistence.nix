@@ -36,6 +36,7 @@
         ".config/vesktop"
 
         # Music
+        ".config/spotify"
         ".config/sh.cider.electron"
 
         # Games
@@ -56,6 +57,7 @@
     files = [
         ".screenrc"
         ".config/kwinoutputconfig.json"
+        ".config/kcminputrc"
         ".config/plasma-org.kde.plasma.desktop-appletsrc"
 
         # Git
