@@ -15,7 +15,7 @@ let
 
     keyboard = {
       layout = "semimak";
-      device = "by-path/pci-0000\\:00\\:14.0-usb-0\\:3.2\\:1.1-event-kbd";
+      device = "by-path/pci-0000\\:00\\:14.0-usb-0\\:3.4\\:1.1-event-kbd";
     };
   };
 in
