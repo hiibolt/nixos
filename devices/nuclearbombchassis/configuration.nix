@@ -11,7 +11,7 @@ let
   hardware_dir    = ../../hardware;
 
   system = {
-    background = "6.jpg";
+    background = "11.jpg";
 
     keyboard = {
       layout = "semimak";
@@ -78,7 +78,7 @@ in
       "author" = "Stylix";
       "slug" = "stylix";
     };
-    image = ../../backgrounds/6.jpg;
+    image = ../../backgrounds/11.jpg;
 	};
   
 
