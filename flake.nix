@@ -14,6 +14,8 @@
 		unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixos-wsl.url = "github:nix-community/nixos-wsl";
 
+		kdiff.url = "github:hiibolt/kdiff";
+
 		disko = {
 			url = "github:nix-community/disko";
 			inputs.nixpkgs.follows = "nixpkgs";

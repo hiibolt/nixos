@@ -33,6 +33,7 @@
           plugins = with pkgs.obs-studio-plugins; [
             obs-backgroundremoval
             obs-composite-blur
+            droidcam-obs
           ];
         })
 
@@ -55,7 +56,9 @@
         ethtool
         mtr
         filelight
-
+        droidcam
+        inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+        
         # Music
         spotify
         (pkgs.callPackage ./cider/default.nix {})
