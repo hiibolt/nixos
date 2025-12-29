@@ -9,9 +9,9 @@
         # Intel Drivers
         intel-media-driver
         intel-compute-runtime
-        vaapiVdpau
+        intel-vaapi-driver
+        libva-vdpau-driver
         libvdpau-va-gl
-        vaapiIntel
       ];
     };
   };
