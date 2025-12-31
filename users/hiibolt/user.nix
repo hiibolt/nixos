@@ -55,7 +55,6 @@
         tcpdump
         ethtool
         mtr
-        filelight
         droidcam
         inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
         
