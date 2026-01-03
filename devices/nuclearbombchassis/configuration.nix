@@ -96,9 +96,7 @@ in
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    extraSetFlags = [
-      "--ssh"
-    ];
+    useRoutingFeatures = "both";
   };
   # Enable CUPS to print documents.
   services.printing.enable = true;

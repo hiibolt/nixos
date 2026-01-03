@@ -33,9 +33,7 @@
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    extraSetFlags = [
-      "--ssh"
-    ];
+    useRoutingFeatures = "both";
   };
 
   # Glances
