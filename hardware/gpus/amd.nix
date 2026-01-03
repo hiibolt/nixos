@@ -8,7 +8,6 @@
       extraPackages = with pkgs; [
         # AMD Drivers
         rocmPackages.clr.icd
-        amdvlk
         vulkan-loader
         vulkan-validation-layers
         vulkan-extension-layer
