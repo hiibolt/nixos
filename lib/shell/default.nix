@@ -14,9 +14,14 @@
   programs.fish = {
     enable = true;
     shellAliases = {
+      # Kanata
       ka = "systemctl start kanata.service";
       kd = "systemctl stop kanata.service";
+      
+      # Fastfetch
       ff = "fastfetch";
+
+      # Kubernetes
       k = "kubectl";
       kgp = "kubectl get pods";
       kgpa = "kubectl get pods --all-namespaces";
@@ -24,25 +29,25 @@
       kgs = "kubectl get services";
       kgn = "kubectl get nodes";
       kgns = "kubectl get namespaces";
-      
       kdp = "kubectl describe pod";
       kdd = "kubectl describe deployment";
       kds = "kubectl describe service";
       kdn = "kubectl describe node";
-      
       kdelp = "kubectl delete pod";
       kdeld = "kubectl delete deployment";
       kdels = "kubectl delete service";
-      
       kl = "kubectl logs";
       klf = "kubectl logs -f";
-      
       ksc = "kubectl config set-context --current --namespace";
-      
       kex = "kubectl exec -it";
-      
       ktop = "kubectl top nodes";
       ktopp = "kubectl top pods";
+
+      # Talos
+      t = "talosctl";
+      tap = "talosctl apply-config";
+
+      # Nixos
       rb-s = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
       rb-b = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
     };
