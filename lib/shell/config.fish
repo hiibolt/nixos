@@ -59,3 +59,4 @@ end
 set_color -i cyan
 set fish_greeting "Don't stop 'till Stanford"
 kubectl completion fish | source
+talosctl completion fish | source
