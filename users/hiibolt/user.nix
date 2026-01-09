@@ -57,6 +57,7 @@
         mtr
         droidcam
         inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+        caligula
         
         # Music
         spotify
