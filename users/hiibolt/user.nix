@@ -23,6 +23,7 @@
         argocd
         kubernetes-helm
         kubectl
+        talosctl
         yq-go
 
         # Web & Office
