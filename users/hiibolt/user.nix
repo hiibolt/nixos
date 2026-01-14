@@ -58,6 +58,7 @@
         mtr
         droidcam
         inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+        inputs.talm.defaultPackage.${pkgs.stdenv.hostPlatform.system}
         caligula
         
         # Music
