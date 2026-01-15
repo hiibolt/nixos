@@ -15,7 +15,6 @@
 		nixos-wsl.url = "github:nix-community/nixos-wsl";
 
 		kdiff.url = "github:hiibolt/kdiff";
-		talm.url = "github:hiibolt/talm";
 
 		disko = {
 			url = "github:nix-community/disko";
