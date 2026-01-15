@@ -25,6 +25,7 @@
         kubectl
         talosctl
         yq-go
+        vscode
 
         # Web & Office
 		    librewolf
