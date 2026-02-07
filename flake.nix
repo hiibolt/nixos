@@ -84,35 +84,21 @@
 		config = pkgs.config;
 	in
 	rec {
-		nixosConfigurations.default = nixosConfigurations.nuclearbombwarhead;
+		nixosConfigurations.default = nixosConfigurations.nuclearbombconsole;
 		nixosConfigurations.nuclearbombwsl = nixpkgs.lib.nixosSystem {
 			inherit system;
-			modules = [
-				./devices/nuclearbombwsl/configuration.nix
-				nixos-wsl.nixosModules.wsl
-			];
-		};
-		nixosConfigurations.nuclearbombwarhead = nixpkgs.lib.nixosSystem {
-			inherit system;
 
-			#
-			# "nuclearbombwarhead" is the primary system (CyberPowerPC Case)
-			#
-
-			specialArgs = {inherit inputs;};
+			specialArgs = {
+				inherit inputs;
+				enable_vscode = false;
+			};
 			modules = [
 				nix-index-database.nixosModules.nix-index
-				./devices/nuclearbombwarhead/configuration.nix 
-
-				disko.nixosModules.default
-				impermanence.nixosModules.impermanence
-				
+				./devices/nuclearbombwsl/configuration.nix
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ 
-						plasma-manager.homeModules.plasma-manager
-					];
+					home-manager.sharedModules = [ ];
 					home-manager.backupFileExtension = "meow";
 					home-manager.users = {
 						"hiibolt" = import ./users/hiibolt/home.nix {
@@ -120,13 +106,14 @@
 							inherit pkgs;
 							inherit unstable-pkgs;
 							inherit inputs;
-							hostname = "nuclearbombwarhead";
-							uses_plasma = true;
+							hostname = "nuclearbombwsl";
+							uses_plasma = false;
+							enable_vscode = false;
 							impermanence = impermanence.nixosModules.home-manager.impermanence;
 						};
 					};
 				}
-				stylix.nixosModules.stylix				
+				nixos-wsl.nixosModules.wsl
 			];
 		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
@@ -136,14 +123,13 @@
 			# "nuclearbombconsole" is the laptop
 			#
 
-			specialArgs = {inherit inputs;};
+			specialArgs = {inherit inputs; enable_vscode = true;};
 			modules = [
 				disko.nixosModules.default
 
 				nix-index-database.nixosModules.nix-index
 
-				./devices/nuclearbombconsole/configuration.nix 
-				
+				./devices/nuclearbombconsole/configuration.nix
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
@@ -159,52 +145,13 @@
 						inherit inputs;
 						hostname = "nuclearbombconsole";
 						uses_plasma = true;
+						enable_vscode = true;
 						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}
 				stylix.nixosModules.stylix
 
 				impermanence.nixosModules.impermanence
-			#	
-			];
-		};
-		nixosConfigurations.nuclearbombchassis = nixpkgs.lib.nixosSystem {
-			inherit system;
-
-			#
-			# "nuclearbombchassis" is the main machine
-			#
-
-			specialArgs = {inherit inputs;};
-			modules = [
-				disko.nixosModules.default
-
-				nix-index-database.nixosModules.nix-index
-
-				./devices/nuclearbombchassis/configuration.nix 
-				
-				home-manager.nixosModules.default {	
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ 
-						plasma-manager.homeModules.plasma-manager
-					];
-					home-manager.backupFileExtension = "meow";
-					
-					home-manager.users."hiibolt" = import ./users/hiibolt/home.nix {
-						config = home-manager.nixosModules.default.config;
-						inherit pkgs;
-						inherit unstable-pkgs;
-						inherit inputs;
-						hostname = "nuclearbombchassis";
-						uses_plasma = true;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
-					};
-				}
-				stylix.nixosModules.stylix
-
-				impermanence.nixosModules.impermanence
-			#	
 			];
 		};
 	};

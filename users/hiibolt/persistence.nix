@@ -2,7 +2,8 @@
 	config,
 	pkgs,
 	hostname,
-	uses_plasma
+	uses_plasma,
+	enable_vscode ? true
 }:
 {
     directories = [
@@ -26,8 +27,9 @@
         # Shell & Dev
         ".local/share/direnv"
         ".local/share/fish"
-        ".config/Code"
         ".kube"
+    ] ++ pkgs.lib.optionals enable_vscode [
+        ".config/Code"
 
         # Browser
         ".librewolf"

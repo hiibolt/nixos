@@ -5,7 +5,8 @@
 	inputs,
 	impermanence,
 	hostname,
-	uses_plasma
+	uses_plasma,
+	enable_vscode ? true
 }:
 let
 	vscode-server = fetchGit {
@@ -15,8 +16,9 @@ let
 in
 { 
 	imports = [
-		"${vscode-server}/modules/vscode-server/home.nix"
 		inputs.impermanence.nixosModules.home-manager.impermanence
+	] ++ pkgs.lib.optionals enable_vscode [
+		"${vscode-server}/modules/vscode-server/home.nix"
 	];
 
 	# `home-manager` and `plasma-manager`
@@ -39,10 +41,13 @@ in
 		inherit pkgs;
 		inherit hostname;
 		inherit uses_plasma;
+		inherit enable_vscode;
 	};
 
 	# VSC Server
-	services.vscode-server.enable = true;
+	services = pkgs.lib.optionalAttrs enable_vscode {
+		vscode-server.enable = true;
+	};
 
 	home.stateVersion = "23.11"; # Please read the comment before changing
 	home.file = {

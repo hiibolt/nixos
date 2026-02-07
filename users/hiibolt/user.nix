@@ -1,5 +1,5 @@
 
-{ config, lib, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, enable_vscode ? true, ... }:
 
 { 
   nixpkgs.config.permittedInsecurePackages = [
@@ -20,11 +20,30 @@
         postman
         skopeo
         racket
+
+        # Kubernetes
         argocd
         kubernetes-helm
         kubectl
         talosctl
         yq-go
+        inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
+
+        # System Utilities
+        fastfetch
+        lsof
+        sysstat
+        nmap
+        dnsutils
+        inetutils
+        tcpdump
+        dnsutils
+        tcpdump
+        ethtool
+        mtr
+        droidcam
+        caligula
+    ] ++ lib.optionals enable_vscode [
         vscode
 
         # Web & Office
@@ -44,22 +63,6 @@
 
         # Vesktop
         vesktop
-
-        # System Utilities
-        fastfetch
-        lsof
-        sysstat
-        nmap
-        dnsutils
-        inetutils
-        tcpdump
-        dnsutils
-        tcpdump
-        ethtool
-        mtr
-        droidcam
-        inputs.kdiff.defaultPackage.${pkgs.stdenv.hostPlatform.system}
-        caligula
         
         # Music
         spotify
