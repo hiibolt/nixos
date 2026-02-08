@@ -30,6 +30,7 @@
         ".kube"
     ] ++ pkgs.lib.optionals enable_vscode [
         ".config/Code"
+        ".zowe"
 
         # Browser
         ".librewolf"
