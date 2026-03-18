@@ -6,6 +6,99 @@
     uses_plasma
 }:
 {   
+    fish = {
+        enable = true;
+        plugins = [
+            {
+                name = "tide";
+                src = pkgs.fishPlugins.tide.src;
+            }
+            {
+                name = "tmux";
+                src = pkgs.fetchFromGitHub {
+                    owner = "budimanjojo";
+                    repo = "tmux.fish";
+                    rev = "v2.0.1";
+                    sha256 = "sha256-ynhEhrdXQfE1dcYsSk2M2BFScNXWPh3aws0U7eDFtv4=";
+                };
+            }
+        ];
+        shellAliases = {
+            # Claude Code
+            ccode = "claude";
+
+            # Kanata
+            ka = "systemctl start kanata.service";
+            kd = "systemctl stop kanata.service";
+
+            # Fastfetch
+            ff = "fastfetch";
+
+            # Kubernetes
+            k = "kubectl";
+            kgp = "kubectl get pods";
+            kgpa = "kubectl get pods --all-namespaces";
+            kgd = "kubectl get deployments";
+            kgs = "kubectl get services";
+            kgn = "kubectl get nodes";
+            kgns = "kubectl get namespaces";
+            kdp = "kubectl describe pod";
+            kdd = "kubectl describe deployment";
+            kds = "kubectl describe service";
+            kdn = "kubectl describe node";
+            kdelp = "kubectl delete pod";
+            kdeld = "kubectl delete deployment";
+            kdels = "kubectl delete service";
+            kl = "kubectl logs";
+            klf = "kubectl logs -f";
+            ksc = "kubectl config set-context --current --namespace";
+            kex = "kubectl exec -it";
+            ktop = "kubectl top nodes";
+            ktopp = "kubectl top pods";
+
+            # Talos
+            t = "talosctl";
+            tap = "talosctl apply-config";
+
+            # Nixos
+            rb-s = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild switch --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
+            rb-b = "sudo mkdir -p /persist/hypermeow && TMPDIR=/persist/hypermeow sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace && sudo rm -rf /persist/hypermeow";
+        };
+        interactiveShellInit = ''
+            set -x DIRENV_LOG_FORMAT ""
+            eval (direnv hook fish)
+            function boilerplate -d "Grabs a boilerplate from https://github.com/boltr6/nix-templates"
+                if contains -- "$argv" "-L" "--list"
+                    # List the available boilerplates
+                    git clone -q https://github.com/boltr6/nix-templates
+                    echo "Availabe boilerplates:"
+                    ls "$PWD/nix-templates"
+                    rm -R -f nix-templates
+                else
+                    # Clone and move the selected boilerplate
+                    git clone -q https://github.com/boltr6/nix-templates
+                    echo "Grabbing the following files:"
+                    ls -A "$PWD/nix-templates/$argv[1]"
+                    mv -n "$PWD/nix-templates/$argv[1]/"{.*,*} "$PWD"
+                    rm -R -f nix-templates
+                    echo "Done"
+                end
+            end
+            set_color -i cyan
+            set fish_greeting "Don't stop 'till Stanford"
+            kubectl completion fish | source
+            talosctl completion fish | source
+
+            string match -q "$TERM_PROGRAM" "vscode"
+            and . (code --locate-shell-integration-path fish)
+        '';
+    };
+    direnv = {
+        enable = true;
+    };
+    tmux = {
+        enable = true;
+    };
     zed-editor = {
         enable = true;
         package = unstable-pkgs.zed-editor;

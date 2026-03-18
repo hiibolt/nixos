@@ -112,7 +112,6 @@
 							hostname = "nuclearbombwsl";
 							uses_plasma = false;
 							enable_vscode = false;
-							impermanence = impermanence.nixosModules.home-manager.impermanence;
 						};
 					};
 				}
@@ -150,7 +149,6 @@
 						hostname = "nuclearbombconsole";
 						uses_plasma = true;
 						enable_vscode = true;
-						impermanence = impermanence.nixosModules.home-manager.impermanence;
 					};
 				}
 				stylix.nixosModules.stylix

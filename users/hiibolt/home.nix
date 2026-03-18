@@ -3,7 +3,6 @@
 	pkgs,
     unstable-pkgs,
 	inputs,
-	impermanence,
 	hostname,
 	uses_plasma,
 	enable_vscode ? true,
@@ -17,7 +16,6 @@ let
 in
 { 
 	imports = [
-		inputs.impermanence.nixosModules.home-manager.impermanence
 	] ++ pkgs.lib.optionals enable_vscode [
 		"${vscode-server}/modules/vscode-server/home.nix"
 	];
@@ -37,7 +35,7 @@ in
 	});
 	
 	# Persistence
-	home.persistence."/persist/home/hiibolt" = import ./persistence.nix {
+	home.persistence."/persist" = import ./persistence.nix {
 		inherit config;
 		inherit pkgs;
 		inherit hostname;
@@ -51,11 +49,6 @@ in
 	};
 
 	home.stateVersion = "23.11"; # Please read the comment before changing
-	home.file = {
-		".config/fish/config.fish" = {
-			source = ../../lib/shell/config.fish;
-		};
-	};
 	home.packages = with pkgs; [
         claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
 		dconf

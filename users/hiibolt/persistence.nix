@@ -34,7 +34,6 @@
         ".local/share/zed"
         ".config/zed"
         ".claude"
-        ".claude.json"
 
         # Browser
         ".librewolf"
@@ -50,19 +49,14 @@
         ".local/share/osu"
         ".local/share/PrismLauncher"
         ".local/share/lutris"
-        {
-            directory = ".local/share/Steam";
-            method = "symlink";
-        }
-        {
-            directory = ".steam";
-            method = "symlink";
-        }
+        ".local/share/Steam"
+        ".steam"
         ".cache/winetricks"
         ".cache/lutris"
     ];
     files = [
         ".screenrc"
+        ".claude.json"
         ".config/kwinoutputconfig.json"
         ".config/kcminputrc"
         ".config/plasma-org.kde.plasma.desktop-appletsrc"
@@ -70,5 +64,4 @@
         # Git
         ".config/gh/hosts.yml"
     ];
-    allowOther = true;
 }
