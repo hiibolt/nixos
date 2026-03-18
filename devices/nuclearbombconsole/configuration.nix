@@ -13,7 +13,7 @@ let
   system = {
     cpu = "intel";
     gpu = "";
-    background = "8.jpg";
+    background = "6.jpg";
 
     keyboard = {
     layout = "semimak";
@@ -79,7 +79,7 @@ in
       "author" = "Stylix";
       "slug" = "stylix";
     };
-    image = ../../backgrounds/8.jpg;
+    image = ../../backgrounds/6.jpg;
 	};
 
   virtualisation.virtualbox.host.enable = true;
@@ -121,6 +121,9 @@ in
 		alsa.support32Bit = true;
 		pulse.enable = true;
 	};
+
+  # Enable `nix-ld`
+  programs.nix-ld.enable = true;
 
   # System Packages
 	environment.systemPackages = with pkgs; [

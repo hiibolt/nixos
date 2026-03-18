@@ -6,7 +6,8 @@
 	impermanence,
 	hostname,
 	uses_plasma,
-	enable_vscode ? true
+	enable_vscode ? true,
+	claude-code-nix
 }:
 let
 	vscode-server = fetchGit {
@@ -56,6 +57,7 @@ in
 		};
 	};
 	home.packages = with pkgs; [
+        claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
 		dconf
 	] ++ [
 		unstable-pkgs.osu-lazer-bin

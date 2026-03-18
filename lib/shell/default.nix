@@ -14,6 +14,9 @@
   programs.fish = {
     enable = true;
     shellAliases = {
+      # Claude Code
+      ccode = "claude";
+
       # Kanata
       ka = "systemctl start kanata.service";
       kd = "systemctl stop kanata.service";

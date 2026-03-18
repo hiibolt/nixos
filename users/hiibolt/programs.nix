@@ -6,6 +6,13 @@
     uses_plasma
 }:
 {   
+    zed-editor = {
+        enable = true;
+        package = unstable-pkgs.zed-editor;
+        extraPackages = [
+            unstable-pkgs.rust-analyzer
+        ];
+    };
     neovim = {
         enable = true;
         extraPackages = with pkgs; [ 
@@ -77,7 +84,7 @@
                 leonardssh.vscord
                 ms-kubernetes-tools.vscode-kubernetes-tools
 
-                # Copilot
+                # Copilot / Claude
                 github.copilot
                 github.copilot-chat
             ]  ++ unstable-pkgs.vscode-utils.extensionsFromVscodeMarketplace [

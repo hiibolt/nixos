@@ -13,6 +13,7 @@
 		nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 		unstable-nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 		nixos-wsl.url = "github:nix-community/nixos-wsl";
+    	claude-code-nix.url = "github:sadjow/claude-code-nix";
 
 		kdiff.url = "github:hiibolt/kdiff";
 
@@ -62,9 +63,10 @@
 		plasma-manager,
 		stylix,
 		nix-index-database,
+		claude-code-nix,
 		...
 	}:
-	let 
+	let
 		system = "x86_64-linux";
 
 		globalPkgsConfig = {
@@ -106,6 +108,7 @@
 							inherit pkgs;
 							inherit unstable-pkgs;
 							inherit inputs;
+							inherit claude-code-nix;
 							hostname = "nuclearbombwsl";
 							uses_plasma = false;
 							enable_vscode = false;
@@ -143,6 +146,7 @@
 						inherit pkgs;
 						inherit unstable-pkgs;
 						inherit inputs;
+						inherit claude-code-nix;
 						hostname = "nuclearbombconsole";
 						uses_plasma = true;
 						enable_vscode = true;

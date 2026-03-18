@@ -31,6 +31,10 @@
     ] ++ pkgs.lib.optionals enable_vscode [
         ".config/Code"
         ".zowe"
+        ".local/share/zed"
+        ".config/zed"
+        ".claude"
+        ".claude.json"
 
         # Browser
         ".librewolf"
