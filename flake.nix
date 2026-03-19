@@ -100,7 +100,8 @@
 				home-manager.nixosModules.default {	
 					home-manager.useGlobalPkgs = true;
 					home-manager.useUserPackages = true;
-					home-manager.sharedModules = [ ];
+					home-manager.sharedModules = [
+					];
 					home-manager.backupFileExtension = "meow";
 					home-manager.users = {
 						"hiibolt" = import ./users/hiibolt/home.nix {
@@ -112,6 +113,7 @@
 							hostname = "nuclearbombwsl";
 							uses_plasma = false;
 							enable_vscode = false;
+							isWsl = true;
 						};
 					};
 				}
@@ -149,6 +151,7 @@
 						hostname = "nuclearbombconsole";
 						uses_plasma = true;
 						enable_vscode = true;
+						isWsl = false;
 					};
 				}
 				stylix.nixosModules.stylix

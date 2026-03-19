@@ -6,6 +6,7 @@
 	hostname,
 	uses_plasma,
 	enable_vscode ? true,
+	isWsl ? false,
 	claude-code-nix
 }:
 let
@@ -34,15 +35,6 @@ in
 		inherit uses_plasma;
 	});
 	
-	# Persistence
-	home.persistence."/persist" = import ./persistence.nix {
-		inherit config;
-		inherit pkgs;
-		inherit hostname;
-		inherit uses_plasma;
-		inherit enable_vscode;
-	};
-
 	# VSC Server
 	services = pkgs.lib.optionalAttrs enable_vscode {
 		vscode-server.enable = true;
@@ -67,5 +59,14 @@ in
 	inherit pkgs;
 	inherit hostname;
 	inherit uses_plasma;
-})
+}) // pkgs.lib.optionalAttrs (!isWsl) {
+	# Persistence
+	home.persistence."/persist" = import ./persistence.nix {
+		inherit config;
+		inherit pkgs;
+		inherit hostname;
+		inherit uses_plasma;
+		inherit enable_vscode;
+	};
+}
 
