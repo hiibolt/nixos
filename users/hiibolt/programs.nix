@@ -5,7 +5,7 @@
     hostname,
     uses_plasma
 }:
-{   
+{
     fish = {
         enable = true;
         plugins = [
@@ -24,8 +24,9 @@
             }
         ];
         shellAliases = {
-            # Claude Code
-            ccode = "claude";
+            # Claude Code / Zed
+            c = "claude";
+            z = "zeditor";
 
             # Kanata
             ka = "systemctl start kanata.service";
@@ -98,6 +99,9 @@
     };
     tmux = {
         enable = true;
+        extraConfig = ''
+            bind J run-shell "for i in $(tmux list-windows -F '#{window_index}' | grep -v $(tmux display -p '#{window_index}')); do tmux join-pane -s :\$i -h; done; tmux select-layout tiled"
+        '';
     };
     zed-editor = {
         enable = true;
@@ -108,7 +112,7 @@
     };
     neovim = {
         enable = true;
-        extraPackages = with pkgs; [ 
+        extraPackages = with pkgs; [
             code-minimap
         ] ++ [
             unstable-pkgs.rust-analyzer
@@ -274,7 +278,7 @@
                     "**/*.REXXINC*{,/*}" = "rexx";
                     "*.rex" = "rexx";
                 };
-            }; 
+            };
         };
     };
 }
