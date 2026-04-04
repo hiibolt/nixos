@@ -236,7 +236,7 @@ in
     shellAliases = {
       # Claude Code / Zed
       c = "claude";
-      z = "zeditor";
+      z = "zeditor . && exit";
 
       # Kanata
       ka = "systemctl start kanata.service";
