@@ -56,14 +56,8 @@
     ACTION=="add", KERNEL=="nvme*", RUN+="${pkgs.nvme-cli}/bin/nvme set-feature -f 6 -V 0 %N"
     '';
 
-  # Reuirements for SOPS + age
-	environment.systemPackages = with pkgs; [
-    # Drives
+  environment.systemPackages = with pkgs; [
     nvme-cli
     mdadm
-
-    # Security
-    sops
-    age
   ];
 }

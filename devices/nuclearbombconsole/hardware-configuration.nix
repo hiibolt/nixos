@@ -26,4 +26,33 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/0081c959-f6ef-4f8d-801f-8243fe613350";
+    fsType = "btrfs";
+    options = [ "subvol=root" ];
+  };
+
+  fileSystems."/persist" = {
+    device = "/dev/disk/by-uuid/0081c959-f6ef-4f8d-801f-8243fe613350";
+    fsType = "btrfs";
+    options = [ "subvol=persist" "noatime" ];
+    neededForBoot = true;
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/0081c959-f6ef-4f8d-801f-8243fe613350";
+    fsType = "btrfs";
+    options = [ "subvol=nix" "noatime" ];
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/C2DF-2427";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
+
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/a62c327e-6b1f-44db-9c9a-2addadee15e8"; }
+  ];
 }

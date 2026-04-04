@@ -10,7 +10,6 @@ let
   this_device_dir = ./.;
   lib_dir         = ../../lib;
   users_dir       = ../../users;
-  workloads_dir   = ../../workloads;
   hardware_dir    = ../../hardware;
 
   system = {

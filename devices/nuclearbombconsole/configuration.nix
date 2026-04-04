@@ -7,7 +7,6 @@ let
   this_device_dir = ./.;
   lib_dir         = ../../lib;
   users_dir       = ../../users;
-  workloads_dir   = ../../workloads;
   hardware_dir    = ../../hardware;
 
   system = {
@@ -25,7 +24,6 @@ in
   imports =
     [
       # Hardware
-      (import ../../lib/disko/default.nix { device = "/dev/nvme0n1"; })
       "${this_device_dir}/hardware-configuration.nix"
       "${hardware_dir}/cpus/${system.cpu}.nix"
 
@@ -39,7 +37,6 @@ in
         layout = system.keyboard.layout;
         device = system.keyboard.device;
       })
-      "${lib_dir}/impermanence/default.nix"
       "${lib_dir}/maintenance/default.nix"
       "${lib_dir}/common/default.nix"
       "${lib_dir}/fingerprint/default.nix"
@@ -55,32 +52,11 @@ in
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  # Stylix
-	stylix = {
-    enable = true;
-    base16Scheme = {
-      "base00" = "1b192e";
-      "base01" = "47464c";
-      "base02" = "796570";
-      "base03" = "909ccc";
-      "base04" = "acb8de";
-      "base05" = "d3e5f1";
-      "base06" = "ffebfa";
-      "base07" = "fcecf9";
-      "base08" = "909287";
-      "base09" = "bc7d9c";
-      "base0A" = "7e93a6";
-      "base0B" = "a48b87";
-      "base0C" = "7c90c5";
-      "base0D" = "9e8c9c";
-      "base0E" = "589f77";
-      "base0F" = "9e86c0";
-      "scheme" = "Stylix";
-      "author" = "Stylix";
-      "slug" = "stylix";
-    };
-    image = ../../backgrounds/6.jpg;
-	};
+  # `chown` `/etc/nixos` for `hiibolt`
+  system.activationScripts.chown-nixos-hiibolt.text = ''
+    chown -R hiibolt:nix-editor /etc/nixos
+    chmod -R g+w /etc/nixos
+  '';
 
   virtualisation.virtualbox.host.enable = true;
 
@@ -151,9 +127,5 @@ in
     protontricks
   ];
   
-  # State Version - Change with caution,
-  #  but it's worth noting that since this
-  #  system uses impermanent storage, it's
-  #  likely a lot easier to recover from
   system.stateVersion = "24.11";
 }
