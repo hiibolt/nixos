@@ -1,0 +1,9 @@
+default-timeout=5000
+border-size=2
+border-radius=8
+border-color=#89b4fa
+background-color=#1e1e2eee
+text-color=#cdd6f4
+font=Mononoki Nerd Font 11
+padding=12
+max-visible=3

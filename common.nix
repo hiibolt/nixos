@@ -98,28 +98,15 @@ in
     # Shell
     kitty
 
-    # Fish plugins
-    fishPlugins.tide
-    (pkgs.stdenv.mkDerivation {
-      name = "tmux-fish-plugin";
-      src = pkgs.fetchFromGitHub {
-        owner = "budimanjojo";
-        repo = "tmux.fish";
-        rev = "v2.0.1";
-        sha256 = "sha256-ynhEhrdXQfE1dcYsSk2M2BFScNXWPh3aws0U7eDFtv4=";
-      };
-      installPhase = ''
-        mkdir -p $out/share/fish/vendor_conf.d $out/share/fish/vendor_functions.d $out/share/fish/vendor_completions.d
-        [ -d conf.d ]    && cp conf.d/*.fish    $out/share/fish/vendor_conf.d/    || true
-        [ -d functions ] && cp functions/*.fish $out/share/fish/vendor_functions.d/ || true
-        [ -d completions ] && cp completions/*.fish $out/share/fish/vendor_completions.d/ || true
-      '';
-    })
+    # Zsh plugins
+    zsh-powerlevel10k
+    zsh-autosuggestions
+    zsh-syntax-highlighting
   ] ++ lib.optionals hasKeyboard [
     kanata
   ];
 
-  environment.shells = with pkgs; [ fish ];
+  environment.shells = with pkgs; [ zsh ];
 
   # Automatically clean the Nix store
   nix.settings.auto-optimise-store = true;
@@ -192,8 +179,17 @@ in
       dconf
       (pkgs.rust-bin.nightly.latest.default.override {
         targets = [ "wasm32-wasip1" ];
+        extensions = [ "rust-src" ];
       })
       gcc
+      pkg-config
+      openssl.dev
+      clang
+      cmake
+      mpi
+      bun
+      nodejs
+      pest-ide-tools
 
       # Neovim extras
       code-minimap
@@ -233,8 +229,10 @@ in
   };
 
   # Shell configuration
-  programs.fish = {
+  programs.zsh = {
     enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
     shellAliases = {
       # Claude Code / Zed
       c = "claude";
@@ -278,50 +276,67 @@ in
       rb-b = "sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace";
     };
     interactiveShellInit = ''
-      fish_add_path $HOME/.cargo/bin $HOME/.bun/bin
-      set -x DIRENV_LOG_FORMAT ""
-      eval (direnv hook fish)
-      function boilerplate -d "Grabs a boilerplate from https://github.com/boltr6/nix-templates"
-          if contains -- "$argv" "-L" "--list"
-              git clone -q https://github.com/boltr6/nix-templates
-              echo "Availabe boilerplates:"
-              ls "$PWD/nix-templates"
-              rm -R -f nix-templates
-          else
-              git clone -q https://github.com/boltr6/nix-templates
-              echo "Grabbing the following files:"
-              ls -A "$PWD/nix-templates/$argv[1]"
-              mv -n "$PWD/nix-templates/$argv[1]/"{.*,*} "$PWD"
-              rm -R -f nix-templates
-              echo "Done"
-          end
-      end
-      set_color -i cyan
-      set fish_greeting "Don't stop 'till Stanford"
-      kubectl completion fish | source
-      talosctl completion fish | source
+      # Powerlevel10k
+      source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+      [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-      string match -q "$TERM_PROGRAM" "vscode"
-      and . (code --locate-shell-integration-path fish)
+      # PATH
+      export PATH="$HOME/.cargo/bin:$HOME/.bun/bin:$PATH"
+
+      # Direnv
+      eval "$(direnv hook zsh)"
+
+      # Completions
+      source <(kubectl completion zsh)
+      source <(talosctl completion zsh)
+
+      # Greeting
+      echo "\033[3;36mAre you saving time?\033[0m"
+
+      # Boilerplate function
+      boilerplate() {
+        if [[ "$1" == "-L" || "$1" == "--list" ]]; then
+          git clone -q https://github.com/boltr6/nix-templates
+          echo "Available boilerplates:"
+          ls "$PWD/nix-templates"
+          rm -rf nix-templates
+        else
+          git clone -q https://github.com/boltr6/nix-templates
+          echo "Grabbing the following files:"
+          ls -A "$PWD/nix-templates/$1"
+          mv -n "$PWD/nix-templates/$1/"* "$PWD/nix-templates/$1/".* "$PWD" 2>/dev/null
+          rm -rf nix-templates
+          echo "Done"
+        fi
+      }
+
+      # VSCode shell integration
+      if [[ "$TERM_PROGRAM" == "vscode" ]]; then
+        . "$(code --locate-shell-integration-path zsh)"
+      fi
     '';
   };
 
-  users.defaultUserShell = pkgs.fish;
-  programs.command-not-found.enable = false;
-
-  # Tide auto-configure
-  system.userActivationScripts.fish.text = ''
-    ${pkgs.fish}/bin/fish -c "tide configure --auto --style=Classic --prompt_colors='16 colors' --show_time=No --classic_prompt_separators=Slanted --powerline_prompt_heads=Sharp --powerline_prompt_tails=Sharp --powerline_prompt_style='Two lines, character and frame' --prompt_connection=Dotted --powerline_right_prompt_frame=No --prompt_spacing=Compact --icons='Many icons' --transient=Yes"
-  '';
+  users.defaultUserShell = pkgs.zsh;
 
   programs.tmux = {
     enable = true;
     extraConfig = ''
+      set -g mouse on
+      set -g destroy-unattached on
+      set -g status-style 'bg=#313244 fg=#89b4fa'
+      set -g window-status-current-style 'bg=#45475a fg=#89b4fa bold'
+      set -g window-status-style 'bg=#313244 fg=#6c7086'
+      set -g set-clipboard on
+      bind -T copy-mode MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel 'wl-copy'
       bind J run-shell "for i in $(tmux list-windows -F '#{window_index}' | grep -v $(tmux display -p '#{window_index}')); do tmux join-pane -s :\$i -h; done; tmux select-layout tiled"
     '';
   };
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    silent = true;
+  };
 
   environment.etc."gitconfig".text = ''
     [user]

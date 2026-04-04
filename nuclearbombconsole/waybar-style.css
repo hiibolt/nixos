@@ -1,0 +1,33 @@
+* {
+    font-family: "Mononoki Nerd Font", monospace;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: rgba(30, 30, 46, 0.85);
+    color: #cdd6f4;
+    border-bottom: 2px solid rgba(137, 180, 250, 0.3);
+}
+
+#workspaces button {
+    padding: 0 6px;
+    color: #6c7086;
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces button.active {
+    color: #89b4fa;
+}
+
+#clock, #cpu, #memory, #battery, #network, #pulseaudio, #tray {
+    padding: 0 6px;
+}
+
+#battery.warning {
+    color: #f9e2af;
+}
+
+#battery.critical {
+    color: #f38ba8;
+}
