@@ -291,7 +291,7 @@ in
       source <(talosctl completion zsh)
 
       # Greeting
-      echo "\033[3;36mAre you saving time?\033[0m"
+      echo "\e[3;38;2;137;180;250mAre you saving time?\e[0m"
 
       # Boilerplate function
       boilerplate() {
