@@ -1,5 +1,5 @@
 # NixOS - `nuclearbomb`
-Multi-host NixOS configuration for `nuclearbombconsole` (laptop) and `nuclearbombwsl` (WSL).
+Multi-host NixOS configuration for `nuclearbombconsole` (laptop), `nuclearbombwsl` (WSL), and `nuclearbombsilo` (NFS server).
 
 ![image](https://github.com/user-attachments/assets/619f39ba-9237-43a0-8410-93e1924dd682)
 ![image](https://github.com/user-attachments/assets/2c789cc4-3db1-42d6-9715-0e5656619275)
@@ -7,10 +7,10 @@ Multi-host NixOS configuration for `nuclearbombconsole` (laptop) and `nuclearbom
 
 ## Layout
 ```
-devices/   — per-host configuration.nix + hardware-configuration.nix
-hardware/  — CPU/GPU modules
-lib/       — shared modules (shell, kanata, maintenance, fingerprint, etc.)
-users/     — user packages, programs, and shell config
+common.nix              — shared config (users, shell, kanata, system defaults)
+nuclearbombconsole/     — laptop (Intel graphics, KDE Plasma)
+nuclearbombwsl/         — WSL instance
+nuclearbombsilo/        — NFS server
 ```
 
 ## Rebuild
@@ -48,6 +48,7 @@ After first boot:
 - Log into Vesktop, Spotify, osu!lazer, Librewolf
 
 ## Adding a Machine
-1. Copy an existing device under `devices/`
+1. Create a new directory at the repo root (e.g. `nuclearbombnew/`)
 2. Run `nixos-generate-config` on the target and drop the result in as `hardware-configuration.nix`
-3. Add the host to `flake.nix`
+3. Add a `configuration.nix` that imports `../common.nix` and the hardware config
+4. Add the host to `flake.nix`

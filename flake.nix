@@ -18,9 +18,9 @@
 
 		kdiff.url = "github:hiibolt/kdiff";
 
-   	nix-index-database = {
-			url = "github:nix-community/nix-index-database";
-  		inputs.nixpkgs.follows = "nixpkgs";
+       	nix-index-database = {
+ 			url = "github:nix-community/nix-index-database";
+      		inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
 
@@ -56,36 +56,36 @@
 		nixosConfigurations.default = nixosConfigurations.nuclearbombconsole;
 		nixosConfigurations.nuclearbombwsl = nixpkgs.lib.nixosSystem {
 			inherit system;
-
 			specialArgs = {
 				inherit inputs;
 				inherit unstable-pkgs;
 				inherit claude-code-nix;
 				enable_vscode = false;
+				keyboard = {
+					device = "by-path/pci-0000\\:00\\:14.0-usb-0\\:2.2\\:1.1-event-kbd";
+				};
 			};
 			modules = [
 				nix-index-database.nixosModules.nix-index
-				./devices/nuclearbombwsl/configuration.nix
+				./nuclearbombwsl/configuration.nix
 				nixos-wsl.nixosModules.wsl
 			];
 		};
 		nixosConfigurations.nuclearbombconsole = nixpkgs.lib.nixosSystem {
 			inherit system;
-
-			#
-			# "nuclearbombconsole" is the laptop
-			#
-
 			specialArgs = {
 				inherit inputs;
 				inherit unstable-pkgs;
 				inherit claude-code-nix;
 				enable_vscode = true;
+				keyboard = {
+					device = "by-path/platform-i8042-serio-0-event-kbd";
+				};
 			};
 			modules = [
 				nix-index-database.nixosModules.nix-index
 
-				./devices/nuclearbombconsole/configuration.nix
+				./nuclearbombconsole/configuration.nix
 			];
 		};
 	};
