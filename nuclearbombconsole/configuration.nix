@@ -35,6 +35,10 @@
     wayland.enable = true;
   };
 
+  # GNOME Keyring (persists NetworkManager credentials across reboots)
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
+
   # Deploy Hyprland configs to hiibolt's home
   system.userActivationScripts.hyprland-config.text = ''
     dir="/home/hiibolt/.config/hypr"
@@ -154,7 +158,7 @@
     grim
     slurp
     wl-clipboard
-    xfce.thunar
+    nemo
     brightnessctl
     playerctl
     networkmanagerapplet

@@ -177,10 +177,7 @@ in
       unstable-pkgs.vscode
       unstable-pkgs.zed-editor
       dconf
-      (pkgs.rust-bin.nightly.latest.default.override {
-        targets = [ "wasm32-wasip1" ];
-        extensions = [ "rust-src" ];
-      })
+      rustup
       gcc
       pkg-config
       openssl.dev
