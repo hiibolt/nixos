@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, system, ... }:
+{ config, lib, pkgs, inputs, system, unstable-pkgs, ... }:
 {
   imports =
     [
@@ -38,6 +38,7 @@
   # GNOME Keyring (persists NetworkManager credentials across reboots)
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
 
   # Deploy Hyprland configs to hiibolt's home
   system.userActivationScripts.hyprland-config.text = ''
@@ -92,7 +93,7 @@
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "both";
+    package = unstable-pkgs.tailscale;
   };
   # Enable CUPS to print documents.
   services.printing.enable = true;
