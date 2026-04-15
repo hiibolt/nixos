@@ -1,5 +1,5 @@
 # NixOS - `nuclearbomb`
-Multi-host NixOS configuration for `nuclearbombconsole` (laptop), `nuclearbombwsl` (WSL), and `nuclearbombsilo` (NFS server).
+Multi-host NixOS configuration for `nuclearbombconsole` (laptop), `nuclearbombwsl` (WSL), `nuclearbombwarhead` (desktop), and `nuclearbombsilo` (NFS server).
 
 ![image](https://github.com/user-attachments/assets/619f39ba-9237-43a0-8410-93e1924dd682)
 ![image](https://github.com/user-attachments/assets/2c789cc4-3db1-42d6-9715-0e5656619275)

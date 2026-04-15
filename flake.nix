@@ -88,5 +88,22 @@
 				./nuclearbombconsole/configuration.nix
 			];
 		};
+		nixosConfigurations.nuclearbombwarhead = nixpkgs.lib.nixosSystem {
+			inherit system;
+			specialArgs = {
+				inherit inputs;
+				inherit unstable-pkgs;
+				inherit claude-code-nix;
+				enable_vscode = true;
+				keyboard = {
+					device = "by-path/platform-i8042-serio-0-event-kbd";
+				};
+			};
+			modules = [
+				nix-index-database.nixosModules.nix-index
+
+				./nuclearbombwarhead/configuration.nix
+			];
+		};
 	};
 }
