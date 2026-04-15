@@ -45,7 +45,7 @@ reboot
 After first boot:
 - `gh auth login --insecure-storage`
 - `tailscale up`
-- Log into Vesktop, Spotify, osu!lazer, Librewolf
+- Log into Vesktop, Spotify, Librewolf
 
 ## Adding a Machine
 1. Create a new directory at the repo root (e.g. `nuclearbombnew/`)

@@ -273,6 +273,11 @@ in
       rb-b = "sudo nixos-rebuild boot --flake /etc/nixos#$(hostname) --show-trace";
     };
     interactiveShellInit = ''
+      # Auto-start tmux in Kitty
+      if [[ "$TERM" == "xterm-kitty" ]] && [[ -z "$TMUX" ]]; then
+        exec tmux new-session
+      fi
+
       # Powerlevel10k
       source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh

@@ -96,7 +96,7 @@
 				inherit claude-code-nix;
 				enable_vscode = true;
 				keyboard = {
-					device = "by-path/platform-i8042-serio-0-event-kbd";
+					device = "by-path/pci-0000\\:00\\:14.0-usb-0\\:2.3\\:1.1-event-kbd";
 				};
 			};
 			modules = [
