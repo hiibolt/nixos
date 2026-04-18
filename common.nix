@@ -171,6 +171,7 @@ in
       mtr
       droidcam
       caligula
+      exiftool
 
       # Dev Environment
       claude-code-nix.packages.${pkgs.stdenv.hostPlatform.system}.claude-code
