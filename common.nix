@@ -293,6 +293,10 @@ in
       source <(kubectl completion zsh)
       source <(talosctl completion zsh)
 
+      # Word navigation
+      bindkey '^[[1;5D' backward-word   # Ctrl+Left
+      bindkey '^[[1;5C' forward-word    # Ctrl+Right
+
       # Greeting
       echo "\e[3;38;2;137;180;250mAre you saving time?\e[0m"
 
