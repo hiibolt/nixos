@@ -146,7 +146,7 @@
         wineWowPackages.stable
         winetricks
         protontricks
-        (lutris.override {
+        (unstable-pkgs.lutris.override {
             extraLibraries = pkgs: [
                 libadwaita
                 gtk4
