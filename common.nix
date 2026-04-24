@@ -79,7 +79,7 @@ in
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "both";
+    useRoutingFeatures = "client";
   };
 
   # Disable NVME Write Cache, additional NVME utils
@@ -220,7 +220,8 @@ in
       anki
 
       # Vesktop
-      vesktop
+      unstable-pkgs.vesktop
+      unstable-pkgs.discord
 
       # Music
       spotify
