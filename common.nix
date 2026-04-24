@@ -238,7 +238,7 @@ in
       z = "zeditor . && exit";
 
       # `uv`
-      ur = "uv run mypy src";
+      ur = "uv run mypy src && uv run src/main.py";
 
       # Kanata
       ka = "systemctl start kanata.service";
