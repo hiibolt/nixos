@@ -237,6 +237,9 @@ in
       c = "claude";
       z = "zeditor . && exit";
 
+      # `uv`
+      ur = "uv run mypy src";
+
       # Kanata
       ka = "systemctl start kanata.service";
       kd = "systemctl stop kanata.service";
