@@ -79,7 +79,7 @@ in
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    useRoutingFeatures = "client";
+    package = unstable-pkgs.tailscale;
   };
 
   # Disable NVME Write Cache, additional NVME utils

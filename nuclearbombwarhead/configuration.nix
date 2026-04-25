@@ -90,11 +90,7 @@
         hostName = "nuclearbombwarhead";
         networkmanager.enable = true;
     };
-    services.openssh.enable = true;
-    services.tailscale = {
-        enable = true;
-        package = unstable-pkgs.tailscale;
-    };
+
     # Enable CUPS to print documents.
     services.printing.enable = true;
     services.avahi = {
